@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Jira Collapse Right Panel",
-  "version": "1.0",
-  "description": "Adds a button to collapse the right Jira panel.",
+  "version": "1.1",
+  "default_locale": "en_US",
+  "description": "__MSG_extDesc__",
+  "name": "__MSG_extName__",
   "permissions": ["activeTab"],
   "content_scripts": [
     {

@@ -1,0 +1,8 @@
+{
+   "extDesc": {
+      "message": "Adds buttons to expand the workspace and collapse the right pane of Jira."
+   },
+   "extName": {
+      "message": "Jira Expand Workspace"
+   }
+}

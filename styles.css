@@ -2,19 +2,6 @@
   width: 30px;
 }
 
-.modalIssueCreatePositioner-expand {
-  width: 100% !important;
-  /* max-width: calc(100vw - 60px) !important;
-  max-height: calc(100vh - 80px) !important; */
-  max-width: 100% !important;
-  max-height: 100% !important;
-  inset-block-start: 0px !important;
-}
-
-.modalIssueCreate-expand {
- /*  width: 100%; */
-}
-
 #expand-icon {
   display: inline-block;
   width: 24px;

@@ -1,0 +1,8 @@
+{
+  "extDesc": {
+     "message": "添加按钮以扩展工作区并折叠 Jira 的右侧窗格。"
+  },
+  "extName": {
+     "message": "Jira 扩展工作区"
+  }
+}

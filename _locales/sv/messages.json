@@ -1,0 +1,8 @@
+{
+  "extDesc": {
+     "message": "Lägger till knappar för att expandera arbetsytan och kollapsa den högra rutan i Jira."
+  },
+  "extName": {
+     "message": "Jira Expandera Arbetsyta"
+  }
+}

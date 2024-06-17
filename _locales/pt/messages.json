@@ -1,0 +1,8 @@
+{
+  "extDesc": {
+     "message": "Adiciona botões para expandir o espaço de trabalho e reduzir o painel direito do Jira."
+  },
+  "extName": {
+     "message": "Expandir Espaço de Trabalho do Jira"
+  }
+}
