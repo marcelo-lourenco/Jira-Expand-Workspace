@@ -1,5 +1,5 @@
 .resizer-width {
-  width: 30px;
+  width: '32px !important';
 }
 
 #span-shrink-expand {

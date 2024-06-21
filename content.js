@@ -22,6 +22,36 @@ function addIconExpand(spanShrinkExpand) {
   spanShrinkExpand.classList.add('icon-expand');
 }
 
+// If the modal dialog exists, expand it
+function expandIssueDetailsDialog(modalIssueDetailsDialog, modalIssueDetailsDialogPositioner) {
+  if (modalIssueDetailsDialog) {
+    modalIssueDetailsDialog.style.width = '100%';
+    Object.assign(modalIssueDetailsDialogPositioner.style, {
+      maxWidth: "calc(-20px + 100vw)", maxHeight: "calc(-70px + 100vh)", insetBlockStart: "60px"
+    });
+  }
+}
+
+// Function to handle the collapse/open behavior of the right container
+function fnCollapseLoad(containerRight, spanCollapseOpen, modalIssueDetailsDialog, modalIssueDetailsDialogPositioner) {
+
+  expandIssueDetailsDialog(modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
+
+  if (containerRight.style.display === 'none') {
+    // If the container is hidden, show it and update the icon
+    addIconCollapse(spanCollapseOpen);
+    containerRight.style.display = 'block';
+
+    expandIssueDetailsDialog(modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
+  } else {
+    // If the container is visible, hide it and update the icon
+    addIconCollapse(spanCollapseOpen);
+    containerRight.style.display = 'block';
+
+    expandIssueDetailsDialog(modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
+  }
+}
+
 // Function to handle the collapse/open behavior of the right container
 function fnCollapseOpen(containerRight, spanCollapseOpen, modalIssueDetailsDialog, modalIssueDetailsDialogPositioner) {
   if (containerRight.style.display === 'none') {
@@ -29,25 +59,13 @@ function fnCollapseOpen(containerRight, spanCollapseOpen, modalIssueDetailsDialo
     addIconCollapse(spanCollapseOpen);
     containerRight.style.display = 'block';
 
-    // If the modal dialog exists, reset its width and position
-    if (modalIssueDetailsDialog) {
-      modalIssueDetailsDialog.style.width = '';
-      Object.assign(modalIssueDetailsDialogPositioner.style, {
-        width: "", maxWidth: "", maxHeight: "", insetBlockStart: ""
-      });
-    }
+    expandIssueDetailsDialog(modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
   } else {
     // If the container is visible, hide it and update the icon
     addIconOpen(spanCollapseOpen);
     containerRight.style.display = 'none';
 
-    // If the modal dialog exists, set its width and position to 100%
-    if (modalIssueDetailsDialog) {
-      modalIssueDetailsDialog.style.width = '100%';
-      Object.assign(modalIssueDetailsDialogPositioner.style, {
-        width: "100%", maxWidth: "100%", maxHeight: "100%", insetBlockStart: "0px"
-      });
-    }
+    expandIssueDetailsDialog(modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
   }
 }
 
@@ -58,7 +76,7 @@ function fnShrinkExpand(modalIssueCreate, spanShrinkExpand, modalIssueCreatePosi
     addIconShrink(spanShrinkExpand);
     modalIssueCreate.style.width = '100%';
     Object.assign(modalIssueCreatePositioner.style, {
-      width: "100%", maxWidth: "100%", maxHeight: "100%", insetBlockStart: "0px"
+      width: "100%", maxWidth: "100%", maxHeight: "calc(-60px + 100vh)", insetBlockStart: "60px"
     });
   } else {
     // If the modal is full width, shrink it and update the icon
@@ -111,7 +129,8 @@ function addCollapseButton() {
     // If all elements are found and the button doesn't exist yet
     if (containerRight && resizerElement && !document.getElementById('span-collapse-open')) {
       // Add a class to the resizer element
-      resizerElement.classList.add('resizer-width');
+      //resizerElement.classList.add('resizer-width');
+      resizerElement.style.width = "32px";
 
       // Create the button element
       const spanCollapseOpen = document.createElement('span');
@@ -123,7 +142,7 @@ function addCollapseButton() {
       const modalIssueDetailsDialog = document.querySelector('[data-testid="issue.views.issue-details.issue-modal.modal-dialog"]');
 
       // Start the container in maximized state
-      fnCollapseOpen(containerRight, spanCollapseOpen, modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
+      fnCollapseLoad(containerRight, spanCollapseOpen, modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
 
       // Add click event listener to the button
       spanCollapseOpen.addEventListener('click', function () {
@@ -133,18 +152,24 @@ function addCollapseButton() {
       // Append the button to the resizer element
       resizerElement.appendChild(spanCollapseOpen);
 
-      // Add mouseover and mouseout event listeners to the resizer element
-      resizerElement.addEventListener('mouseover', function() {
-        if (containerRight.style.display === 'none') {
-          fnCollapseOpen(containerRight, spanCollapseOpen, modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
+      /* 
+      // Add mouseover and mouseout event listeners to the document
+      document.addEventListener('mouseover', function (event) {
+        if (event.clientX > window.innerWidth - 20 && containerRight.style.display === 'none') {
+          containerRight.style.display === 'block'
+          modalIssueDetailsDialog.style.width = '';
+          Object.assign(modalIssueDetailsDialogPositioner.style, {
+            width: "100%", maxWidth: "100%", maxHeight: "100%", insetBlockStart: "0px"
+          });
         }
       });
 
-      resizerElement.addEventListener('mouseout', function() {
-        if (containerRight.style.display === 'block') {
-          fnCollapseOpen(containerRight, spanCollapseOpen, modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
+      document.addEventListener('mouseout', function (event) {
+        if (event.clientX > window.innerWidth - 20 && containerRight.style.display === 'block') {
+          containerRight.style.display === 'none'
         }
-      });
+      }); 
+      */
     }
   } catch (error) {
     console.error('Error adding collapse button:', error);
