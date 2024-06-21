@@ -132,6 +132,19 @@ function addCollapseButton() {
 
       // Append the button to the resizer element
       resizerElement.appendChild(spanCollapseOpen);
+
+      // Add mouseover and mouseout event listeners to the resizer element
+      resizerElement.addEventListener('mouseover', function() {
+        if (containerRight.style.display === 'none') {
+          fnCollapseOpen(containerRight, spanCollapseOpen, modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
+        }
+      });
+
+      resizerElement.addEventListener('mouseout', function() {
+        if (containerRight.style.display === 'block') {
+          fnCollapseOpen(containerRight, spanCollapseOpen, modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
+        }
+      });
     }
   } catch (error) {
     console.error('Error adding collapse button:', error);
