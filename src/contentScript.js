@@ -24,6 +24,11 @@ function addIconOpen(spanCollapseOpen) {
 function addIconShrink(spanShrinkExpand) {
   spanShrinkExpand.classList.remove('icon-expand');
   spanShrinkExpand.classList.add('icon-shrink');
+  if (!isCloud) {
+    Object.assign(spanShrinkExpand.style, {
+      margin: '0px -10px -5px 10px'
+    });
+  }
 }
 
 // Function to add the 'icon-expand' class to the span element
@@ -163,11 +168,14 @@ function addExpandButton() {
       /* aui-dialog2-header aui-toolbar2*/
       /* .jira-dialog-core-heading .qf-form-operations .aui-toolbar2-inner .aui-toolbar2-secondary*/
 
-      const modalIcons = document.querySelector('.aui-toolbar2-secondary'); // Cabeçalho do modal que pode conter ícones
+      const modalIcons = document.querySelector('.qf-form-operations'); // Cabeçalho do modal que pode conter ícones
       console.log("modalIcons", modalIcons)
 
       // If all elements are found and the button doesn't exist yet
       if (modalIssueCreate && modalIcons && !document.getElementById('span-shrink-expand')) {
+        Object.assign(modalIcons.style, {
+          display: "flex"
+        });
         // Create the button element
         const spanShrinkExpand = document.createElement('span');
         spanShrinkExpand.id = 'span-shrink-expand';
