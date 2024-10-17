@@ -1,34 +1,25 @@
-# Jira - Expandir área de trabalho
+# Jira - Expand Workspace
 
-* Adiciona botões para expandir a área de trabalho e recolher o painel direito do Jira.
+* Chrome extension to add buttons to expand the workspace and collapse the right pane of Jira.
 
-Veja na [Chrome Web Store](https://chromewebstore.google.com/detail/jira-expandir-%C3%A1rea-de-tra/occanfpdiglllenbekgbnhijeoincilf).
+View on [Chrome Web Store](https://chromewebstore.google.com/detail/jira-expandir-%C3%A1rea-de-tra/occanfpdiglllenbekgbnhijeoincilf).
 
-## Funcionalidades
+* Expand your issue creation and viewing area in Jira.
+* Easily collapse and expand the right pane on issue pages with a single click.
+* Increase your productivity and keep your workspace organized!
 
-* Expanda sua área de criação e visualização de problemas no Jira.
-* Recolha e expanda facilmente o painel direito nas páginas de problemas com um único clique
-* Aumente sua produtividade e mantenha seu espaço de trabalho organizado!
+## Main Features:
 
-## Principais recursos
+* User friendly
+* Maximizes the issue creation mode
+* One-click toggle to open/close the right pane.
+* Consistent layout with predefined resize width.
+* Automatically adjusts to DOM changes.
 
-* Fácil de usar Maximiza o modo de criação de problemas 
-* Alternância de um clique para abrir/fechar o painel direito. 
-* Layout consistente com largura de redimensionamento predefinida. 
-* Ajusta-se automaticamente às alterações do DOM.tickets.
+## Compatibility
 
-## Como usar
+This extension has been tested and is compatible with the latest versions of Google Chrome.
 
-1. **Instale a extensão** na [Chrome Web Store](https://chromewebstore.google.com/detail/jira-expandir-%C3%A1rea-de-tra/occanfpdiglllenbekgbnhijeoincilf)..
-2. **Navegue até qualquer página** dentro do seu Jira.
-3. **Clique no ícone da extensão** na barra de ferramentas do navegador.
-4. **A área de trabalho será expandida automaticamente**, ocultando a barra lateral e o cabeçalho.
-5. **Para restaurar a visualização padrão**, clique novamente no ícone da extensão.
+## Contributions
 
-## Compatibilidade
-
-Esta extensão foi testada e é compatível com as versões mais recentes do Google Chrome
-
-## Contribuições
-
-Contribuições são bem-vindas! Sinta-se à vontade para fazer um fork do repositório e enviar suas pull requests.
+Contributions are welcome! Feel free to fork the repository and submit your pull requests.
