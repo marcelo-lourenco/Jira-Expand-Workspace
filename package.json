@@ -1,11 +1,12 @@
 {
-  "name": "teste",
+  "name": "jira-expand-workspace",
   "version": "0.1.0",
-  "description": "Jira Expand-Workspace",
+  "description": "Adds buttons to expand the workspace and collapse the right pane of Jira.",
   "private": true,
   "scripts": {
-    "watch": "node ./node_modules/webpack/bin/webpack.js --mode=development --watch --config config/webpack.config.js",
-    "build": "node ./node_modules/webpack/bin/webpack.js --mode=production --config config/webpack.config.js"
+    "watch": "set WEBPACK_ENV=chrome && node ./node_modules/webpack/bin/webpack.js --mode=development --watch --config config/webpack.config.js",
+    "build": "set WEBPACK_ENV=chrome && node ./node_modules/webpack/bin/webpack.js --mode=production --config config/webpack.config.js",
+    "build:firefox": "set WEBPACK_ENV=firefox && node ./node_modules/webpack/bin/webpack.js --mode=production --config config/webpack.config.js"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^6.4.1",
@@ -16,5 +17,18 @@
     "webpack": "^5.95.0",
     "webpack-cli": "^4.10.0",
     "webpack-merge": "^5.10.0"
-  }
+  },
+  "license": "MIT",
+  "author": "Marcelo Lourenço <qabi.dev@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcelo-lourenco/Jira-Expand-Workspace.git"
+  },
+  "bugs": "https://github.com/marcelo-lourenco/Jira-Expand-Workspace/issues",
+  "homepage": "https://github.com/marcelo-lourenco/gJira-Expand-Workspace#readme",
+  "keywords": [
+    "Jira",
+    "extension",
+    "expand"
+  ]
 }

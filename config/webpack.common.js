@@ -53,7 +53,7 @@ const common = {
       patterns: [
         {
           from: '**/*',
-          context: 'public',
+          context: PATHS.public,
         },
       ]
     }),

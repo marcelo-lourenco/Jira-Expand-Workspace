@@ -1,1 +1,53 @@
-[{"timestamp":1729165876203,"files":[{"filename":"contentScript.js","previous":1123,"size":1153,"diff":30},{"filename":"styles.css","previous":604,"size":604,"diff":0}]},{"timestamp":1729126565652,"files":[{"filename":"contentScript.js","previous":1097,"size":1123,"diff":26},{"filename":"styles.css","previous":604,"size":604,"diff":0}]},{"timestamp":1729100928787,"files":[{"filename":"contentScript.js","previous":0,"size":1097,"diff":1097},{"filename":"styles.css","previous":0,"size":604,"diff":604}]}]
+[
+  {
+    "timestamp": 1729165876203,
+    "files": [
+      {
+        "filename": "contentScript.js",
+        "previous": 1123,
+        "size": 1153,
+        "diff": 30
+      },
+      {
+        "filename": "styles.css",
+        "previous": 604,
+        "size": 604,
+        "diff": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1729126565652,
+    "files": [
+      {
+        "filename": "contentScript.js",
+        "previous": 1097,
+        "size": 1123,
+        "diff": 26
+      },
+      {
+        "filename": "styles.css",
+        "previous": 604,
+        "size": 604,
+        "diff": 0
+      }
+    ]
+  },
+  {
+    "timestamp": 1729100928787,
+    "files": [
+      {
+        "filename": "contentScript.js",
+        "previous": 0,
+        "size": 1097,
+        "diff": 1097
+      },
+      {
+        "filename": "styles.css",
+        "previous": 0,
+        "size": 604,
+        "diff": 604
+      }
+    ]
+  }
+]
