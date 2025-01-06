@@ -2,7 +2,7 @@ let isCloud = false;
 
 function getJiraType() {
   if (document.getElementById('jira-frontend')) {
-    return true
+    return true;
   } else if (document.getElementById('page')) {
     return false;
   }
@@ -26,7 +26,7 @@ function addIconShrink(spanShrinkExpand) {
   spanShrinkExpand.classList.add('icon-shrink');
   if (!isCloud) {
     Object.assign(spanShrinkExpand.style, {
-      margin: '0px -10px -5px 10px'
+      margin: '0px -10px -5px 10px',
     });
   }
 }
@@ -37,10 +37,9 @@ function addIconExpand(spanShrinkExpand) {
   spanShrinkExpand.classList.add('icon-expand');
   if (!isCloud) {
     Object.assign(spanShrinkExpand.style, {
-      margin: '0px -10px -5px 10px'
+      margin: '0px -10px -5px 10px',
     });
   }
-
 }
 
 // If the modal dialog exists, expand it
@@ -48,14 +47,15 @@ function expandIssueDetailsDialog(modalIssueDetailsDialog, modalIssueDetailsDial
   if (modalIssueDetailsDialog) {
     modalIssueDetailsDialog.style.width = isCloud ? '100%' : '';
     Object.assign(modalIssueDetailsDialogPositioner.style, {
-      maxWidth: "calc(-20px + 100vw)", maxHeight: "calc(-70px + 100vh)", insetBlockStart: "60px"
+      maxWidth: "calc(-20px + 100vw)",
+      maxHeight: "calc(-70px + 100vh)",
+      insetBlockStart: "60px",
     });
   }
 }
 
 // Function to handle the collapse/open behavior of the right container
 function fnCollapseLoad(containerRight, spanCollapseOpen, modalIssueDetailsDialog, modalIssueDetailsDialogPositioner) {
-
   expandIssueDetailsDialog(modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
 
   if (containerRight.style.display === 'none') {
@@ -99,27 +99,36 @@ function fnShrinkExpand(modalIssueCreate, spanShrinkExpand, modalIssueCreatePosi
 
     if (isCloud) {
       Object.assign(modalIssueCreatePositioner.style, {
-        width: "100%", maxWidth: "100%", maxHeight: "calc(-60px + 100vh)", insetBlockStart: "60px"
+        width: "100%",
+        maxWidth: "100%",
+        maxHeight: "calc(-60px + 100vh)",
+        insetBlockStart: "60px",
       });
     } else {
       modalIssueCreatePositioner.style.height = '100%';
       Object.assign(modalIssueCreatePositioner.style, {
-        width: "100%", insetBlockStart: "40px", height: "calc(-40px + 100vh)"
+        width: "100%",
+        insetBlockStart: "40px",
+        height: "calc(-40px + 100vh)",
       });
     }
-
   } else {
     // If the modal is full width, shrink it and update the icon
     addIconExpand(spanShrinkExpand);
-    modalIssueCreate.style.width = "";
+    modalIssueCreate.style.width = '';
     if (isCloud) {
       Object.assign(modalIssueCreatePositioner.style, {
-        width: "", maxWidth: "", maxHeight: "", insetBlockStart: "60px"
+        width: '',
+        maxWidth: '',
+        maxHeight: '',
+        insetBlockStart: "60px",
       });
     } else {
       modalIssueCreatePositioner.style.height = '';
       Object.assign(modalIssueCreatePositioner.style, {
-        width: "", insetBlockStart: "", height: ""
+        width: '',
+        insetBlockStart: '',
+        height: '',
       });
     }
   }
@@ -130,9 +139,15 @@ function addExpandButton() {
   if (isCloud) {
     try {
       // Get the necessary elements
-      const modalIssueCreatePositioner = document.querySelector('[data-testid="issue-create.ui.modal.modal-wrapper.modal--positioner"]');
-      const modalIssueCreate = document.querySelector('[data-testid="issue-create.ui.modal.modal-wrapper.modal"]');
-      const modalIcons = document.querySelector('[data-testid="minimizable-modal.ui.modal-container.modal-header.view-changer-wrapper"]');
+      const modalIssueCreatePositioner = document.querySelector(
+        '[data-testid="issue-create.ui.modal.modal-wrapper.modal--positioner"]'
+      );
+      const modalIssueCreate = document.querySelector(
+        '[data-testid="issue-create.ui.modal.modal-wrapper.modal"]'
+      );
+      const modalIcons = document.querySelector(
+        '[data-testid="minimizable-modal.ui.modal-container.modal-header.view-changer-wrapper"]'
+      );
 
       // If all elements are found and the button doesn't exist yet
       if (modalIssueCreate && modalIcons && !document.getElementById('span-shrink-expand')) {
@@ -155,26 +170,24 @@ function addExpandButton() {
     } catch (error) {
       console.error('Error adding expand button:', error);
     }
-
   } else {
-
     try {
       // Get the necessary elements
       const modalIssueCreatePositioner = document.querySelector('#create-issue-dialog'); // Modal de criação de issue
-      console.log("modalIssueCreatePositioner", modalIssueCreatePositioner)
+      console.log('modalIssueCreatePositioner', modalIssueCreatePositioner);
       const modalIssueCreate = document.querySelector('.jira-dialog-core-heading'); // Padrão de modais no Jira Data Center
-      console.log("modalIssueCreate", modalIssueCreate)
+      console.log('modalIssueCreate', modalIssueCreate);
 
       /* aui-dialog2-header aui-toolbar2*/
       /* .jira-dialog-core-heading .qf-form-operations .aui-toolbar2-inner .aui-toolbar2-secondary*/
 
       const modalIcons = document.querySelector('.qf-form-operations'); // Cabeçalho do modal que pode conter ícones
-      console.log("modalIcons", modalIcons)
+      console.log('modalIcons', modalIcons);
 
       // If all elements are found and the button doesn't exist yet
       if (modalIssueCreate && modalIcons && !document.getElementById('span-shrink-expand')) {
         Object.assign(modalIcons.style, {
-          display: "flex"
+          display: 'flex',
         });
         // Create the button element
         const spanShrinkExpand = document.createElement('span');
@@ -195,9 +208,7 @@ function addExpandButton() {
     } catch (error) {
       console.error('Error adding expand button:', error);
     }
-
   }
-
 }
 
 // Function to add the collapse button to the issue details container
@@ -205,14 +216,16 @@ function addCollapseButton() {
   if (isCloud) {
     try {
       // Get the necessary elements
-      const containerRight = document.querySelector('[data-testid="issue.views.issue-details.issue-layout.container-right"]');
+      const containerRight = document.querySelector(
+        '[data-testid="issue.views.issue-details.issue-layout.container-right"]'
+      );
       const resizerElement = document.querySelector('[data-testid="flex-resizer.ui.handle.resizer"]');
 
       // If all elements are found and the button doesn't exist yet
       if (containerRight && resizerElement && !document.getElementById('span-collapse-open')) {
         // Add a class to the resizer element
         //resizerElement.classList.add('resizer-width');
-        resizerElement.style.width = "32px";
+        resizerElement.style.width = '32px';
 
         // Create the button element
         const spanCollapseOpen = document.createElement('span');
@@ -220,8 +233,12 @@ function addCollapseButton() {
         spanCollapseOpen.classList.add('icon-collapse');
 
         // Get the modal dialog elements
-        const modalIssueDetailsDialogPositioner = document.querySelector('[data-testid="issue.views.issue-details.issue-modal.modal-dialog--positioner"]');
-        const modalIssueDetailsDialog = document.querySelector('[data-testid="issue.views.issue-details.issue-modal.modal-dialog"]');
+        const modalIssueDetailsDialogPositioner = document.querySelector(
+          '[data-testid="issue.views.issue-details.issue-modal.modal-dialog--positioner"]'
+        );
+        const modalIssueDetailsDialog = document.querySelector(
+          '[data-testid="issue.views.issue-details.issue-modal.modal-dialog"]'
+        );
 
         // Start the container in maximized state
         fnCollapseLoad(containerRight, spanCollapseOpen, modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
@@ -233,22 +250,17 @@ function addCollapseButton() {
 
         // Append the button to the resizer element
         resizerElement.appendChild(spanCollapseOpen);
-
       }
     } catch (error) {
       console.error('Error adding collapse button:', error);
     }
-
   } else {
-
     try {
-
       const containerRight = document.querySelector('.issue-side-column');
-      const resizerElement = document.querySelector('.aui-toolbar2-secondary');  // Elemento de redimensionamento (se houver)]
+      const resizerElement = document.querySelector('.aui-toolbar2-secondary'); // Elemento de redimensionamento (se houver)]
 
       // If all elements are found and the button doesn't exist yet
       if (containerRight && resizerElement && !document.getElementById('span-collapse-open')) {
-
         // Create the button element
         const spanCollapseOpen = document.createElement('span');
         spanCollapseOpen.id = 'span-collapse-open';
@@ -268,9 +280,7 @@ function addCollapseButton() {
 
         // Append the button to the resizer element
         resizerElement.appendChild(spanCollapseOpen);
-
       }
-
     } catch (error) {
       console.error('Error adding collapse button:', error);
     }
@@ -284,7 +294,7 @@ function checkAndAddButtons() {
     addExpandButton();
     addCollapseButton();
   } else {
-    return
+    return;
   }
 }
 
@@ -298,8 +308,6 @@ if (document.readyState === 'loading') {
 // Observe for DOM changes and add buttons if necessary
 const observer = new MutationObserver(checkAndAddButtons);
 observer.observe(document.body, { childList: true, subtree: true });
-
-
 
 // Mortrar Icones vinculados ao card
 (function () {
@@ -359,7 +367,7 @@ observer.observe(document.body, { childList: true, subtree: true });
       return issueKeyElement.textContent.trim();
     }
 
-    console.error("Função getIssueKeyFromCard: Não foi possível encontrar a chave da issue no card:",cardElement);
+    console.error("Função getIssueKeyFromCard: Não foi possível encontrar a chave da issue no card:", cardElement);
     return null;
   }
 
@@ -368,17 +376,17 @@ observer.observe(document.body, { childList: true, subtree: true });
     // console.log("Função fetchLinkedIssues: Buscando itens vinculados para a issue:", issueKey);
     if (!issueKey) {
       // console.log("Função fetchLinkedIssues: Chave da issue não fornecida.");
-      callback(null, "Não foi possível encontrar a chave da issue.");
+      callback(null, 'Não foi possível encontrar a chave da issue.');
       return;
     }
 
-    const apiUrl = `/rest/api/3/issue/${issueKey}?fields=issuelinks`;
+    const apiUrl = `/rest/api/3/issue/${issueKey}?fields=issuelinks,assignee`;
 
     fetch(apiUrl)
       .then((response) => {
         // console.log("Função fetchLinkedIssues: Resposta da API recebida.");
         if (!response.ok) {
-          throw new Error( `Erro ao obter links da issue. Status: ${response.status}` );
+          throw new Error(`Erro ao obter links da issue. Status: ${response.status}`);
         }
         return response.json();
       })
@@ -386,15 +394,18 @@ observer.observe(document.body, { childList: true, subtree: true });
         // console.log("Função fetchLinkedIssues: Dados de links da issue recebidos:", data);
         let linksHtml = "";
 
+        const assignee = data.fields.assignee;
+
         if (
-          data.fields &&
-          data.fields.issuelinks &&
-          data.fields.issuelinks.length > 0
+            data.fields &&
+            data.fields.issuelinks &&
+            data.fields.issuelinks.length > 0
         ) {
           data.fields.issuelinks.forEach((link) => {
             const linkedIssue = link.inwardIssue || link.outwardIssue;
             const relationship = link.type.inward || link.type.outward;
             if (linkedIssue) {
+              console.log(linkedIssue,linkedIssue)
               const statusCategory = linkedIssue.fields.status.statusCategory.key;
               const status = linkedIssue.fields.status.name.toLowerCase();
               let iconUrl = linkedIssue.fields.issuetype.iconUrl;
@@ -410,8 +421,15 @@ observer.observe(document.body, { childList: true, subtree: true });
               } else {
                 statusColor = 'rgb(64, 84, 178)';
               }
+              let assigneeAvatarUrl = "";
+              let assigneeDisplayName ="";
 
-              linksHtml += `
+              if (linkedIssue.fields.assignee) {
+                  assigneeAvatarUrl = linkedIssue.fields.assignee.avatarUrls['16x16'];
+                  assigneeDisplayName = linkedIssue.fields.assignee.displayName;
+              }
+
+                linksHtml += `
                 <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="issue-links-group-container">
                   <h3 class="issue-links-group-container-h3">
                     <span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span>
@@ -448,9 +466,9 @@ observer.observe(document.body, { childList: true, subtree: true });
                           <div role="presentation">
                             <div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img" aria-labelledby="uid54" style="display: inline-block; position: relative; outline: 0px;">
                               <span class="issue-line-card-assignee-inner" data-testid="issue-line-card.ui.assignee.read-only-assignee--inner">
-                                <img src="REFATORAR AQUI" alt="" data-testid="issue-line-card.ui.assignee.read-only-assignee--image" aria-hidden="true" data-vc="issue-line-card.ui.assignee.read-only-assignee--image" data-ssr-placeholder-ignored="true" class="issue-line-card-assignee-image" style="border-radius: 50%;">
+                                <img src="${assigneeAvatarUrl}" alt="${assigneeDisplayName}" data-testid="issue-line-card.ui.assignee.read-only-assignee--image" aria-hidden="true" data-vc="issue-line-card.ui.assignee.read-only-assignee--image" data-ssr-placeholder-ignored="true" class="issue-line-card-assignee-image" style="border-radius: 50%;">
                               </span>
-                              <span data-testid="issue-line-card.ui.assignee.read-only-assignee--label" id="uid54" hidden="">REFATORAR AQUI</span>
+                              <span data-testid="issue-line-card.ui.assignee.read-only-assignee--label" id="uid54" hidden="">${assigneeDisplayName}</span>
                             </div>
                           </div>
                           <div data-testid="issue-line-card.ui.status.status-field-container" class="issue-line-card-status-field-container">
@@ -483,14 +501,14 @@ observer.observe(document.body, { childList: true, subtree: true });
             }
           });
         } else {
-          linksHtml = "<p>Nenhum item vinculado encontrado.</p>";
+          linksHtml = '<p>Nenhum item vinculado encontrado.</p>';
         }
         // console.log("Função fetchLinkedIssues: HTML de links gerado.");
         callback(linksHtml);
       })
       .catch((error) => {
-        console.error("Função fetchLinkedIssues: Erro ao buscar os itens vinculados:", error );
-        callback( null,`Erro ao buscar os itens vinculados: ${error.message}`);
+        console.error('Função fetchLinkedIssues: Erro ao buscar os itens vinculados:', error);
+        callback(null, `Erro ao buscar os itens vinculados: ${error.message}`);
       });
   }
 
@@ -530,31 +548,31 @@ observer.observe(document.body, { childList: true, subtree: true });
       '[data-testid="platform-card.ui.card.card-content.footer"]'
     );
     if (!footer) {
-      console.error("Função addIconToCard: Não foi possível encontrar o footer do card:",card);
+      console.error("Função addIconToCard: Não foi possível encontrar o footer do card:", card);
       return;
     }
     // console.log("Função addIconToCard: Footer do card encontrado.");
 
     // Verifica se o ícone já foi adicionado
-    if (footer.querySelector(".linked-issues-icon")) {
+    if (footer.querySelector('.linked-issues-icon')) {
       // console.log("Função addIconToCard: Ícone já adicionado ao card. Retornando.");
       return;
     }
 
-    const icon = document.createElement("span");
-    icon.className = "linked-issues-icon";
-    icon.style.cursor = "pointer";
-    icon.style.marginLeft = "5px";
+    const icon = document.createElement('span');
+    icon.className = 'linked-issues-icon';
+    icon.style.cursor = 'pointer';
+    icon.style.marginLeft = '5px';
     icon.innerHTML =
       '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" fill="none"/><path fill="#0052cc" d="m17.657 14.828l-1.415-1.414L17.658 12A4 4 0 1 0 12 6.343l-1.414 1.414L9.17 6.343l1.415-1.414a6 6 0 0 1 8.485 8.485zm-2.829 2.829l-1.414 1.414a6 6 0 0 1-8.485-8.485l1.414-1.414l1.414 1.414L6.343 12A4 4 0 0 0 12 17.657l1.414-1.414zm0-9.9l1.415 1.415l-7.072 7.07l-1.414-1.414z"/></svg>';
     // console.log("Função addIconToCard: Ícone criado.");
 
     let tooltip;
 
-    icon.addEventListener("mouseover", (event) => {
+    icon.addEventListener('mouseover', (event) => {
       // console.log("Função addIconToCard: Evento mouseover no ícone.");
       if (!tooltip) {
-        tooltip = createTooltip("");
+        tooltip = createTooltip('');
       }
 
       fetchLinkedIssues(issueKey, (linksHtml, error) => {
@@ -578,19 +596,19 @@ observer.observe(document.body, { childList: true, subtree: true });
               </div>
               <div>${linksHtml}</div>
             </div>`;
-        tooltip.style.display = "block";
+        tooltip.style.display = 'block';
         updateTooltipPosition(event, tooltip);
       });
     });
 
-    icon.addEventListener("mousemove", (event) => {
+    icon.addEventListener('mousemove', (event) => {
       // console.log("Função addIconToCard: Evento mousemove no ícone.");
-      if (tooltip && tooltip.style.display === "block") {
+      if (tooltip && tooltip.style.display === 'block') {
         updateTooltipPosition(event, tooltip);
       }
     });
 
-    icon.addEventListener("mouseout", () => {
+    icon.addEventListener('mouseout', () => {
       // console.log("Função addIconToCard: Evento mouseout no ícone.");
       destroyTooltip(tooltip);
       tooltip = null;
