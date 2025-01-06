@@ -371,144 +371,165 @@ observer.observe(document.body, { childList: true, subtree: true });
     return null;
   }
 
-  // Busca itens vinculados através da API
-  function fetchLinkedIssues(issueKey, callback) {
-    // console.log("Função fetchLinkedIssues: Buscando itens vinculados para a issue:", issueKey);
-    if (!issueKey) {
-      // console.log("Função fetchLinkedIssues: Chave da issue não fornecida.");
-      callback(null, 'Não foi possível encontrar a chave da issue.');
-      return;
-    }
+  function fetchAssigneeDetails(linkedIssueSelf, callback) {
+    fetch(linkedIssueSelf)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Erro ao buscar os detalhes do issue. Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((issueData) => {
+        const assignee = issueData.fields.assignee;
+        callback(null, assignee);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar os detalhes do issue:', error);
+        callback(error, null);
+      });
+  }
 
-    const apiUrl = `/rest/api/3/issue/${issueKey}?fields=issuelinks,assignee`;
+  function generateLinkedIssueHTML(linkedIssue, relationship, callback) {
+    fetchAssigneeDetails(linkedIssue.self, (error, assignee) => {
+      if (error) {
+        callback(`<p>Erro ao buscar detalhes do assignee: ${error.message}</p>`);
+        return;
+      }
+
+      const assigneeAvatarUrl = assignee?.avatarUrls?.['16x16'] ||  `<svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+      <g fill="currentcolor" fill-rule="evenodd">
+        <path d="M6 14c0-1.105.902-2 2.009-2h7.982c1.11 0 2.009.894 2.009 2.006v4.44c0 3.405-12 3.405-12 0z"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </g>
+    </svg>`;
+
+      const assigneeDisplayName = assignee?.displayName/*  || 'Não atribuído' */;
+
+      // Gerar o HTML com os dados do linkedIssue e assignee
+      const statusCategory = linkedIssue.fields.status.statusCategory.key;
+      const status = linkedIssue.fields.status.name.toLowerCase();
+      const iconUrl = linkedIssue.fields.issuetype.iconUrl;
+
+      let statusColor = "";
+
+      // Mapeamento das cores baseado na categoria do status
+      if (statusCategory === 'new') {
+        statusColor = 'rgb(0, 82, 204)';
+      } else if (statusCategory === 'indeterminate') {
+        statusColor = 'rgb(255, 171, 0)';
+      } else if (statusCategory === 'done') {
+        statusColor = 'rgb(20, 137, 44)';
+      } else {
+        statusColor = 'rgb(64, 84, 178)';
+      }
+
+      const html = `
+            <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="issue-links-group-container">
+              <h3 class="issue-links-group-container-h3">
+                <span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span>
+              </h3>
+              <div class="margin-top-8">
+                <ul class="ul-card-container">
+                  <div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed  ">
+                    <div data-testid="issue-line-card.card-container" class="issue-line-card-container">
+                      <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
+                        <div data-testid="issue-line-card-issue-type.issue-type" class="issue-line-issue-type">
+                          <div class="issue-line-issue-type-grid">
+                            <img src="${iconUrl}" width="16px" height="16px" alt="Tipo de item: História" draggable="false" class="issue-line-issue-type-img">
+                          </div>
+                        </div>
+                      </div>
+                      <span>
+                        <span data-testid="hover-card-trigger-wrapper">
+                          <a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${linkedIssue.key}" target="_blank" aria-label="${linkedIssue.key} ${status}" role="link" draggable="false" class="issue-line-card-view-key">${linkedIssue.key}</a>
+                        </span>
+                      </span>
+                      <div data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary" class="issue-line-card-view-summary">
+                        <span>
+                          <span data-testid="hover-card-trigger-wrapper">
+                            <a data-testid="issue-field-summary.ui.inline-read.link-item" data-is-router-link="false" data-vc="link-item" tabindex="0" class="issue-line-card-view-summary-a" href="/browse/${linkedIssue.key}" target="_blank" draggable="false" aria-disabled="false">
+                              <span class="issue-line-card-view-summary-span" data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container">
+                                <div class="issue-line-card-view-summary-div">
+                                  <span class="linkedIssue-fields-summary" data-item-title="true">${linkedIssue.fields.summary}</span>
+                                </div>
+                              </span>
+                            </a>
+                          </span>
+                        </span>
+                      </div>
+                      <div role="presentation">
+                        <div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img" aria-labelledby="uid54" style="display: inline-block; position: relative; outline: 0px;">
+                          <span class="issue-line-card-assignee-inner" data-testid="issue-line-card.ui.assignee.read-only-assignee--inner">
+                            <img src="${assigneeAvatarUrl}" alt="${assigneeDisplayName}" style="border-radius: 50%;">
+                          </span>
+                          <span data-testid="issue-line-card.ui.assignee.read-only-assignee--label" id="uid54" hidden="">${assigneeDisplayName}</span>
+                        </div>
+                      </div>
+                      <div data-testid="issue-line-card.ui.status.status-field-container" class="issue-line-card-status-field-container">
+                        <div role="presentation">
+                          <div>
+                            <div>
+                              <button aria-label="${status} - Alterar status" aria-expanded="false" class="issue-line-card-view-button-status" tabindex="0" type="button">
+                                <span class="issue-line-card-view-button-span">
+                                  <span class="issue-line-card-view-button-span2">
+                                    <div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="issue-fields-status-lozenge">
+                                      <span class="issue-line-card-view-button-span3">
+                                        <span class="issue-line-card-view-button-span4">
+                                          <div class="issue-line-card-view-button-status-color" style="color: ${statusColor};">${status}</div>
+                                        </span>
+                                      </span>
+                                    </div>
+                                  </span>
+                                </span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ul>
+              </div>
+            </div>
+        `;
+      callback(html);
+    });
+  }
+
+  // Atualizar a função para montar os links
+  function fetchLinkedIssues(issueKey, callback) {
+    const apiUrl = `/rest/api/3/issue/${issueKey}?fields=issuelinks`;
 
     fetch(apiUrl)
       .then((response) => {
-        // console.log("Função fetchLinkedIssues: Resposta da API recebida.");
         if (!response.ok) {
           throw new Error(`Erro ao obter links da issue. Status: ${response.status}`);
         }
         return response.json();
       })
       .then((data) => {
-        // console.log("Função fetchLinkedIssues: Dados de links da issue recebidos:", data);
-        let linksHtml = "";
+        const linkedIssues = data.fields.issuelinks || [];
+        let htmlLinks = '';
 
-        const assignee = data.fields.assignee;
+        linkedIssues.forEach((link) => {
+          const linkedIssue = link.inwardIssue || link.outwardIssue;
+          const relationship = link.type.inward || link.type.outward;
 
-        if (
-            data.fields &&
-            data.fields.issuelinks &&
-            data.fields.issuelinks.length > 0
-        ) {
-          data.fields.issuelinks.forEach((link) => {
-            const linkedIssue = link.inwardIssue || link.outwardIssue;
-            const relationship = link.type.inward || link.type.outward;
-            if (linkedIssue) {
-              console.log(linkedIssue,linkedIssue)
-              const statusCategory = linkedIssue.fields.status.statusCategory.key;
-              const status = linkedIssue.fields.status.name.toLowerCase();
-              let iconUrl = linkedIssue.fields.issuetype.iconUrl;
-              let statusColor = "";
+          if (linkedIssue) {
+            generateLinkedIssueHTML(linkedIssue, relationship, (html) => {
+              htmlLinks += html;
+              callback(htmlLinks);
+            });
+          }
+        });
 
-              // Mapeamento das cores baseado na categoria do status
-              if (statusCategory === 'new') {
-                statusColor = 'rgb(0, 82, 204)';
-              } else if (statusCategory === 'indeterminate') {
-                statusColor = 'rgb(255, 171, 0)';
-              } else if (statusCategory === 'done') {
-                statusColor = 'rgb(20, 137, 44)';
-              } else {
-                statusColor = 'rgb(64, 84, 178)';
-              }
-              let assigneeAvatarUrl = "";
-              let assigneeDisplayName ="";
-
-              if (linkedIssue.fields.assignee) {
-                  assigneeAvatarUrl = linkedIssue.fields.assignee.avatarUrls['16x16'];
-                  assigneeDisplayName = linkedIssue.fields.assignee.displayName;
-              }
-
-                linksHtml += `
-                <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="issue-links-group-container">
-                  <h3 class="issue-links-group-container-h3">
-                    <span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span>
-                  </h3>
-                  <div class="margin-top-8">
-                    <ul class="ul-card-container">
-                      <div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed  ">
-                        <div data-testid="issue-line-card.card-container" class="issue-line-card-container">
-                          <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
-                            <div data-testid="issue-line-card-issue-type.issue-type" class="issue-line-issue-type">
-                              <div class="issue-line-issue-type-grid">
-                                <img src="${iconUrl}" width="16px" height="16px" alt="Tipo de item: História" draggable="false" class="issue-line-issue-type-img">
-                              </div>
-                            </div>
-                          </div>
-                          <span>
-                            <span data-testid="hover-card-trigger-wrapper">
-                              <a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${linkedIssue.key}" target="_blank" aria-label="${linkedIssue.key} ${status}" role="link" draggable="false" class="issue-line-card-view-key">${linkedIssue.key}</a>
-                            </span>
-                          </span>
-                          <div data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary" class="issue-line-card-view-summary">
-                            <span>
-                              <span data-testid="hover-card-trigger-wrapper">
-                                <a data-testid="issue-field-summary.ui.inline-read.link-item" data-is-router-link="false" data-vc="link-item" tabindex="0" class="issue-line-card-view-summary-a" href="/browse/${linkedIssue.key}" target="_blank" draggable="false" aria-disabled="false">
-                                  <span class="issue-line-card-view-summary-span" data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container">
-                                    <div class="issue-line-card-view-summary-div">
-                                      <span class="linkedIssue-fields-summary" data-item-title="true">${linkedIssue.fields.summary}</span>
-                                    </div>
-                                  </span>
-                                </a>
-                              </span>
-                            </span>
-                          </div>
-                          <div role="presentation">
-                            <div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img" aria-labelledby="uid54" style="display: inline-block; position: relative; outline: 0px;">
-                              <span class="issue-line-card-assignee-inner" data-testid="issue-line-card.ui.assignee.read-only-assignee--inner">
-                                <img src="${assigneeAvatarUrl}" alt="${assigneeDisplayName}" data-testid="issue-line-card.ui.assignee.read-only-assignee--image" aria-hidden="true" data-vc="issue-line-card.ui.assignee.read-only-assignee--image" data-ssr-placeholder-ignored="true" class="issue-line-card-assignee-image" style="border-radius: 50%;">
-                              </span>
-                              <span data-testid="issue-line-card.ui.assignee.read-only-assignee--label" id="uid54" hidden="">${assigneeDisplayName}</span>
-                            </div>
-                          </div>
-                          <div data-testid="issue-line-card.ui.status.status-field-container" class="issue-line-card-status-field-container">
-                            <div role="presentation">
-                              <div>
-                                <div>
-                                  <button aria-label="${status} - Alterar status" aria-expanded="false" class="issue-line-card-view-button-status" tabindex="0" type="button">
-                                    <span class="issue-line-card-view-button-span">
-                                      <span class="issue-line-card-view-button-span2">
-                                        <div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="issue-fields-status-lozenge">
-                                          <span class="issue-line-card-view-button-span3">
-                                            <span class="issue-line-card-view-button-span4">
-                                              <div class="issue-line-card-view-button-status-color" style="color: ${statusColor};">${status}</div>
-                                            </span>
-                                          </span>
-                                        </div>
-                                      </span>
-                                    </span>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </ul>
-                  </div>
-                </div>
-              `;
-            }
-          });
-        } else {
-          linksHtml = '<p>Nenhum item vinculado encontrado.</p>';
+        if (linkedIssues.length === 0) {
+          callback('<p>Nenhum item vinculado encontrado.</p>');
         }
-        // console.log("Função fetchLinkedIssues: HTML de links gerado.");
-        callback(linksHtml);
       })
       .catch((error) => {
-        console.error('Função fetchLinkedIssues: Erro ao buscar os itens vinculados:', error);
-        callback(null, `Erro ao buscar os itens vinculados: ${error.message}`);
+        console.error('Erro ao buscar os itens vinculados:', error);
+        callback(`<p>Erro ao buscar os itens vinculados: ${error.message}</p>`);
       });
   }
 
