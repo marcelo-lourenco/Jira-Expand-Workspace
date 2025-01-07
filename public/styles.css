@@ -320,7 +320,7 @@ text-decoration: none;
     align-items: baseline;
     box-sizing: border-box;
     display: inline-flex;
-    font-size: inherit;
+    font-size: 10px;
     font-style: normal;
     font-family: inherit;
     font-weight: var(--ds-font-weight-medium, 500);
@@ -337,7 +337,7 @@ text-decoration: none;
     background-clip: ; */
     cursor: pointer;
     height: auto;
-    line-height: 2.28571em;
+    line-height: 15px;
     vertical-align: middle;
     width: auto;
     -webkit-box-pack: center;

@@ -309,7 +309,9 @@ if (document.readyState === 'loading') {
 const observer = new MutationObserver(checkAndAddButtons);
 observer.observe(document.body, { childList: true, subtree: true });
 
-// Mortrar Icones vinculados ao card
+
+//----------------------------------------------------------------------------//
+// Mortrar Ícones vinculados ao card
 (function () {
   // Estilo para o tooltip (atualizado para se parecer com o layout desejado)
   const tooltipStyle = `
@@ -396,14 +398,8 @@ observer.observe(document.body, { childList: true, subtree: true });
         return;
       }
 
-      const assigneeAvatarUrl = assignee?.avatarUrls?.['16x16'] ||  `<svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
-      <g fill="currentcolor" fill-rule="evenodd">
-        <path d="M6 14c0-1.105.902-2 2.009-2h7.982c1.11 0 2.009.894 2.009 2.006v4.44c0 3.405-12 3.405-12 0z"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </g>
-    </svg>`;
-
-      const assigneeDisplayName = assignee?.displayName/*  || 'Não atribuído' */;
+      const assigneeAvatarUrl = assignee?.avatarUrls?.['16x16'] ||  '';
+      const assigneeDisplayName = assignee?.displayName || '';
 
       // Gerar o HTML com os dados do linkedIssue e assignee
       const statusCategory = linkedIssue.fields.status.statusCategory.key;
@@ -411,16 +407,21 @@ observer.observe(document.body, { childList: true, subtree: true });
       const iconUrl = linkedIssue.fields.issuetype.iconUrl;
 
       let statusColor = "";
+      let statusBgColor = "";
 
       // Mapeamento das cores baseado na categoria do status
       if (statusCategory === 'new') {
         statusColor = 'rgb(0, 82, 204)';
+        statusBgColor = 'rgb(233, 242, 255)';
       } else if (statusCategory === 'indeterminate') {
-        statusColor = 'rgb(255, 171, 0)';
+        statusColor = 'rgb(133, 100, 4)';
+        statusBgColor = 'rgb(255, 238, 186)';
       } else if (statusCategory === 'done') {
         statusColor = 'rgb(20, 137, 44)';
+        statusBgColor = 'rgb(227, 252, 239)';
       } else {
         statusColor = 'rgb(64, 84, 178)';
+        statusBgColor = 'rgb(227, 252, 239)';
       }
 
       const html = `
@@ -430,7 +431,7 @@ observer.observe(document.body, { childList: true, subtree: true });
               </h3>
               <div class="margin-top-8">
                 <ul class="ul-card-container">
-                  <div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed  ">
+                  <div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed">
                     <div data-testid="issue-line-card.card-container" class="issue-line-card-container">
                       <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
                         <div data-testid="issue-line-card-issue-type.issue-type" class="issue-line-issue-type">
@@ -460,9 +461,9 @@ observer.observe(document.body, { childList: true, subtree: true });
                       <div role="presentation">
                         <div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img" aria-labelledby="uid54" style="display: inline-block; position: relative; outline: 0px;">
                           <span class="issue-line-card-assignee-inner" data-testid="issue-line-card.ui.assignee.read-only-assignee--inner">
-                            <img src="${assigneeAvatarUrl}" alt="${assigneeDisplayName}" style="border-radius: 50%;">
+                            <img src="${assigneeAvatarUrl}" title="${assigneeDisplayName}" style="border-radius: 50%;">
                           </span>
-                          <span data-testid="issue-line-card.ui.assignee.read-only-assignee--label" id="uid54" hidden="">${assigneeDisplayName}</span>
+                          <!-- <span data-testid="issue-line-card.ui.assignee.read-only-assignee--label" id="uid54" hidden=""></span> -->
                         </div>
                       </div>
                       <div data-testid="issue-line-card.ui.status.status-field-container" class="issue-line-card-status-field-container">
@@ -473,9 +474,9 @@ observer.observe(document.body, { childList: true, subtree: true });
                                 <span class="issue-line-card-view-button-span">
                                   <span class="issue-line-card-view-button-span2">
                                     <div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="issue-fields-status-lozenge">
-                                      <span class="issue-line-card-view-button-span3">
+                                      <span class="issue-line-card-view-button-span3" style="background-color: ${statusBgColor};">
                                         <span class="issue-line-card-view-button-span4">
-                                          <div class="issue-line-card-view-button-status-color" style="color: ${statusColor};">${status}</div>
+                                          <div class="issue-line-card-view-button-status-color" style="color: ${statusColor}; background-color: ${statusBgColor};">${status}</div>
                                         </span>
                                       </span>
                                     </div>
@@ -524,7 +525,7 @@ observer.observe(document.body, { childList: true, subtree: true });
         });
 
         if (linkedIssues.length === 0) {
-          callback('<p>Nenhum item vinculado encontrado.</p>');
+          callback('<p>Nenhum item vinculado.</p>');
         }
       })
       .catch((error) => {
@@ -580,17 +581,17 @@ observer.observe(document.body, { childList: true, subtree: true });
       return;
     }
 
-    const icon = document.createElement('span');
-    icon.className = 'linked-issues-icon';
-    icon.style.cursor = 'pointer';
-    icon.style.marginLeft = '5px';
-    icon.innerHTML =
+    const iconLink = document.createElement('span');
+    iconLink.className = 'linked-issues-iconLink';
+    iconLink.style.cursor = 'pointer';
+    iconLink.style.marginLeft = '5px';
+    iconLink.innerHTML =
       '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" fill="none"/><path fill="#0052cc" d="m17.657 14.828l-1.415-1.414L17.658 12A4 4 0 1 0 12 6.343l-1.414 1.414L9.17 6.343l1.415-1.414a6 6 0 0 1 8.485 8.485zm-2.829 2.829l-1.414 1.414a6 6 0 0 1-8.485-8.485l1.414-1.414l1.414 1.414L6.343 12A4 4 0 0 0 12 17.657l1.414-1.414zm0-9.9l1.415 1.415l-7.072 7.07l-1.414-1.414z"/></svg>';
     // console.log("Função addIconToCard: Ícone criado.");
 
     let tooltip;
 
-    icon.addEventListener('mouseover', (event) => {
+    iconLink.addEventListener('mouseover', (event) => {
       // console.log("Função addIconToCard: Evento mouseover no ícone.");
       if (!tooltip) {
         tooltip = createTooltip('');
@@ -622,20 +623,20 @@ observer.observe(document.body, { childList: true, subtree: true });
       });
     });
 
-    icon.addEventListener('mousemove', (event) => {
+    iconLink.addEventListener('mousemove', (event) => {
       // console.log("Função addIconToCard: Evento mousemove no ícone.");
       if (tooltip && tooltip.style.display === 'block') {
         updateTooltipPosition(event, tooltip);
       }
     });
 
-    icon.addEventListener('mouseout', () => {
+    iconLink.addEventListener('mouseout', () => {
       // console.log("Função addIconToCard: Evento mouseout no ícone.");
       destroyTooltip(tooltip);
       tooltip = null;
     });
 
-    footer.appendChild(icon);
+    footer.appendChild(iconLink);
     // console.log("Função addIconToCard: Ícone adicionado ao footer do card.");
   }
 
