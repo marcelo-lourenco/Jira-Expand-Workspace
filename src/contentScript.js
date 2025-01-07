@@ -333,11 +333,11 @@ observer.observe(document.body, { childList: true, subtree: true });
     tooltip.style.cssText = tooltipStyle;
     tooltip.innerHTML = `
       <div class="issue-tooltip-div1">
-        <div class="_o0a01u4f _s1t41u4f _29a51440 _nopz1440 _le7a1440 _uqy11440 issue-tooltip">
+        <div class="_o0a01u4f _s1t41u4f _29a51440 _nopz1440 _le7a1440 _uqy11440 issue-tooltip-linked-items-label">
           <label for="issue-link-search" class="issue-link-search-label">
-            <h2 class="title-linked-items">linked items</h2>
+            <h2 class="title-linked-items">Linked items</h2>
           </label>
-        <div class="issue-tooltip-div2"></div>
+        </div>
       </div>
       <div>${content}</div>
     `;
@@ -353,7 +353,7 @@ observer.observe(document.body, { childList: true, subtree: true });
       let timeoutId = setTimeout(() => {
         document.body.removeChild(tooltip);
         // console.log("Função destroyTooltip: Tooltip destruído.");
-      }, 3000);
+      }, 300000);
     } else {
       // console.log("Função destroyTooltip: Tooltip não encontrado para destruir.");
     }
@@ -405,17 +405,18 @@ observer.observe(document.body, { childList: true, subtree: true });
       const statusCategory = linkedIssue.fields.status.statusCategory.key;
       const status = linkedIssue.fields.status.name.toLowerCase();
       const iconUrl = linkedIssue.fields.issuetype.iconUrl;
+      const issueTypeName = linkedIssue.fields.issuetype.name;
 
       let statusColor = "";
       let statusBgColor = "";
 
       // Mapeamento das cores baseado na categoria do status
       if (statusCategory === 'new') {
-        statusColor = 'rgb(0, 82, 204)';
-        statusBgColor = 'rgb(233, 242, 255)';
+        statusColor = 'rgb(68, 84, 111)';
+        statusBgColor = 'rgb(223, 225, 230)';
       } else if (statusCategory === 'indeterminate') {
-        statusColor = 'rgb(133, 100, 4)';
-        statusBgColor = 'rgb(255, 238, 186)';
+        statusColor = 'rgb(0,85,204)';
+        statusBgColor = 'rgb(233, 242, 255)';
       } else if (statusCategory === 'done') {
         statusColor = 'rgb(20, 137, 44)';
         statusBgColor = 'rgb(227, 252, 239)';
@@ -436,19 +437,19 @@ observer.observe(document.body, { childList: true, subtree: true });
                       <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
                         <div data-testid="issue-line-card-issue-type.issue-type" class="issue-line-issue-type">
                           <div class="issue-line-issue-type-grid">
-                            <img src="${iconUrl}" width="16px" height="16px" alt="Tipo de item: História" draggable="false" class="issue-line-issue-type-img">
+                            <img src="${iconUrl}" alt="${issueTypeName}" title="${issueTypeName}" class="issue-line-issue-type-img" draggable="false" >
                           </div>
                         </div>
                       </div>
                       <span>
                         <span data-testid="hover-card-trigger-wrapper">
-                          <a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${linkedIssue.key}" target="_blank" aria-label="${linkedIssue.key} ${status}" role="link" draggable="false" class="issue-line-card-view-key">${linkedIssue.key}</a>
+                          <a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${linkedIssue.key}" target="_blank" class="issue-line-card-view-key" aria-label="${linkedIssue.key} ${status}" role="link" draggable="false">${linkedIssue.key}</a>
                         </span>
                       </span>
                       <div data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary" class="issue-line-card-view-summary">
                         <span>
                           <span data-testid="hover-card-trigger-wrapper">
-                            <a data-testid="issue-field-summary.ui.inline-read.link-item" data-is-router-link="false" data-vc="link-item" tabindex="0" class="issue-line-card-view-summary-a" href="/browse/${linkedIssue.key}" target="_blank" draggable="false" aria-disabled="false">
+                            <a data-testid="issue-field-summary.ui.inline-read.link-item" href="/browse/${linkedIssue.key}" target="_blank" class="issue-line-card-view-summary-a" data-is-router-link="false" data-vc="link-item" tabindex="0" draggable="false" aria-disabled="false">
                               <span class="issue-line-card-view-summary-span" data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container">
                                 <div class="issue-line-card-view-summary-div">
                                   <span class="linkedIssue-fields-summary" data-item-title="true">${linkedIssue.fields.summary}</span>
@@ -459,24 +460,23 @@ observer.observe(document.body, { childList: true, subtree: true });
                         </span>
                       </div>
                       <div role="presentation">
-                        <div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img" aria-labelledby="uid54" style="display: inline-block; position: relative; outline: 0px;">
-                          <span class="issue-line-card-assignee-inner" data-testid="issue-line-card.ui.assignee.read-only-assignee--inner">
-                            <img src="${assigneeAvatarUrl}" title="${assigneeDisplayName}" style="border-radius: 50%;">
+                        <div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img"  class="issue-line-card-read-only-assignee-inner">
+                          <span data-testid="issue-line-card.ui.assignee.read-only-assignee--inner" class="issue-line-card-assignee-inner">
+                            <img src="${assigneeAvatarUrl}" title="${assigneeDisplayName}" class="issue-line-card-assignee-image">
                           </span>
-                          <!-- <span data-testid="issue-line-card.ui.assignee.read-only-assignee--label" id="uid54" hidden=""></span> -->
                         </div>
                       </div>
                       <div data-testid="issue-line-card.ui.status.status-field-container" class="issue-line-card-status-field-container">
                         <div role="presentation">
                           <div>
                             <div>
-                              <button aria-label="${status} - Alterar status" aria-expanded="false" class="issue-line-card-view-button-status" tabindex="0" type="button">
+                              <button aria-label="${status}" aria-expanded="false" class="issue-line-card-view-button-status" tabindex="0" type="button">
                                 <span class="issue-line-card-view-button-span">
                                   <span class="issue-line-card-view-button-span2">
                                     <div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="issue-fields-status-lozenge">
                                       <span class="issue-line-card-view-button-span3" style="background-color: ${statusBgColor};">
                                         <span class="issue-line-card-view-button-span4">
-                                          <div class="issue-line-card-view-button-status-color" style="color: ${statusColor}; background-color: ${statusBgColor};">${status}</div>
+                                          <div class="issue-line-card-view-button-status-color" style="color: ${statusColor};">${status}</div>
                                         </span>
                                       </span>
                                     </div>
@@ -510,6 +510,7 @@ observer.observe(document.body, { childList: true, subtree: true });
       })
       .then((data) => {
         const linkedIssues = data.fields.issuelinks || [];
+        console.log('linkedIssues', linkedIssues);
         let htmlLinks = '';
 
         linkedIssues.forEach((link) => {
@@ -600,21 +601,19 @@ observer.observe(document.body, { childList: true, subtree: true });
       fetchLinkedIssues(issueKey, (linksHtml, error) => {
         tooltip.innerHTML = error
           ? `<div class="issue-tooltip-div1">
-              <div class="_o0a01u4f _s1t41u4f _29a51440 _nopz1440 _le7a1440 _uqy11440 issue-tooltip">
+              <div class="_o0a01u4f _s1t41u4f _29a51440 _nopz1440 _le7a1440 _uqy11440 issue-tooltip-linked-items-label">
                 <label for="issue-link-search" class="issue-link-search-label">
                   <h2 class="itle-linked-items">Erro</h2>
                 </label>
-                <div class="display-flex align-items-center"></div>
               </div>
               <div>${error}</div>
             </div>`
           : `
             <div class="issue-tooltip-div1">
-              <div class="_o0a01u4f _s1t41u4f _29a51440 _nopz1440 _le7a1440 _uqy11440 issue-tooltip">
+              <div class="_o0a01u4f _s1t41u4f _29a51440 _nopz1440 _le7a1440 _uqy11440 issue-tooltip-linked-items-label">
                 <label for="issue-link-search" class="issue-link-search-label">
                   <h2 class="title-linked-items">Linked items</h2>
                 </label>
-                <div class="display-flex align-items-center"></div>
               </div>
               <div>${linksHtml}</div>
             </div>`;
