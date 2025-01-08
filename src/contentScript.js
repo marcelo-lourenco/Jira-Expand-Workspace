@@ -311,44 +311,78 @@ observer.observe(document.body, { childList: true, subtree: true });
 
 
 
-//----------------------------------------------------------------------------//
+
+
+
+
+
+
+
+
+
+
+// ---------------------------------------------------------------------------- //
 // Mostrar Ícones vinculados ao card
-// Defina os estilos do tooltip em uma variável
-const tooltipStyle = `
-  position: absolute;
-  z-index: 1000;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  color: #333;
-  max-width: 700px;
-  display: none; /* Inicialmente oculto */
-`;
+// ---------------------------------------------------------------------------- //
+// Constantes
+// ---------------------------------------------------------------------------- //
+const API_ISSUE_BASE_URL = '/rest/api/3/issue/';
+const CLASS_LINKED_ISSUES_ICON = 'linked-issues-icon';
+const CLASS_LINKED_ISSUES_ICON_LINK = 'linked-issues-iconLink';
+const CLASS_TOOLTIP = 'tooltip-style';
+const SELECTOR_BOARD = '[data-testid="platform-board-kit.ui.board.scroll.board-scroll"]';
+const SELECTOR_CARD = '[data-testid="platform-board-kit.ui.card.card"]';
+const SELECTOR_CARD_FOOTER = '[data-testid="platform-card.ui.card.card-content.footer"]';
+const SELECTOR_ISSUE_KEY = '[data-testid="platform-card.common.ui.key.key"] a';
+const SPACE = 10;
+const TIME_TOOLTIP_DELAY = 1000;
+const TIME_BOARD_CHECK_INTERVAL = 500;
+
+// Status colors mapping
+const STATUS_COLORS = {
+  new: {
+    color: 'status-color-new',
+    bgColor: 'status-bg-color-new',
+  },
+  indeterminate: {
+    color: 'status-color-indeterminate',
+    bgColor: 'status-bg-color-indeterminate',
+  },
+  done: {
+    color: 'status-color-done',
+    bgColor: 'status-bg-color-done',
+  },
+  other: {
+    color: 'status-color-other',
+    bgColor: 'status-bg-color-other',
+  },
+};
+
+// ---------------------------------------------------------------------------- //
+// Tooltip Management
+// ---------------------------------------------------------------------------- //
 
 let currentTooltip = null;
 
+/**
+ * Creates a tooltip element with the given content.
+ *
+ * @param {string} content - The content to be displayed in the tooltip.
+ * @returns {HTMLElement} The created tooltip element.
+ */
 function createTooltip(content) {
   const tooltip = document.createElement('div');
-  tooltip.classList.add('tooltip-style');
-  tooltip.innerHTML = `
-    <div class="issue-tooltip-div1">
-      <div class="issue-tooltip-linked-items-label">
-        <label for="issue-link-search" class="issue-link-search-label">
-          <h2 class="title-linked-items">Linked items</h2>
-        </label>
-      </div>
-    </div>
-    <div>${content}</div>
-    `;
+  tooltip.classList.add(CLASS_TOOLTIP);
+  tooltip.innerHTML = content;
   document.body.appendChild(tooltip);
   return tooltip;
 }
 
-
+/**
+ * Destroys the given tooltip after a delay.
+ *
+ * @param {HTMLElement} tooltip - The tooltip element to destroy.
+ */
 function destroyTooltip(tooltip) {
   setTimeout(() => {
     if (tooltip && document.body.contains(tooltip)) {
@@ -357,81 +391,64 @@ function destroyTooltip(tooltip) {
       document.body.removeChild(tooltip);
       currentTooltip = null;
     }
-  }, 1000);
+  }, TIME_TOOLTIP_DELAY);
 }
 
-// Obtém a chave da issue de um card
+// ---------------------------------------------------------------------------- //
+// Issue Key and Data Fetching
+// ---------------------------------------------------------------------------- //
+
+/**
+ * Retrieves the issue key from a card element.
+ *
+ * @param {HTMLElement} cardElement - The card element.
+ * @returns {string|null} The issue key or null if not found.
+ */
 function getIssueKeyFromCard(cardElement) {
-  const issueKeyElement = cardElement.querySelector('[data-testid="platform-card.common.ui.key.key"] a');
-
-  if (issueKeyElement) {
-    return issueKeyElement.textContent.trim();
-  }
-
-  console.error("Não foi possível encontrar a chave da issue no card:", cardElement);
-  return null;
+  const issueKeyElement = cardElement.querySelector(SELECTOR_ISSUE_KEY);
+  return issueKeyElement ? issueKeyElement.textContent.trim() : null;
 }
 
-// Busca detalhes do responsável por uma issue
-function fetchAssigneeDetails(linkedIssueSelf, callback) {
-  fetch(linkedIssueSelf)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Erro ao buscar os detalhes do issue. Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((issueData) => {
-      const assignee = issueData.fields.assignee;
-      callback(null, assignee);
-    })
-    .catch((error) => {
-      console.error('Erro ao buscar os detalhes do issue:', error);
-      callback(error, null);
-    });
-}
-
-// Gera o HTML para um issue vinculado
-function generateLinkedIssueHTML(linkedIssue, relationship, callback) {
-  fetchAssigneeDetails(linkedIssue.self, (error, assignee) => {
-    if (error) {
-      callback(`<p>Erro ao buscar detalhes do assignee: ${error.message}</p>`);
-      return;
+/**
+ * Fetches assignee details for a given issue.
+ *
+ * @param {string} linkedIssueSelf - The 'self' URL of the linked issue.
+ * @param {function} callback - Callback function to handle the response.
+ */
+async function fetchAssigneeDetails(linkedIssueSelf) {
+  try {
+    const response = await fetch(linkedIssueSelf);
+    if (!response.ok) {
+      throw new Error(`Error fetching issue details. Status: ${response.status}`);
     }
+    const issueData = await response.json();
+    return issueData.fields.assignee;
+  } catch (error) {
+    console.error('Error fetching issue details:', error);
+    throw error;
+  }
+}
 
+/**
+ * Generates HTML for a linked issue.
+ *
+ * @param {object} linkedIssue - The linked issue data.
+ * @param {string} relationship - The relationship type.
+ * @param {function} callback - Callback function to handle the generated HTML.
+ */
+async function generateLinkedIssueHTML(linkedIssue, relationship) {
+  try {
+    const assignee = await fetchAssigneeDetails(linkedIssue.self);
     const assigneeAvatarUrl = assignee?.avatarUrls?.['16x16'] || '';
     const assigneeDisplayName = assignee?.displayName || '';
 
-    const statusCategory = linkedIssue.fields.status.statusCategory.key;
+    const { key: statusCategory } = linkedIssue.fields.status.statusCategory;
     const status = linkedIssue.fields.status.name.toLowerCase();
-    const iconUrl = linkedIssue.fields.issuetype.iconUrl;
-    const issueTypeName = linkedIssue.fields.issuetype.name;
+    const { iconUrl, name: issueTypeName } = linkedIssue.fields.issuetype;
 
-    let statusColor = "";
-    let statusBgColor = "";
+    const { color: statusColor, bgColor: statusBgColor } = STATUS_COLORS[statusCategory] || STATUS_COLORS.other;
 
-    // Mapeamento das cores baseado na categoria do status
-    if (statusCategory === 'new') {
-      statusColor = 'status-color-new';
-      statusBgColor = 'status-bg-color-new';
-    } else if (statusCategory === 'indeterminate') {
-      statusColor = 'status-color-indeterminate';
-      statusBgColor = 'status-bg-color-indeterminate';
-    } else if (statusCategory === 'done') {
-      statusColor = 'status-color-done';
-      statusBgColor = 'status-bg-color-done';
-    } else {
-      statusColor = 'status-color-other';
-      statusBgColor = 'status-bg-color-other';
-    }
-
-    const html = `
-      <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="issue-links-group-container">
-        <h3 class="issue-links-group-container-h3">
-          <span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span>
-        </h3>
-        <div class="margin-top-8">
-          <ul class="ul-card-container">
+    return `          
             <div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed">
               <div data-testid="issue-line-card.card-container" class="issue-line-card-container">
                 <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
@@ -489,212 +506,196 @@ function generateLinkedIssueHTML(linkedIssue, relationship, callback) {
                 </div>
               </div>
             </div>
-          </ul>
+    `;
+  } catch (error) {
+    return `<p>Error fetching assignee details: ${error.message}</p>`;
+  }
+}
+
+/**
+ * Fetches linked issues for a given issue key and groups them by relationship type.
+ *
+ * @param {string} issueKey - The key of the issue.
+ * @returns {object} An object containing grouped linked issues HTML and a title.
+ */
+async function fetchLinkedIssues(issueKey) {
+  try {
+    const apiUrl = `${API_ISSUE_BASE_URL}${issueKey}?fields=issuelinks`;
+    const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error(`Error fetching issue links. Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const linkedIssues = data.fields.issuelinks || [];
+
+    if (linkedIssues.length === 0) {
+      return { groupedLinksHtml: '<p>No linked items.</p>', title: 'Linked items' };
+    }
+
+    const groupedLinks = {};
+    for (const link of linkedIssues) {
+      const linkedIssue = link.inwardIssue || link.outwardIssue;
+      const relationship = link.type.inward || link.type.outward;
+      if (linkedIssue) {
+        if (!groupedLinks[relationship]) {
+          groupedLinks[relationship] = [];
+        }
+        groupedLinks[relationship].push(await generateLinkedIssueHTML(linkedIssue, relationship));
+      }
+    }
+
+    let groupedLinksHtml = '';
+    for (const relationship in groupedLinks) {
+      groupedLinksHtml += `
+        <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="issue-links-group-container">
+          <h3 class="issue-links-group-container-h3">
+            <span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span>
+          </h3>
+          <div class="margin-top-8">
+            <ul class="ul-card-container">
+              ${groupedLinks[relationship].join('')}
+            </ul>
+          </div>
         </div>
-      </div>
       `;
-    callback(html);
-  });
+    }
+
+    return { groupedLinksHtml, title: 'Linked items' };
+  } catch (error) {
+    console.error('Error fetching linked issues:', error);
+    return { error: `<p>Error fetching linked issues: ${error.message}</p>`, title: 'Error' };
+  }
 }
 
-// Busca os issues vinculados e monta os links no tooltip
-function fetchLinkedIssues(issueKey, callback) {
-  const apiUrl = `/rest/api/3/issue/${issueKey}?fields=issuelinks`;
+// ---------------------------------------------------------------------------- //
+// Tooltip Position and Event Handling
+// ---------------------------------------------------------------------------- //
 
-  fetch(apiUrl)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Erro ao obter links da issue. Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const linkedIssues = data.fields.issuelinks || [];
-      let htmlLinks = '';
-      let fetchedCount = 0;
-
-      if (linkedIssues.length === 0) {
-        callback('<p>Nenhum item vinculado.</p>', null, 'Linked items');
-      } else {
-        linkedIssues.forEach((link) => {
-          const linkedIssue = link.inwardIssue || link.outwardIssue;
-          const relationship = link.type.inward || link.type.outward;
-
-          if (linkedIssue) {
-            generateLinkedIssueHTML(linkedIssue, relationship, (html) => {
-              htmlLinks += html;
-              fetchedCount++;
-              if (fetchedCount === linkedIssues.length) {
-                callback(htmlLinks, null, 'Linked items');
-              }
-            });
-          } else {
-            fetchedCount++;
-            if (fetchedCount === linkedIssues.length) {
-              callback(htmlLinks, null, 'Linked items');
-            }
-          }
-        });
-      }
-    })
-    .catch((error) => {
-      console.error('Erro ao buscar os itens vinculados:', error);
-      callback(null, `<p>Erro ao buscar os itens vinculados: ${error.message}</p>`, 'Erro');
-    });
-}
-
-// Atualiza a posição do tooltip
+/**
+ * Updates the position of the tooltip based on the mouse event or stored coordinates.
+ *
+ * @param {MouseEvent} event - The mouse event.
+ * @param {HTMLElement} tooltip - The tooltip element.
+ */
 function updateTooltipPosition(event, tooltip) {
   if (!tooltip) return;
 
-  // Usa as coordenadas armazenadas se existirem, caso contrário, usa a posição do evento
   const { pageX, pageY } = event;
   const tooltipRect = tooltip.getBoundingClientRect();
-  const space = 0;
 
-  let left = tooltip.tooltipX || pageX + space;
-  let top = tooltip.tooltipY || pageY + space;
+  let left = tooltip.tooltipX || pageX + SPACE;
+  let top = tooltip.tooltipY || pageY + SPACE;
 
-  // Ajuste para evitar que o tooltip saia da tela
   if (left + tooltipRect.width > window.innerWidth) {
-    left = (tooltip.tooltipX || pageX) - tooltipRect.width - space;
+    left = (tooltip.tooltipX || pageX) - tooltipRect.width - SPACE;
   }
   if (top + tooltipRect.height > window.innerHeight) {
-    top = (tooltip.tooltipY || pageY) - tooltipRect.height - space;
+    top = (tooltip.tooltipY || pageY) - tooltipRect.height - SPACE;
   }
 
   tooltip.style.left = `${left}px`;
   tooltip.style.top = `${top}px`;
 }
 
-
-// Adiciona o ícone ao card e configura os eventos do tooltip
-function addIconToCard(card) {
+/**
+ * Adds a linked issues icon to a card and sets up tooltip event listeners.
+ *
+ * @param {HTMLElement} card - The card element.
+ */
+async function addIconToCard(card) {
   const issueKey = getIssueKeyFromCard(card);
   if (!issueKey) return;
 
-  const footer = card.querySelector('[data-testid="platform-card.ui.card.card-content.footer"]');
-  if (!footer) {
-    console.error("Não foi possível encontrar o footer do card:", card);
-    return;
-  }
-
-  if (footer.querySelector('.linked-issues-icon')) return;
+  const footer = card.querySelector(SELECTOR_CARD_FOOTER);
+  if (!footer || footer.querySelector(`.${CLASS_LINKED_ISSUES_ICON}`)) return;
 
   const iconLink = document.createElement('span');
-  iconLink.className = 'linked-issues-iconLink';
+  iconLink.className = CLASS_LINKED_ISSUES_ICON_LINK;
 
-  let tooltip;
-
-  iconLink.addEventListener('mouseover', (event) => {
+  iconLink.addEventListener('mouseover', async (event) => {
     if (!currentTooltip) {
-      tooltip = createTooltip('');
-      currentTooltip = tooltip;
-
-      // Armazena a posição do mouse no momento em que o tooltip é criado
+      currentTooltip = createTooltip('');
       currentTooltip.tooltipX = event.pageX;
       currentTooltip.tooltipY = event.pageY;
-    } else {
-      tooltip = currentTooltip;
     }
 
-
-    fetchLinkedIssues(issueKey, (linksHtml, error, title) => {
-      const titleElement = tooltip.querySelector('.title-linked-items');
+    try {
+      const { groupedLinksHtml, error, title } = await fetchLinkedIssues(issueKey);
+      const titleElement = currentTooltip.querySelector('.title-linked-items');
       if (titleElement) {
         titleElement.textContent = title;
       }
-      tooltip.innerHTML = error
+      currentTooltip.innerHTML = error
         ? `<div class="issue-tooltip-div1">
-            <div class="issue-tooltip-linked-items-label">
-              <label for="issue-link-search" class="issue-link-search-label">
-                <h2 class="title-linked-items">Error</h2>
-              </label>
-            </div>
-            <div>${error}</div>
-          </div>`
+             <div class="issue-tooltip-linked-items-label">
+               <label for="issue-link-search" class="issue-link-search-label">
+                 <h2 class="title-linked-items">${title}</h2>
+               </label>
+             </div>
+             <div>${error}</div>
+           </div>`
         : `<div class="issue-tooltip-div1">
-            <div class="issue-tooltip-linked-items-label">
-              <label for="issue-link-search" class="issue-link-search-label">
-                <h2 class="title-linked-items">Linked items</h2>
-              </label>
-            </div>
-            <div>${linksHtml}</div>
-          </div>`;
-      tooltip.style.display = 'block';
-      updateTooltipPosition(event, tooltip);
-    });
+             <div class="issue-tooltip-linked-items-label">
+               <label for="issue-link-search" class="issue-link-search-label">
+                 <h2 class="title-linked-items">${title}</h2>
+               </label>
+             </div>
+             <div>${groupedLinksHtml}</div>
+           </div>`;
+      currentTooltip.style.display = 'block';
+      updateTooltipPosition(event, currentTooltip);
+    } catch (err) {
+      console.error('Error handling tooltip:', err);
+      if (currentTooltip) {
+        currentTooltip.innerHTML = `<p>Error: ${err.message}</p>`;
+        currentTooltip.style.display = 'block';
+        updateTooltipPosition(event, currentTooltip);
+      }
+    }
   });
 
-  function delayedTooltipClose() {
-    if (currentTooltip && !currentTooltip.matches(':hover') && !iconLink.matches(':hover')) {
-      destroyTooltip(currentTooltip);
-    }
-  }
-
-  //iconLink.addEventListener('mouseout', delayedTooltipClose);
-
-  //iconLink.addEventListener('mousemove', (event) => {
-  //  if (tooltip && tooltip.style.display === 'block') {
-  //    updateTooltipPosition(event, tooltip);
-  //  }
-  //});
-
   iconLink.addEventListener('mouseout', () => {
-
-    // Adicionado um timeout para que o mouseout do ícone não feche o tooltip se o mouse estiver sobre o tooltip
     setTimeout(() => {
       if (currentTooltip && !currentTooltip.matches(':hover') && !iconLink.matches(':hover')) {
-        destroyTooltip(currentTooltip); // Usar currentTooltip aqui
-        if (currentTooltip) {
-          delete currentTooltip.tooltipX;
-          delete currentTooltip.tooltipY;
-        }
+        destroyTooltip(currentTooltip);
       }
-    }, 1000);
+    }, TIME_TOOLTIP_DELAY);
   });
 
   if (currentTooltip) {
     currentTooltip.addEventListener('mouseout', () => {
-      destroyTooltip(currentTooltip); // Usar currentTooltip aqui
-      // Limpa as coordenadas armazenadas quando o tooltip é fechado
+      destroyTooltip(currentTooltip);
       delete currentTooltip.tooltipX;
       delete currentTooltip.tooltipY;
     });
   }
 
-  /*
-    if (currentTooltip) {
-      currentTooltip.addEventListener('mouseleave', () => {
-        destroyTooltip(currentTooltip); // Usar currentTooltip aqui
-        // Limpa as coordenadas armazenadas quando o tooltip é fechado
-        delete currentTooltip.tooltipX;
-        delete currentTooltip.tooltipY;
-      });
-    }
-   */
-
   footer.appendChild(iconLink);
 }
 
+// ---------------------------------------------------------------------------- //
+// Board Observation
+// ---------------------------------------------------------------------------- //
 
-// Observa mudanças no board e adiciona o ícone aos novos cards
+/**
+ * Observes the board for changes and adds the icon to new cards.
+ */
 function observeBoard() {
-  const board = document.querySelector('[data-testid="platform-board-kit.ui.board.scroll.board-scroll"]');
+  const board = document.querySelector(SELECTOR_BOARD);
   if (!board) {
-    console.error("Não foi possível encontrar o board.");
+    console.error('Could not find the board.');
     return;
   }
 
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
-      if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+      if (mutation.addedNodes) {
         mutation.addedNodes.forEach((node) => {
           if (node.nodeType === Node.ELEMENT_NODE) {
-            const cards = node.querySelectorAll('[data-testid="platform-board-kit.ui.card.card"]');
-            if (cards.length > 0) {
-              cards.forEach(addIconToCard);
-            }
+            const cards = node.querySelectorAll(SELECTOR_CARD);
+            cards.forEach(addIconToCard);
           }
         });
       }
@@ -703,20 +704,26 @@ function observeBoard() {
 
   observer.observe(board, { childList: true, subtree: true });
 
-  // Adiciona o ícone aos cards que já estão presentes no board
-  const initialCards = board.querySelectorAll('[data-testid="platform-board-kit.ui.card.card"]');
+  // Add the icon to existing cards
+  const initialCards = board.querySelectorAll(SELECTOR_CARD);
   initialCards.forEach(addIconToCard);
 }
 
-// Aguarda o board carregar e inicia a observação
+/**
+ * Waits for the board to load and then starts observing it.
+ */
 function waitForBoard() {
   const checkInterval = setInterval(() => {
-    const board = document.querySelector('[data-testid="platform-board-kit.ui.board.scroll.board-scroll"]');
+    const board = document.querySelector(SELECTOR_BOARD);
     if (board) {
       clearInterval(checkInterval);
       observeBoard();
     }
-  }, 500);
+  }, TIME_BOARD_CHECK_INTERVAL);
 }
+
+// ---------------------------------------------------------------------------- //
+// Initialization
+// ---------------------------------------------------------------------------- //
 
 waitForBoard();
