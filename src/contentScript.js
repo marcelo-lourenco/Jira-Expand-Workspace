@@ -310,6 +310,7 @@ const observer = new MutationObserver(checkAndAddButtons);
 observer.observe(document.body, { childList: true, subtree: true });
 
 
+
 //----------------------------------------------------------------------------//
 // Mostrar Ícones vinculados ao card
 // Defina os estilos do tooltip em uma variável
@@ -332,16 +333,16 @@ let currentTooltip = null;
 
 function createTooltip(content) {
   const tooltip = document.createElement('div');
-  tooltip.style.cssText = tooltipStyle;
+  tooltip.classList.add('tooltip-style');
   tooltip.innerHTML = `
-      <div class="issue-tooltip-div1">
-        <div class="_o0a01u4f _s1t41u4f _29a51440 _nopz1440 _le7a1440 _uqy11440 issue-tooltip-linked-items-label">
-          <label for="issue-link-search" class="issue-link-search-label">
-            <h2 class="title-linked-items">Linked items</h2>
-          </label>
-        </div>
+    <div class="issue-tooltip-div1">
+      <div class="issue-tooltip-linked-items-label">
+        <label for="issue-link-search" class="issue-link-search-label">
+          <h2 class="title-linked-items">Linked items</h2>
+        </label>
       </div>
-      <div>${content}</div>
+    </div>
+    <div>${content}</div>
     `;
   document.body.appendChild(tooltip);
   return tooltip;
@@ -349,12 +350,14 @@ function createTooltip(content) {
 
 
 function destroyTooltip(tooltip) {
-  if (tooltip && document.body.contains(tooltip)) {
-    setTimeout(() => {
+  setTimeout(() => {
+    if (tooltip && document.body.contains(tooltip)) {
+      delete tooltip.tooltipX;
+      delete tooltip.tooltipY;
       document.body.removeChild(tooltip);
-    }, 500);
-  }
-  currentTooltip = null;
+      currentTooltip = null;
+    }
+  }, 1000);
 }
 
 // Obtém a chave da issue de um card
@@ -409,87 +412,87 @@ function generateLinkedIssueHTML(linkedIssue, relationship, callback) {
 
     // Mapeamento das cores baseado na categoria do status
     if (statusCategory === 'new') {
-      statusColor = 'rgb(68, 84, 111)';
-      statusBgColor = 'rgb(223, 225, 230)';
+      statusColor = 'status-color-new';
+      statusBgColor = 'status-bg-color-new';
     } else if (statusCategory === 'indeterminate') {
-      statusColor = 'rgb(0,85,204)';
-      statusBgColor = 'rgb(233, 242, 255)';
+      statusColor = 'status-color-indeterminate';
+      statusBgColor = 'status-bg-color-indeterminate';
     } else if (statusCategory === 'done') {
-      statusColor = 'rgb(20, 137, 44)';
-      statusBgColor = 'rgb(227, 252, 239)';
+      statusColor = 'status-color-done';
+      statusBgColor = 'status-bg-color-done';
     } else {
-      statusColor = 'rgb(64, 84, 178)';
-      statusBgColor = 'rgb(227, 252, 239)';
+      statusColor = 'status-color-other';
+      statusBgColor = 'status-bg-color-other';
     }
 
     const html = `
-            <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="issue-links-group-container">
-              <h3 class="issue-links-group-container-h3">
-                <span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span>
-              </h3>
-              <div class="margin-top-8">
-                <ul class="ul-card-container">
-                  <div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed">
-                    <div data-testid="issue-line-card.card-container" class="issue-line-card-container">
-                      <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
-                        <div data-testid="issue-line-card-issue-type.issue-type" class="issue-line-issue-type">
-                          <div class="issue-line-issue-type-grid">
-                            <img src="${iconUrl}" alt="${issueTypeName}" title="${issueTypeName}" class="issue-line-issue-type-img" draggable="false" >
+      <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="issue-links-group-container">
+        <h3 class="issue-links-group-container-h3">
+          <span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span>
+        </h3>
+        <div class="margin-top-8">
+          <ul class="ul-card-container">
+            <div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed">
+              <div data-testid="issue-line-card.card-container" class="issue-line-card-container">
+                <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
+                  <div data-testid="issue-line-card-issue-type.issue-type" class="issue-line-issue-type">
+                    <div class="issue-line-issue-type-grid">
+                      <img src="${iconUrl}" alt="${issueTypeName}" title="${issueTypeName}" class="issue-line-issue-type-img" draggable="false" >
+                    </div>
+                  </div>
+                </div>
+                <span>
+                  <span data-testid="hover-card-trigger-wrapper">
+                    <a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${linkedIssue.key}" target="_blank" class="issue-line-card-view-key" aria-label="${linkedIssue.key} ${status}" role="link" draggable="false">${linkedIssue.key}</a>
+                  </span>
+                </span>
+                <div data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary" class="issue-line-card-view-summary">
+                  <span>
+                    <span data-testid="hover-card-trigger-wrapper">
+                      <a data-testid="issue-field-summary.ui.inline-read.link-item" href="/browse/${linkedIssue.key}" target="_blank" class="issue-line-card-view-summary-a" data-is-router-link="false" data-vc="link-item" tabindex="0" draggable="false" aria-disabled="false">
+                        <span class="issue-line-card-view-summary-span" data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container">
+                          <div class="issue-line-card-view-summary-div">
+                            <span class="linkedIssue-fields-summary" data-item-title="true">${linkedIssue.fields.summary}</span>
                           </div>
-                        </div>
-                      </div>
-                      <span>
-                        <span data-testid="hover-card-trigger-wrapper">
-                          <a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${linkedIssue.key}" target="_blank" class="issue-line-card-view-key" aria-label="${linkedIssue.key} ${status}" role="link" draggable="false">${linkedIssue.key}</a>
                         </span>
-                      </span>
-                      <div data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary" class="issue-line-card-view-summary">
-                        <span>
-                          <span data-testid="hover-card-trigger-wrapper">
-                            <a data-testid="issue-field-summary.ui.inline-read.link-item" href="/browse/${linkedIssue.key}" target="_blank" class="issue-line-card-view-summary-a" data-is-router-link="false" data-vc="link-item" tabindex="0" draggable="false" aria-disabled="false">
-                              <span class="issue-line-card-view-summary-span" data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container">
-                                <div class="issue-line-card-view-summary-div">
-                                  <span class="linkedIssue-fields-summary" data-item-title="true">${linkedIssue.fields.summary}</span>
-                                </div>
-                              </span>
-                            </a>
-                          </span>
-                        </span>
-                      </div>
-                      <div role="presentation">
-                        <div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img"  class="issue-line-card-read-only-assignee-inner">
-                          <span data-testid="issue-line-card.ui.assignee.read-only-assignee--inner" class="issue-line-card-assignee-inner">
-                            <img src="${assigneeAvatarUrl}" title="${assigneeDisplayName}" class="issue-line-card-assignee-image">
-                          </span>
-                        </div>
-                      </div>
-                      <div data-testid="issue-line-card.ui.status.status-field-container" class="issue-line-card-status-field-container">
-                        <div role="presentation">
-                          <div>
-                            <div>
-                              <button aria-label="${status}" aria-expanded="false" class="issue-line-card-view-button-status" tabindex="0" type="button">
-                                <span class="issue-line-card-view-button-span">
-                                  <span class="issue-line-card-view-button-span2">
-                                    <div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="issue-fields-status-lozenge">
-                                      <span class="issue-line-card-view-button-span3" style="background-color: ${statusBgColor};">
-                                        <span class="issue-line-card-view-button-span4">
-                                          <div class="issue-line-card-view-button-status-color" style="color: ${statusColor};">${status}</div>
-                                        </span>
-                                      </span>
-                                    </div>
+                      </a>
+                    </span>
+                  </span>
+                </div>
+                <div role="presentation">
+                  <div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img"  class="issue-line-card-read-only-assignee-inner">
+                    <span data-testid="issue-line-card.ui.assignee.read-only-assignee--inner" class="issue-line-card-assignee-inner">
+                      <img src="${assigneeAvatarUrl}" title="${assigneeDisplayName}" class="issue-line-card-assignee-image">
+                    </span>
+                  </div>
+                </div>
+                <div data-testid="issue-line-card.ui.status.status-field-container" class="issue-line-card-status-field-container">
+                  <div role="presentation">
+                    <div>
+                      <div>
+                        <button aria-label="${status}" aria-expanded="false" class="issue-line-card-view-button-status" tabindex="0" type="button">
+                          <span class="issue-line-card-view-button-span">
+                            <span class="issue-line-card-view-button-span2">
+                              <div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="issue-fields-status-lozenge">
+                                <span class="issue-line-card-view-button-span3 ${statusBgColor}">
+                                  <span class="issue-line-card-view-button-span4">
+                                    <div class="issue-line-card-view-button-status-color ${statusColor}">${status}</div>
                                   </span>
                                 </span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
+                              </div>
+                            </span>
+                          </span>
+                        </button>
                       </div>
                     </div>
                   </div>
-                </ul>
+                </div>
               </div>
             </div>
-        `;
+          </ul>
+        </div>
+      </div>
+      `;
     callback(html);
   });
 }
@@ -544,24 +547,26 @@ function fetchLinkedIssues(issueKey, callback) {
 function updateTooltipPosition(event, tooltip) {
   if (!tooltip) return;
 
+  // Usa as coordenadas armazenadas se existirem, caso contrário, usa a posição do evento
   const { pageX, pageY } = event;
   const tooltipRect = tooltip.getBoundingClientRect();
   const space = 0;
 
-  let left = pageX + space;
-  let top = pageY + space;
+  let left = tooltip.tooltipX || pageX + space;
+  let top = tooltip.tooltipY || pageY + space;
 
   // Ajuste para evitar que o tooltip saia da tela
   if (left + tooltipRect.width > window.innerWidth) {
-    left = pageX - tooltipRect.width - space;
+    left = (tooltip.tooltipX || pageX) - tooltipRect.width - space;
   }
   if (top + tooltipRect.height > window.innerHeight) {
-    top = pageY - tooltipRect.height - space;
+    top = (tooltip.tooltipY || pageY) - tooltipRect.height - space;
   }
 
   tooltip.style.left = `${left}px`;
   tooltip.style.top = `${top}px`;
 }
+
 
 // Adiciona o ícone ao card e configura os eventos do tooltip
 function addIconToCard(card) {
@@ -578,10 +583,6 @@ function addIconToCard(card) {
 
   const iconLink = document.createElement('span');
   iconLink.className = 'linked-issues-iconLink';
-  iconLink.style.cursor = 'pointer';
-  iconLink.style.marginLeft = '5px';
-  iconLink.innerHTML =
-    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" fill="none"/><path fill="#0052cc" d="m17.657 14.828l-1.415-1.414L17.658 12A4 4 0 1 0 12 6.343l-1.414 1.414L9.17 6.343l1.415-1.414a6 6 0 0 1 8.485 8.485zm-2.829 2.829l-1.414 1.414a6 6 0 0 1-8.485-8.485l1.414-1.414l1.414 1.414L6.343 12A4 4 0 0 0 12 17.657l1.414-1.414zm0-9.9l1.415 1.415l-7.072 7.07l-1.414-1.414z"/></svg>';
 
   let tooltip;
 
@@ -589,9 +590,14 @@ function addIconToCard(card) {
     if (!currentTooltip) {
       tooltip = createTooltip('');
       currentTooltip = tooltip;
+
+      // Armazena a posição do mouse no momento em que o tooltip é criado
+      currentTooltip.tooltipX = event.pageX;
+      currentTooltip.tooltipY = event.pageY;
     } else {
       tooltip = currentTooltip;
     }
+
 
     fetchLinkedIssues(issueKey, (linksHtml, error, title) => {
       const titleElement = tooltip.querySelector('.title-linked-items');
@@ -600,51 +606,73 @@ function addIconToCard(card) {
       }
       tooltip.innerHTML = error
         ? `<div class="issue-tooltip-div1">
-                <div class="_o0a01u4f _s1t41u4f _29a51440 _nopz1440 _le7a1440 _uqy11440 issue-tooltip-linked-items-label">
-                  <label for="issue-link-search" class="issue-link-search-label">
-                    <h2 class="title-linked-items">Error</h2>
-                  </label>
-                </div>
-                <div>${error}</div>
-              </div>`
-        : `
-                <div class="issue-tooltip-div1">
-                  <div class="_o0a01u4f _s1t41u4f _29a51440 _nopz1440 _le7a1440 _uqy11440 issue-tooltip-linked-items-label">
-                    <label for="issue-link-search" class="issue-link-search-label">
-                      <h2 class="title-linked-items">Linked items</h2>
-                    </label>
-                  </div>
-                  <div>${linksHtml}</div>
-                </div>`;
+            <div class="issue-tooltip-linked-items-label">
+              <label for="issue-link-search" class="issue-link-search-label">
+                <h2 class="title-linked-items">Error</h2>
+              </label>
+            </div>
+            <div>${error}</div>
+          </div>`
+        : `<div class="issue-tooltip-div1">
+            <div class="issue-tooltip-linked-items-label">
+              <label for="issue-link-search" class="issue-link-search-label">
+                <h2 class="title-linked-items">Linked items</h2>
+              </label>
+            </div>
+            <div>${linksHtml}</div>
+          </div>`;
       tooltip.style.display = 'block';
       updateTooltipPosition(event, tooltip);
     });
   });
 
+  function delayedTooltipClose() {
+    if (currentTooltip && !currentTooltip.matches(':hover') && !iconLink.matches(':hover')) {
+      destroyTooltip(currentTooltip);
+    }
+  }
+
+  //iconLink.addEventListener('mouseout', delayedTooltipClose);
+
   //iconLink.addEventListener('mousemove', (event) => {
-  //    if (tooltip && tooltip.style.display === 'block') {
-  //        updateTooltipPosition(event, tooltip);
-  //    }
+  //  if (tooltip && tooltip.style.display === 'block') {
+  //    updateTooltipPosition(event, tooltip);
+  //  }
   //});
 
   iconLink.addEventListener('mouseout', () => {
+
     // Adicionado um timeout para que o mouseout do ícone não feche o tooltip se o mouse estiver sobre o tooltip
-
-    if (currentTooltip && !currentTooltip.matches(':hover')) {
-      setTimeout(() => {
-        destroyTooltip(tooltip);
-      }, 500);
-    }
-
+    setTimeout(() => {
+      if (currentTooltip && !currentTooltip.matches(':hover') && !iconLink.matches(':hover')) {
+        destroyTooltip(currentTooltip); // Usar currentTooltip aqui
+        if (currentTooltip) {
+          delete currentTooltip.tooltipX;
+          delete currentTooltip.tooltipY;
+        }
+      }
+    }, 1000);
   });
 
-
   if (currentTooltip) {
-    currentTooltip.addEventListener('mouseleave', () => {
-      destroyTooltip(tooltip);
-    })
+    currentTooltip.addEventListener('mouseout', () => {
+      destroyTooltip(currentTooltip); // Usar currentTooltip aqui
+      // Limpa as coordenadas armazenadas quando o tooltip é fechado
+      delete currentTooltip.tooltipX;
+      delete currentTooltip.tooltipY;
+    });
   }
 
+  /*
+    if (currentTooltip) {
+      currentTooltip.addEventListener('mouseleave', () => {
+        destroyTooltip(currentTooltip); // Usar currentTooltip aqui
+        // Limpa as coordenadas armazenadas quando o tooltip é fechado
+        delete currentTooltip.tooltipX;
+        delete currentTooltip.tooltipY;
+      });
+    }
+   */
 
   footer.appendChild(iconLink);
 }
