@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Fügt Schaltflächen hinzu, um den Arbeitsbereich zu erweitern und den rechten Bereich von Jira zusammenzufalten."
+     "message": "Jira. Fügt Schaltflächen hinzu, um den Arbeitsbereich zu erweitern, das rechte Fenster zu reduzieren und ein Modalfenster anzuzeigen, um verwandte Probleme anzuzeigen."
   },
   "extName": {
      "message": "Jira Arbeitsbereich erweitern"

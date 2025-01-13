@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Aggiunge pulsanti per espandere l'area di lavoro e ricomporre il riquadro destro di Jira."
+     "message": "Aggiungi pulsanti per espandere l'area di lavoro, piega il pannello destro e aggiungi un modale per visualizzare i problemi correlati."
   },
   "extName": {
      "message": "Espandi Area di Lavoro di Jira"

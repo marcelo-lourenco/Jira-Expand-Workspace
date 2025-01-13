@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Jira çalışma alanını genişletmek ve sağ paneli daraltmak için düğmeler ekler."
+     "message": "Jira. Çalışma alanını genişletmek için düğme ekleyin, sağ paneli toplayın ve ilgili sorunları görmek için modal ekleyin."
   },
   "extName": {
      "message": "Jira Çalışma Alanını Genişlet"

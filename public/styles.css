@@ -147,7 +147,7 @@
 .tooltip-content-container {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 400px;
+  max-height:350px;
 }
 
 /* Estilos do ícone de link */

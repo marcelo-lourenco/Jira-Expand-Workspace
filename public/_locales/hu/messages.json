@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Gombokat ad hozzá a munkaterület kibővítéséhez és a Jira jobb oldali paneljének összezárásához."
+     "message": "Jira. Munkaterület kibővítése gomb hozzáadásával, jobb panel összecsukásával és kapcsolódó problémák megtekintésére szolgáló modális ablak hozzáadásával."
   },
   "extName": {
      "message": "Jira Munkaterület Kibővítése"

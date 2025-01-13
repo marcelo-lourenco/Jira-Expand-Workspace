@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Jira 작업 공간을 확장하고 오른쪽 창을 접는 버튼을 추가합니다."
+     "message": "Jira 작업 공간 확장을 위한 버튼 추가, 오른쪽 패널 접기 및 관련 문제를 보기 위한 모달 추가"
   },
   "extName": {
      "message": "Jira 작업 공간 확장"

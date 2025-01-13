@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Voegt knoppen toe om de werkruimte uit te breiden en het rechterdeelvenster van Jira in te klappen."
+     "message": "Jira. Voeg knoppen toe om de werkruimte uit te breiden, de rechterpaneel in te klappen en een modaal toe te voegen om gerelateerde problemen te bekijken."
   },
   "extName": {
      "message": "Jira Werkruimte Uitbreiden"

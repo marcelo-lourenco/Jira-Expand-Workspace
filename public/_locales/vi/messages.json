@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Thêm nút để mở rộng không gian làm việc và thu gọn ngăn bên phải của Jira."
+     "message": "Jira. Thêm nút để mở rộng Không gian Làm việc, ẩn bảng điều khiển bên phải và thêm mô hình để xem các vấn đề liên quan."
   },
   "extName": {
      "message": "Mở rộng Không gian Làm việc của Jira"

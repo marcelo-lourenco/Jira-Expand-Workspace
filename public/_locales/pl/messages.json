@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Dodaje przyciski do rozszerzenia przestrzeni roboczej i zwinięcia prawego panelu Jira."
+     "message": "Jira. Dodaj przyciski do rozszerzania przestrzeni roboczej, zwiń panel prawy i dodaj okno modalne do wyświetlania powiązanych problemów."
   },
   "extName": {
      "message": "Jira Rozwiń Przestrzeń Roboczą"

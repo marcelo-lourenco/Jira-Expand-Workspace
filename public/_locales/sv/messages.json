@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Lägger till knappar för att expandera arbetsytan och kollapsa den högra rutan i Jira."
+     "message": "Jira. Lägg till knappar för att expandera arbetsyta, dölja högerpanel och lägga till modal för att visa relaterade problem."
   },
   "extName": {
      "message": "Jira Expandera Arbetsyta"

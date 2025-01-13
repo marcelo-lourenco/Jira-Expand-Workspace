@@ -1,7 +1,7 @@
 {
   "name": "jira-expand-workspace",
-  "version": "0.1.0",
-  "description": "Adds buttons to expand the workspace and collapse the right pane of Jira.",
+  "version": "0.1.1",
+  "description": "Adds buttons to expand the workspace, collapse the right pane and modal to view related issues.",
   "private": true,
   "scripts": {
     "watch": "set WEBPACK_ENV=chrome && node ./node_modules/webpack/bin/webpack.js --mode=development --watch --config config/webpack.config.js",
@@ -25,10 +25,11 @@
     "url": "https://github.com/marcelo-lourenco/Jira-Expand-Workspace.git"
   },
   "bugs": "https://github.com/marcelo-lourenco/Jira-Expand-Workspace/issues",
-  "homepage": "https://github.com/marcelo-lourenco/gJira-Expand-Workspace#readme",
+  "homepage": "https://github.com/marcelo-lourenco/Jira-Expand-Workspace#readme",
   "keywords": [
     "Jira",
     "extension",
-    "expand"
+    "expand",
+    "related issues"
   ]
 }

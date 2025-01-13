@@ -1,6 +1,6 @@
 {
    "extDesc": {
-      "message": "Adiciona botões para expandir a área de trabalho e recolher o painel direito do Jira."
+      "message": "Jira. Adicione botões para expandir a área de trabalho, recolher o painel direito e adicionar um modal para visualizar problemas relacionados."
    },
    "extName": {
       "message": "Jira Expandir Área de Trabalho"

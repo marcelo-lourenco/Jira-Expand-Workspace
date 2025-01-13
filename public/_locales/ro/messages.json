@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Adaugă butoane pentru a extinde spațiul de lucru și a colapsa panoul din dreapta al Jira."
+     "message": "Jira. Adăugați butoane pentru extinderea spațiului de lucru, pliați panoul din dreapta și adăugați un modal pentru a vizualiza problemele relevante."
   },
   "extName": {
      "message": "Extinde spațiul de lucru Jira"

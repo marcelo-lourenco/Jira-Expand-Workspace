@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "1.1.4",
+  "version": "1.1.5",
   "default_locale": "en_US",
   "description": "__MSG_extDesc__",
   "name": "__MSG_extName__",
@@ -18,7 +18,10 @@
   ],
   "icons": {
     "16": "icons/icon16.png",
+    "24": "icons/icon24.png",
+    "32": "icons/icon32.png",
     "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
     "128": "icons/icon128.png"
   },
   "browser_specific_settings": {

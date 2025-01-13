@@ -1,6 +1,6 @@
 {
   "extDesc": {
-     "message": "Menambahkan tombol untuk memperluas ruang kerja dan melipat panel kanan Jira."
+     "message": "Jira. Tambahkan tombol untuk memperluas ruang kerja, lipat panel kanan, dan modal untuk melihat isu terkait."
   },
   "extName": {
      "message": "Perluas Ruang Kerja Jira"
