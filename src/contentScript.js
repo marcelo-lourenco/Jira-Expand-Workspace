@@ -377,11 +377,16 @@ function getProjectKeyFromURL() {
 function createTooltip(content) {
   const tooltip = document.createElement('div');
   tooltip.classList.add(CLASS_TOOLTIP);
-  tooltip.innerHTML = content;
+
+  // Create a container for the tooltip content
+  const tooltipContentContainer = document.createElement('div');
+  tooltipContentContainer.classList.add('tooltip-content-container');
+  tooltipContentContainer.innerHTML = content;
+
+  tooltip.appendChild(tooltipContentContainer);
   document.body.appendChild(tooltip);
   return tooltip;
 }
-
 
 /**
  * Destroys the provided tooltip after a delay.
@@ -399,7 +404,6 @@ function destroyTooltip(tooltip) {
     }
   }, TOOLTIP_DELAY);
 }
-
 
 /**
  * Adjusts the tooltip position to stay within the viewport.
@@ -429,6 +433,7 @@ function adjustTooltipPosition(event, tooltip) {
   tooltip.style.top = `${top}px`;
 }
 
+
 // ---------------------------------------------------------------------------- //
 // Issue Key and Data Fetching
 // ---------------------------------------------------------------------------- //
@@ -442,6 +447,7 @@ function getIssueKeyFromCard(cardElement) {
   const issueKeyElement = cardElement.querySelector(SELECTOR_ISSUE_KEY);
   return issueKeyElement ? issueKeyElement.textContent.trim() : null;
 }
+
 
 /**
  * Fetches assignee details for a given issue.
@@ -461,6 +467,7 @@ async function fetchAssigneeDetails(linkedIssueSelf) {
     throw error;
   }
 }
+
 
 /**
  * Generates HTML for a linked issue.
@@ -601,7 +608,6 @@ async function fetchLinkedIssues(issueKey) {
   }
 }
 
-
 // ---------------------------------------------------------------------------- //
 // Tooltip Position and Event Handling
 // ---------------------------------------------------------------------------- //
@@ -626,7 +632,7 @@ async function handleIconMouseOver(event, iconLink, issueKey) {
       titleElement.textContent = title;
     }
 
-    activeTooltip.innerHTML = error
+    const tooltipContent = error
       ? `<div class="issue-tooltip-div1">
              <div class="issue-tooltip-linked-items-label">
                <label for="issue-link-search" class="issue-link-search-label">
@@ -648,12 +654,15 @@ async function handleIconMouseOver(event, iconLink, issueKey) {
              </div>
              <div>${groupedLinksHtml}</div>
            </div>`;
+
+    // Set the HTML content of the inner container
+    activeTooltip.querySelector('.tooltip-content-container').innerHTML = tooltipContent;
     activeTooltip.style.display = 'block';
     adjustTooltipPosition(event, activeTooltip);
   } catch (err) {
     console.error('Error handling tooltip:', err);
     if (activeTooltip) {
-      activeTooltip.innerHTML = `<p>Error: ${err.message}</p>`;
+      activeTooltip.querySelector('.tooltip-content-container').innerHTML = `<p>Error: ${err.message}</p>`;
       activeTooltip.style.display = 'block';
       adjustTooltipPosition(event, activeTooltip);
     }
@@ -691,9 +700,11 @@ function addIconToCard(card) {
         delete activeTooltip.tooltipY;
       });
     }
+
     footer.appendChild(iconLink);
   }
 }
+
 
 // ---------------------------------------------------------------------------- //
 // Board Detection and Icon Addition
@@ -708,10 +719,10 @@ function checkAndAddIcons() {
     const cards = board.querySelectorAll(SELECTOR_CARD);
     cards.forEach(card => addIconToCard(card));
     currentProjectKey = getProjectKeyFromURL();
-    // console.log(`Icons added/verified for project: ${currentProjectKey}`);
+    //console.log(`Icons added/verified for project: ${currentProjectKey}`);
   } else {
     currentProjectKey = getProjectKeyFromURL();
-    // console.log(`Not a board, Waiting for board for project: ${currentProjectKey}`);
+    //console.log(`Not a board, Waiting for board for project: ${currentProjectKey}`);
   }
 }
 
@@ -736,6 +747,8 @@ function handleDocumentClick(event) {
     }
   }
 }
+
+
 // ---------------------------------------------------------------------------- //
 // Initialization
 // ---------------------------------------------------------------------------- //

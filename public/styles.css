@@ -144,6 +144,12 @@
   /* Inicialmente oculto */
 }
 
+.tooltip-content-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 400px;
+}
+
 /* Estilos do ícone de link */
 .linked-issues-iconLink {
   cursor: pointer;
