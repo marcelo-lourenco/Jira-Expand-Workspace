@@ -321,13 +321,12 @@ observer.observe(document.body, { childList: true, subtree: true });
 
 
 
-
 // ---------------------------------------------------------------------------- //
 // Mostrar Ícones vinculados ao card
 // ---------------------------------------------------------------------------- //
 
 // ---------------------------------------------------------------------------- //
-// Constantes e variáveis globais
+// Constants and Global Variables
 // ---------------------------------------------------------------------------- //
 const API_ISSUE_BASE_URL = '/rest/api/3/issue/';
 const CLASS_LINKED_ISSUES_ICON = 'linked-issues-icon';
@@ -338,40 +337,28 @@ const SELECTOR_CARD = '[data-testid="platform-board-kit.ui.card.card"]';
 const SELECTOR_CARD_FOOTER = '[data-testid="platform-card.ui.card.card-content.footer"]';
 const SELECTOR_ISSUE_KEY = '[data-testid="platform-card.common.ui.key.key"] a';
 const SPACE = 10;
-const TIME_TOOLTIP_DELAY = 1000;
-const TIME_BOARD_CHECK_INTERVAL = 1500;
+const TOOLTIP_DELAY = 1000;
+const BOARD_CHECK_INTERVAL = 1500;
 
 // Status colors mapping
 const STATUS_COLORS = {
-  new: {
-    color: 'status-color-new',
-    bgColor: 'status-bg-color-new',
-  },
-  indeterminate: {
-    color: 'status-color-indeterminate',
-    bgColor: 'status-bg-color-indeterminate',
-  },
-  done: {
-    color: 'status-color-done',
-    bgColor: 'status-bg-color-done',
-  },
-  other: {
-    color: 'status-color-other',
-    bgColor: 'status-bg-color-other',
-  },
+  new: { color: 'status-color-new', bgColor: 'status-bg-color-new' },
+  indeterminate: { color: 'status-color-indeterminate', bgColor: 'status-bg-color-indeterminate' },
+  done: { color: 'status-color-done', bgColor: 'status-bg-color-done' },
+  other: { color: 'status-color-other', bgColor: 'status-bg-color-other' },
 };
 
-let currentTooltip = null;
+let activeTooltip = null;
 let currentProjectKey = null;
 
+
 // ---------------------------------------------------------------------------- //
-// Funções utilitárias
+// Utility Functions
 // ---------------------------------------------------------------------------- //
 
 /**
- * Extrai a chave do projeto da URL atual.
- *
- * @returns {string|null} A chave do projeto ou null se não for encontrada.
+ * Extracts the project key from the URL.
+ * @returns {string|null} The project key or null if not found.
  */
 function getProjectKeyFromURL() {
   const match = window.location.pathname.match(/\/projects\/([A-Z]+)\/board/);
@@ -383,10 +370,9 @@ function getProjectKeyFromURL() {
 // ---------------------------------------------------------------------------- //
 
 /**
- * Creates a tooltip element with the given content.
- *
- * @param {string} content - The content to be displayed in the tooltip.
- * @returns {HTMLElement} The created tooltip element.
+ * Creates a tooltip element with given content.
+ * @param {string} content - HTML content for the tooltip.
+ * @returns {HTMLElement} The tooltip element.
  */
 function createTooltip(content) {
   const tooltip = document.createElement('div');
@@ -396,20 +382,51 @@ function createTooltip(content) {
   return tooltip;
 }
 
+
 /**
- * Destroys the given tooltip after a delay.
- *
- * @param {HTMLElement} tooltip - The tooltip element to destroy.
+ * Destroys the provided tooltip after a delay.
+ * @param {HTMLElement} tooltip - The tooltip to destroy.
  */
 function destroyTooltip(tooltip) {
+  if (!tooltip) return;
+
   setTimeout(() => {
-    if (tooltip && document.body.contains(tooltip)) {
+    if (document.body.contains(tooltip)) {
       delete tooltip.tooltipX;
       delete tooltip.tooltipY;
       document.body.removeChild(tooltip);
-      currentTooltip = null;
+      activeTooltip = null;
     }
-  }, TIME_TOOLTIP_DELAY);
+  }, TOOLTIP_DELAY);
+}
+
+
+/**
+ * Adjusts the tooltip position to stay within the viewport.
+ * @param {MouseEvent} event - The mouse event.
+ * @param {HTMLElement} tooltip - The tooltip element.
+ */
+function adjustTooltipPosition(event, tooltip) {
+  if (!tooltip) return;
+
+  const { pageX, pageY } = event;
+  const tooltipRect = tooltip.getBoundingClientRect();
+
+  let left = tooltip.tooltipX || pageX + SPACE;
+  let top = tooltip.tooltipY || pageY + SPACE;
+
+  // Adjust horizontal position
+  if (left + tooltipRect.width > window.innerWidth) {
+    left = (tooltip.tooltipX || pageX) - tooltipRect.width - SPACE;
+  }
+
+  // Adjust vertical position
+  if (top + tooltipRect.height > window.innerHeight) {
+    top = (tooltip.tooltipY || pageY) - tooltipRect.height - SPACE;
+  }
+
+  tooltip.style.left = `${left}px`;
+  tooltip.style.top = `${top}px`;
 }
 
 // ---------------------------------------------------------------------------- //
@@ -417,8 +434,7 @@ function destroyTooltip(tooltip) {
 // ---------------------------------------------------------------------------- //
 
 /**
- * Retrieves the issue key from a card element.
- *
+ * Extracts the issue key from a card element.
  * @param {HTMLElement} cardElement - The card element.
  * @returns {string|null} The issue key or null if not found.
  */
@@ -429,9 +445,8 @@ function getIssueKeyFromCard(cardElement) {
 
 /**
  * Fetches assignee details for a given issue.
- *
  * @param {string} linkedIssueSelf - The 'self' URL of the linked issue.
- * @returns {Promise<object>} Promise com os dados do assignee ou erro.
+ * @returns {Promise<object>} Promise with assignee data or error.
  */
 async function fetchAssigneeDetails(linkedIssueSelf) {
   try {
@@ -449,10 +464,9 @@ async function fetchAssigneeDetails(linkedIssueSelf) {
 
 /**
  * Generates HTML for a linked issue.
- *
  * @param {object} linkedIssue - The linked issue data.
  * @param {string} relationship - The relationship type.
- * @returns {Promise<string>} Promise com o HTML gerado ou mensagem de erro.
+ * @returns {Promise<string>} Promise with the generated HTML or error message.
  */
 async function generateLinkedIssueHTML(linkedIssue, relationship) {
   try {
@@ -467,73 +481,73 @@ async function generateLinkedIssueHTML(linkedIssue, relationship) {
     const { color: statusColor, bgColor: statusBgColor } = STATUS_COLORS[statusCategory] || STATUS_COLORS.other;
 
     return `<div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed">
-              <div data-testid="issue-line-card.card-container" class="issue-line-card-container">
-                <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
-                  <div data-testid="issue-line-card-issue-type.issue-type" class="issue-line-issue-type">
-                    <div class="issue-line-issue-type-grid">
-                      <img src="${iconUrl}" alt="${issueTypeName}" title="${issueTypeName}" class="issue-line-issue-type-img" draggable="false" >
+                    <div data-testid="issue-line-card.card-container" class="issue-line-card-container">
+                    <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
+                        <div data-testid="issue-line-card-issue-type.issue-type" class="issue-line-issue-type">
+                        <div class="issue-line-issue-type-grid">
+                            <img src="${iconUrl}" alt="${issueTypeName}" title="${issueTypeName}" class="issue-line-issue-type-img" draggable="false" >
+                        </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <span>
-                  <span data-testid="hover-card-trigger-wrapper">
-                    <a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${linkedIssue.key}" target="_blank" class="issue-line-card-view-key" aria-label="${linkedIssue.key} ${status}" role="link" draggable="false">${linkedIssue.key}</a>
-                  </span>
-                </span>
-                <div data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary" class="issue-line-card-view-summary">
-                  <span>
-                    <span data-testid="hover-card-trigger-wrapper">
-                      <a data-testid="issue-field-summary.ui.inline-read.link-item" href="/browse/${linkedIssue.key}" target="_blank" class="issue-line-card-view-summary-a" data-is-router-link="false" data-vc="link-item" tabindex="0" draggable="false" aria-disabled="false">
-                        <span class="issue-line-card-view-summary-span" data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container">
-                          <div class="issue-line-card-view-summary-div">
-                            <span class="linkedIssue-fields-summary" data-item-title="true">${linkedIssue.fields.summary}</span>
-                          </div>
+                    <span>
+                        <span data-testid="hover-card-trigger-wrapper">
+                        <a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${linkedIssue.key}" target="_blank" class="issue-line-card-view-key" aria-label="${linkedIssue.key} ${status}" role="link" draggable="false">${linkedIssue.key}</a>
                         </span>
-                      </a>
                     </span>
-                  </span>
-                </div>
-                <div role="presentation">
-                  <div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img"  class="issue-line-card-read-only-assignee-inner">
-                    <span data-testid="issue-line-card.ui.assignee.read-only-assignee--inner" class="issue-line-card-assignee-inner">
-                      <img src="${assigneeAvatarUrl}" title="${assigneeDisplayName}" class="issue-line-card-assignee-image">
-                    </span>
-                  </div>
-                </div>
-                <div data-testid="issue-line-card.ui.status.status-field-container" class="issue-line-card-status-field-container">
-                  <div role="presentation">
-                    <div>
-                      <div>
-                        <button aria-label="${status}" aria-expanded="false" class="issue-line-card-view-button-status" tabindex="0" type="button">
-                          <span class="issue-line-card-view-button-span">
-                            <span class="issue-line-card-view-button-span2">
-                              <div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="issue-fields-status-lozenge">
-                                <span class="issue-line-card-view-button-span3 ${statusBgColor}">
-                                  <span class="issue-line-card-view-button-span4">
-                                    <div class="issue-line-card-view-button-status-color ${statusColor}">${status}</div>
-                                  </span>
-                                </span>
-                              </div>
+                    <div data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary" class="issue-line-card-view-summary">
+                        <span>
+                        <span data-testid="hover-card-trigger-wrapper">
+                            <a data-testid="issue-field-summary.ui.inline-read.link-item" href="/browse/${linkedIssue.key}" target="_blank" class="issue-line-card-view-summary-a" data-is-router-link="false" data-vc="link-item" tabindex="0" draggable="false" aria-disabled="false">
+                            <span class="issue-line-card-view-summary-span" data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container">
+                                <div class="issue-line-card-view-summary-div">
+                                <span class="linkedIssue-fields-summary" data-item-title="true">${linkedIssue.fields.summary}</span>
+                                </div>
                             </span>
-                          </span>
-                        </button>
-                      </div>
+                            </a>
+                        </span>
+                        </span>
                     </div>
-                  </div>
+                    <div role="presentation">
+                        <div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img"  class="issue-line-card-read-only-assignee-inner">
+                        <span data-testid="issue-line-card.ui.assignee.read-only-assignee--inner" class="issue-line-card-assignee-inner">
+                            <img src="${assigneeAvatarUrl}" title="${assigneeDisplayName}" class="issue-line-card-assignee-image">
+                        </span>
+                        </div>
+                    </div>
+                    <div data-testid="issue-line-card.ui.status.status-field-container" class="issue-line-card-status-field-container">
+                        <div role="presentation">
+                        <div>
+                            <div>
+                            <button aria-label="${status}" aria-expanded="false" class="issue-line-card-view-button-status" tabindex="0" type="button">
+                                <span class="issue-line-card-view-button-span">
+                                <span class="issue-line-card-view-button-span2">
+                                    <div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="issue-fields-status-lozenge">
+                                    <span class="issue-line-card-view-button-span3 ${statusBgColor}">
+                                        <span class="issue-line-card-view-button-span4">
+                                        <div class="issue-line-card-view-button-status-color ${statusColor}">${status}</div>
+                                        </span>
+                                    </span>
+                                    </div>
+                                </span>
+                                </span>
+                            </button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-    `;
+        `;
   } catch (error) {
     return `<p>Error fetching assignee details: ${error.message}</p>`;
   }
 }
 
+
 /**
  * Fetches linked issues for a given issue key and groups them by relationship type.
- *
  * @param {string} issueKey - The key of the issue.
- * @returns {Promise<object>} Promise com objeto contendo HTML dos links agrupados e um título, ou mensagem de erro.
+ * @returns {Promise<object>} Promise with HTML for grouped links or error message.
  */
 async function fetchLinkedIssues(issueKey) {
   try {
@@ -555,6 +569,7 @@ async function fetchLinkedIssues(issueKey) {
     for (const link of linkedIssues) {
       const linkedIssue = link.inwardIssue || link.outwardIssue;
       const relationship = link.type.inward || link.type.outward;
+
       if (linkedIssue) {
         if (!groupedLinks[relationship]) {
           groupedLinks[relationship] = [];
@@ -563,22 +578,22 @@ async function fetchLinkedIssues(issueKey) {
       }
     }
 
+
     let groupedLinksHtml = '';
     for (const relationship in groupedLinks) {
       groupedLinksHtml += `
-        <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="issue-links-group-container">
-          <h3 class="issue-links-group-container-h3">
-            <span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span>
-          </h3>
-          <div class="margin-top-8">
-            <ul class="ul-card-container">
-              ${groupedLinks[relationship].join('')}
-            </ul>
-          </div>
-        </div>
-      `;
+              <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="issue-links-group-container">
+                <h3 class="issue-links-group-container-h3">
+                  <span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span>
+                </h3>
+                <div class="margin-top-8">
+                  <ul class="ul-card-container">
+                    ${groupedLinks[relationship].join('')}
+                  </ul>
+                </div>
+              </div>
+            `;
     }
-
     return { groupedLinksHtml, title: 'Linked items' };
   } catch (error) {
     console.error('Error fetching linked issues:', error);
@@ -586,66 +601,33 @@ async function fetchLinkedIssues(issueKey) {
   }
 }
 
+
 // ---------------------------------------------------------------------------- //
 // Tooltip Position and Event Handling
 // ---------------------------------------------------------------------------- //
 
 /**
- * Updates the position of the tooltip based on the mouse event or stored coordinates.
- *
+ * Handles mouseover event on the icon, fetches linked issues, and shows the tooltip.
  * @param {MouseEvent} event - The mouse event.
- * @param {HTMLElement} tooltip - The tooltip element.
+ * @param {HTMLElement} iconLink - The icon that triggered the event.
+ * @param {string} issueKey - The issue key for which to fetch linked issues.
  */
-function updateTooltipPosition(event, tooltip) {
-  if (!tooltip) return;
-
-  const { pageX, pageY } = event;
-  const tooltipRect = tooltip.getBoundingClientRect();
-
-  let left = tooltip.tooltipX || pageX + SPACE;
-  let top = tooltip.tooltipY || pageY + SPACE;
-
-  if (left + tooltipRect.width > window.innerWidth) {
-    left = (tooltip.tooltipX || pageX) - tooltipRect.width - SPACE;
-  }
-  if (top + tooltipRect.height > window.innerHeight) {
-    top = (tooltip.tooltipY || pageY) - tooltipRect.height - SPACE;
+async function handleIconMouseOver(event, iconLink, issueKey) {
+  if (!activeTooltip) {
+    activeTooltip = createTooltip('');
+    activeTooltip.tooltipX = event.pageX;
+    activeTooltip.tooltipY = event.pageY;
   }
 
-  tooltip.style.left = `${left}px`;
-  tooltip.style.top = `${top}px`;
-}
+  try {
+    const { groupedLinksHtml, error, title } = await fetchLinkedIssues(issueKey);
+    const titleElement = activeTooltip.querySelector('.title-linked-items');
+    if (titleElement) {
+      titleElement.textContent = title;
+    }
 
-/**
- * Adds a linked issues icon to a card and sets up tooltip event listeners.
- *
- * @param {HTMLElement} card - The card element.
- */
-async function addIconToCard(card) {
-  const issueKey = getIssueKeyFromCard(card);
-  if (!issueKey) return;
-
-  const footer = card.querySelector(SELECTOR_CARD_FOOTER);
-  // Verifica se já existe um ícone no rodapé do card
-  if (footer && !footer.querySelector(`.${CLASS_LINKED_ISSUES_ICON_LINK}`)) {
-    const iconLink = document.createElement('span');
-    iconLink.className = CLASS_LINKED_ISSUES_ICON_LINK;
-
-    iconLink.addEventListener('mouseover', async (event) => {
-      if (!currentTooltip) {
-        currentTooltip = createTooltip('');
-        currentTooltip.tooltipX = event.pageX;
-        currentTooltip.tooltipY = event.pageY;
-      }
-
-      try {
-        const { groupedLinksHtml, error, title } = await fetchLinkedIssues(issueKey);
-        const titleElement = currentTooltip.querySelector('.title-linked-items');
-        if (titleElement) {
-          titleElement.textContent = title;
-        }
-        currentTooltip.innerHTML = error
-          ? `<div class="issue-tooltip-div1">
+    activeTooltip.innerHTML = error
+      ? `<div class="issue-tooltip-div1">
              <div class="issue-tooltip-linked-items-label">
                <label for="issue-link-search" class="issue-link-search-label">
                  <h2 class="title-linked-items">${title}</h2>
@@ -653,7 +635,7 @@ async function addIconToCard(card) {
              </div>
              <div>${error}</div>
            </div>`
-          : `<div class="issue-tooltip-div1">
+      : `<div class="issue-tooltip-div1">
              <div class="issue-tooltip-linked-items-label">
                <label for="issue-link-search" class="issue-link-search-label">
                  <h2 class="title-linked-items">${title}</h2>
@@ -666,34 +648,49 @@ async function addIconToCard(card) {
              </div>
              <div>${groupedLinksHtml}</div>
            </div>`;
-        currentTooltip.style.display = 'block';
-        updateTooltipPosition(event, currentTooltip);
-      } catch (err) {
-        console.error('Error handling tooltip:', err);
-        if (currentTooltip) {
-          currentTooltip.innerHTML = `<p>Error: ${err.message}</p>`;
-          currentTooltip.style.display = 'block';
-          updateTooltipPosition(event, currentTooltip);
-        }
-      }
-    });
+    activeTooltip.style.display = 'block';
+    adjustTooltipPosition(event, activeTooltip);
+  } catch (err) {
+    console.error('Error handling tooltip:', err);
+    if (activeTooltip) {
+      activeTooltip.innerHTML = `<p>Error: ${err.message}</p>`;
+      activeTooltip.style.display = 'block';
+      adjustTooltipPosition(event, activeTooltip);
+    }
+  }
+}
 
+
+/**
+ * Adds a linked issues icon to a card, including event listeners.
+ * @param {HTMLElement} card - The card element.
+ */
+function addIconToCard(card) {
+  const issueKey = getIssueKeyFromCard(card);
+  if (!issueKey) return;
+
+  const footer = card.querySelector(SELECTOR_CARD_FOOTER);
+  if (footer && !footer.querySelector(`.${CLASS_LINKED_ISSUES_ICON_LINK}`)) {
+    const iconLink = document.createElement('span');
+    iconLink.className = CLASS_LINKED_ISSUES_ICON_LINK;
+    iconLink.dataset.issueLink = issueKey;
+
+    iconLink.addEventListener('mouseover', (event) => handleIconMouseOver(event, iconLink, issueKey));
     iconLink.addEventListener('mouseout', () => {
       setTimeout(() => {
-        if (currentTooltip && !currentTooltip.matches(':hover') && !iconLink.matches(':hover')) {
-          destroyTooltip(currentTooltip);
+        if (activeTooltip && !activeTooltip.matches(':hover') && !iconLink.matches(':hover')) {
+          destroyTooltip(activeTooltip);
         }
-      }, TIME_TOOLTIP_DELAY);
+      }, TOOLTIP_DELAY);
     });
 
-    if (currentTooltip) {
-      currentTooltip.addEventListener('mouseout', () => {
-        destroyTooltip(currentTooltip);
-        delete currentTooltip.tooltipX;
-        delete currentTooltip.tooltipY;
+    if (activeTooltip) {
+      activeTooltip.addEventListener('mouseout', () => {
+        destroyTooltip(activeTooltip);
+        delete activeTooltip.tooltipX;
+        delete activeTooltip.tooltipY;
       });
     }
-
     footer.appendChild(iconLink);
   }
 }
@@ -714,14 +711,34 @@ function checkAndAddIcons() {
     // console.log(`Icons added/verified for project: ${currentProjectKey}`);
   } else {
     currentProjectKey = getProjectKeyFromURL();
-    // console.log(`Not a board, Waiting for board for project: ${currentProjectKey}`)
+    // console.log(`Not a board, Waiting for board for project: ${currentProjectKey}`);
   }
 }
 
 // ---------------------------------------------------------------------------- //
+// Global Click Handler
+// ---------------------------------------------------------------------------- //
+
+/**
+ * Handles clicks on the document. If the click is outside the tooltip and the icon
+ * that triggered it, destroy the tooltip.
+ * @param {MouseEvent} event - The mouse event.
+ */
+function handleDocumentClick(event) {
+  if (activeTooltip) {
+    const target = event.target;
+    const iconLink = document.querySelector(`[data-issue-link="${activeTooltip.dataset.issueLink}"]`);
+
+    if (activeTooltip && !activeTooltip.contains(target) && !iconLink?.contains(target)) {
+      destroyTooltip(activeTooltip);
+      delete activeTooltip.tooltipX;
+      delete activeTooltip.tooltipY;
+    }
+  }
+}
+// ---------------------------------------------------------------------------- //
 // Initialization
 // ---------------------------------------------------------------------------- //
-// Executa a função de verificação e adição de ícones a cada intervalo de tempo
-setInterval(checkAndAddIcons, TIME_BOARD_CHECK_INTERVAL);
-// Executa a função de verificação e adição de ícones inicial
+setInterval(checkAndAddIcons, BOARD_CHECK_INTERVAL);
 checkAndAddIcons();
+document.addEventListener('click', handleDocumentClick);
