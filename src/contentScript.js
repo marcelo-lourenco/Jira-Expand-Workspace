@@ -1,5 +1,8 @@
 let isCloud = false;
 
+const BY = 'By Jira Expand Extension';
+const BY_URL = 'https://chromewebstore.google.com/detail/occanfpdiglllenbekgbnhijeoincilf';
+
 function getJiraType() {
   if (document.getElementById('jira-frontend')) {
     return true;
@@ -154,6 +157,7 @@ function addExpandButton() {
         // Create the button element
         const spanShrinkExpand = document.createElement('span');
         spanShrinkExpand.id = 'span-shrink-expand';
+        spanShrinkExpand.title = BY;
         addIconExpand(spanShrinkExpand);
 
         // Start the modal in expanded state
@@ -192,6 +196,7 @@ function addExpandButton() {
         // Create the button element
         const spanShrinkExpand = document.createElement('span');
         spanShrinkExpand.id = 'span-shrink-expand';
+        spanShrinkExpand.title = BY;
         addIconExpand(spanShrinkExpand);
 
         // Start the modal in expanded state
@@ -231,6 +236,7 @@ function addCollapseButton() {
         const spanCollapseOpen = document.createElement('span');
         spanCollapseOpen.id = 'span-collapse-open';
         spanCollapseOpen.classList.add('icon-collapse');
+        spanCollapseOpen.title = BY;
 
         // Get the modal dialog elements
         const modalIssueDetailsDialogPositioner = document.querySelector(
@@ -316,15 +322,12 @@ observer.observe(document.body, { childList: true, subtree: true });
 
 
 
-
-
-
-
-
 // ---------------------------------------------------------------------------- //
 // Mostrar Ícones vinculados ao card
 // ---------------------------------------------------------------------------- //
-// Constantes
+
+// ---------------------------------------------------------------------------- //
+// Constantes e variáveis globais
 // ---------------------------------------------------------------------------- //
 const API_ISSUE_BASE_URL = '/rest/api/3/issue/';
 const CLASS_LINKED_ISSUES_ICON = 'linked-issues-icon';
@@ -336,7 +339,7 @@ const SELECTOR_CARD_FOOTER = '[data-testid="platform-card.ui.card.card-content.f
 const SELECTOR_ISSUE_KEY = '[data-testid="platform-card.common.ui.key.key"] a';
 const SPACE = 10;
 const TIME_TOOLTIP_DELAY = 1000;
-const TIME_BOARD_CHECK_INTERVAL = 500;
+const TIME_BOARD_CHECK_INTERVAL = 1500;
 
 // Status colors mapping
 const STATUS_COLORS = {
@@ -358,11 +361,26 @@ const STATUS_COLORS = {
   },
 };
 
+let currentTooltip = null;
+let currentProjectKey = null;
+
+// ---------------------------------------------------------------------------- //
+// Funções utilitárias
+// ---------------------------------------------------------------------------- //
+
+/**
+ * Extrai a chave do projeto da URL atual.
+ *
+ * @returns {string|null} A chave do projeto ou null se não for encontrada.
+ */
+function getProjectKeyFromURL() {
+  const match = window.location.pathname.match(/\/projects\/([A-Z]+)\/board/);
+  return match ? match[1] : null;
+}
+
 // ---------------------------------------------------------------------------- //
 // Tooltip Management
 // ---------------------------------------------------------------------------- //
-
-let currentTooltip = null;
 
 /**
  * Creates a tooltip element with the given content.
@@ -413,7 +431,7 @@ function getIssueKeyFromCard(cardElement) {
  * Fetches assignee details for a given issue.
  *
  * @param {string} linkedIssueSelf - The 'self' URL of the linked issue.
- * @param {function} callback - Callback function to handle the response.
+ * @returns {Promise<object>} Promise com os dados do assignee ou erro.
  */
 async function fetchAssigneeDetails(linkedIssueSelf) {
   try {
@@ -434,7 +452,7 @@ async function fetchAssigneeDetails(linkedIssueSelf) {
  *
  * @param {object} linkedIssue - The linked issue data.
  * @param {string} relationship - The relationship type.
- * @param {function} callback - Callback function to handle the generated HTML.
+ * @returns {Promise<string>} Promise com o HTML gerado ou mensagem de erro.
  */
 async function generateLinkedIssueHTML(linkedIssue, relationship) {
   try {
@@ -448,8 +466,7 @@ async function generateLinkedIssueHTML(linkedIssue, relationship) {
 
     const { color: statusColor, bgColor: statusBgColor } = STATUS_COLORS[statusCategory] || STATUS_COLORS.other;
 
-    return `          
-            <div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed">
+    return `<div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed">
               <div data-testid="issue-line-card.card-container" class="issue-line-card-container">
                 <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
                   <div data-testid="issue-line-card-issue-type.issue-type" class="issue-line-issue-type">
@@ -516,7 +533,7 @@ async function generateLinkedIssueHTML(linkedIssue, relationship) {
  * Fetches linked issues for a given issue key and groups them by relationship type.
  *
  * @param {string} issueKey - The key of the issue.
- * @returns {object} An object containing grouped linked issues HTML and a title.
+ * @returns {Promise<object>} Promise com objeto contendo HTML dos links agrupados e um título, ou mensagem de erro.
  */
 async function fetchLinkedIssues(issueKey) {
   try {
@@ -609,26 +626,26 @@ async function addIconToCard(card) {
   if (!issueKey) return;
 
   const footer = card.querySelector(SELECTOR_CARD_FOOTER);
-  if (!footer || footer.querySelector(`.${CLASS_LINKED_ISSUES_ICON}`)) return;
+  // Verifica se já existe um ícone no rodapé do card
+  if (footer && !footer.querySelector(`.${CLASS_LINKED_ISSUES_ICON_LINK}`)) {
+    const iconLink = document.createElement('span');
+    iconLink.className = CLASS_LINKED_ISSUES_ICON_LINK;
 
-  const iconLink = document.createElement('span');
-  iconLink.className = CLASS_LINKED_ISSUES_ICON_LINK;
-
-  iconLink.addEventListener('mouseover', async (event) => {
-    if (!currentTooltip) {
-      currentTooltip = createTooltip('');
-      currentTooltip.tooltipX = event.pageX;
-      currentTooltip.tooltipY = event.pageY;
-    }
-
-    try {
-      const { groupedLinksHtml, error, title } = await fetchLinkedIssues(issueKey);
-      const titleElement = currentTooltip.querySelector('.title-linked-items');
-      if (titleElement) {
-        titleElement.textContent = title;
+    iconLink.addEventListener('mouseover', async (event) => {
+      if (!currentTooltip) {
+        currentTooltip = createTooltip('');
+        currentTooltip.tooltipX = event.pageX;
+        currentTooltip.tooltipY = event.pageY;
       }
-      currentTooltip.innerHTML = error
-        ? `<div class="issue-tooltip-div1">
+
+      try {
+        const { groupedLinksHtml, error, title } = await fetchLinkedIssues(issueKey);
+        const titleElement = currentTooltip.querySelector('.title-linked-items');
+        if (titleElement) {
+          titleElement.textContent = title;
+        }
+        currentTooltip.innerHTML = error
+          ? `<div class="issue-tooltip-div1">
              <div class="issue-tooltip-linked-items-label">
                <label for="issue-link-search" class="issue-link-search-label">
                  <h2 class="title-linked-items">${title}</h2>
@@ -636,94 +653,75 @@ async function addIconToCard(card) {
              </div>
              <div>${error}</div>
            </div>`
-        : `<div class="issue-tooltip-div1">
+          : `<div class="issue-tooltip-div1">
              <div class="issue-tooltip-linked-items-label">
                <label for="issue-link-search" class="issue-link-search-label">
                  <h2 class="title-linked-items">${title}</h2>
                </label>
+               <div role="presentation">
+                <a href="${BY_URL}" target="_blank" class="img-link" rel="noopener noreferrer">
+                  <span role="img" class="span-logo logo16" title="${BY}"></span>
+                </a>
+               </div>
              </div>
              <div>${groupedLinksHtml}</div>
            </div>`;
-      currentTooltip.style.display = 'block';
-      updateTooltipPosition(event, currentTooltip);
-    } catch (err) {
-      console.error('Error handling tooltip:', err);
-      if (currentTooltip) {
-        currentTooltip.innerHTML = `<p>Error: ${err.message}</p>`;
         currentTooltip.style.display = 'block';
         updateTooltipPosition(event, currentTooltip);
+      } catch (err) {
+        console.error('Error handling tooltip:', err);
+        if (currentTooltip) {
+          currentTooltip.innerHTML = `<p>Error: ${err.message}</p>`;
+          currentTooltip.style.display = 'block';
+          updateTooltipPosition(event, currentTooltip);
+        }
       }
-    }
-  });
+    });
 
-  iconLink.addEventListener('mouseout', () => {
-    setTimeout(() => {
-      if (currentTooltip && !currentTooltip.matches(':hover') && !iconLink.matches(':hover')) {
+    iconLink.addEventListener('mouseout', () => {
+      setTimeout(() => {
+        if (currentTooltip && !currentTooltip.matches(':hover') && !iconLink.matches(':hover')) {
+          destroyTooltip(currentTooltip);
+        }
+      }, TIME_TOOLTIP_DELAY);
+    });
+
+    if (currentTooltip) {
+      currentTooltip.addEventListener('mouseout', () => {
         destroyTooltip(currentTooltip);
-      }
-    }, TIME_TOOLTIP_DELAY);
-  });
-
-  if (currentTooltip) {
-    currentTooltip.addEventListener('mouseout', () => {
-      destroyTooltip(currentTooltip);
-      delete currentTooltip.tooltipX;
-      delete currentTooltip.tooltipY;
-    });
-  }
-
-  footer.appendChild(iconLink);
-}
-
-// ---------------------------------------------------------------------------- //
-// Board Observation
-// ---------------------------------------------------------------------------- //
-
-/**
- * Observes the board for changes and adds the icon to new cards.
- */
-function observeBoard() {
-  const board = document.querySelector(SELECTOR_BOARD);
-  if (!board) {
-    console.error('Could not find the board.');
-    return;
-  }
-
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.addedNodes) {
-        mutation.addedNodes.forEach((node) => {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            const cards = node.querySelectorAll(SELECTOR_CARD);
-            cards.forEach(addIconToCard);
-          }
-        });
-      }
-    });
-  });
-
-  observer.observe(board, { childList: true, subtree: true });
-
-  // Add the icon to existing cards
-  const initialCards = board.querySelectorAll(SELECTOR_CARD);
-  initialCards.forEach(addIconToCard);
-}
-
-/**
- * Waits for the board to load and then starts observing it.
- */
-function waitForBoard() {
-  const checkInterval = setInterval(() => {
-    const board = document.querySelector(SELECTOR_BOARD);
-    if (board) {
-      clearInterval(checkInterval);
-      observeBoard();
+        delete currentTooltip.tooltipX;
+        delete currentTooltip.tooltipY;
+      });
     }
-  }, TIME_BOARD_CHECK_INTERVAL);
+
+    footer.appendChild(iconLink);
+  }
+}
+
+// ---------------------------------------------------------------------------- //
+// Board Detection and Icon Addition
+// ---------------------------------------------------------------------------- //
+
+/**
+ * Checks if the current page is a Jira board and adds the icons if they don't exist.
+ */
+function checkAndAddIcons() {
+  const board = document.querySelector(SELECTOR_BOARD);
+  if (board) {
+    const cards = board.querySelectorAll(SELECTOR_CARD);
+    cards.forEach(card => addIconToCard(card));
+    currentProjectKey = getProjectKeyFromURL();
+    // console.log(`Icons added/verified for project: ${currentProjectKey}`);
+  } else {
+    currentProjectKey = getProjectKeyFromURL();
+    // console.log(`Not a board, Waiting for board for project: ${currentProjectKey}`)
+  }
 }
 
 // ---------------------------------------------------------------------------- //
 // Initialization
 // ---------------------------------------------------------------------------- //
-
-waitForBoard();
+// Executa a função de verificação e adição de ícones a cada intervalo de tempo
+setInterval(checkAndAddIcons, TIME_BOARD_CHECK_INTERVAL);
+// Executa a função de verificação e adição de ícones inicial
+checkAndAddIcons();
