@@ -29,5 +29,16 @@
       "id": "jira-expand-workspace@exemplo.com",
       "strict_min_version": "109.0"
     }
-  }
+  },
+  "default_popup": "popup.html",
+  "action": {
+      "default_icon": "icons/icon48.png",
+      "default_popup": "popup.html",
+      "default_title": "Options"
+   },
+   "options_ui": {
+      "open_in_tab": false,
+      "page": "popup.html"
+   }
+
 }
