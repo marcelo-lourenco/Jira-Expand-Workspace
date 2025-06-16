@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Carrega todas as configurações de uma vez
-  chrome.storage.sync.get(Object.keys(settingConfiguration), (savedSettings) => {
+  chrome.storage.local.get(Object.keys(settingConfiguration), (savedSettings) => {
     if (chrome.runtime.lastError) {
       console.error('Error loading settings:', chrome.runtime.lastError.message);
       return;
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Salva uma configuração individual
   function saveSetting(key, value) {
-    chrome.storage.sync.set({ [key]: value }, () => {
+    chrome.storage.local.set({ [key]: value }, () => {
       if (chrome.runtime.lastError) {
         console.error(`Error saving setting "${key}":`, chrome.runtime.lastError.message);
       } else {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
       defaultSettings[key] = settingConfiguration[key].default;
     });
 
-    chrome.storage.sync.set(defaultSettings, () => {
+    chrome.storage.local.set(defaultSettings, () => {
       if (chrome.runtime.lastError) {
         console.error('Error saving default settings:', chrome.runtime.lastError.message);
       } else {
