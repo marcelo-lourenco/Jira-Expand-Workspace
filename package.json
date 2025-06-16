@@ -1,6 +1,6 @@
 {
   "name": "jira-expand-workspace",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Adds buttons to expand the workspace, collapse the right pane and modal to view related issues.",
   "private": true,
   "scripts": {

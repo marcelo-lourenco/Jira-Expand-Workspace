@@ -1,3 +1,144 @@
+/* Popup */
+
+* {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.settings-container {
+  width: 280px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 8px 16px rgba(9, 30, 66, 0.15);
+  overflow: hidden;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 40px;
+  padding: 0 12px;
+  border-bottom: 1px solid #dee3ed;
+  background: #f8f9fc;
+}
+
+.settings-section {
+  padding: 12px 16px;
+  border-bottom: 1px solid #dfe1e6;
+}
+
+.settings-section-main-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 0;
+  color: #5E6C84;
+}
+
+.settings-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #5E6C84;
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.setting-item:last-child {
+  margin-bottom: 0;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 20px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked+.toggle-slider {
+  background-color: #0052CC;
+}
+
+input:checked+.toggle-slider:before {
+  transform: translateX(16px);
+}
+
+.setting-label {
+  font-size: 14px;
+  color: #172B4D;
+}
+
+.divider {
+  height: 1px;
+  background-color: #dfe1e6;
+  margin: 8px 0;
+}
+
+#reload-message {
+  margin-left: 10px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  background-color: #4CAF50;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.fields-section {
+  padding: 12px 16px;
+}
+
+/* Fim Popup */
+
+
 .resizer-width {
   width: '32px !important';
 }
@@ -147,7 +288,7 @@
 .tooltip-content-container {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height:350px;
+  max-height: 350px;
 }
 
 /* Estilos do ícone de link */
@@ -587,4 +728,3 @@
     opacity: 1
   }
 }
-

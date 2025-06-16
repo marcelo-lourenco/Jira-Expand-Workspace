@@ -194,8 +194,8 @@ export const LinkedIssues = {
   },
 
   checkAndAddIconsInternal() {
-    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.sync) {
-      chrome.storage.sync.get(['viewLinkedTickets'], (result) => {
+    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local) {
+      chrome.storage.local.get(['viewLinkedTickets'], (result) => {
         if (result.viewLinkedTickets !== false) {
           const boardSelector = Utils.getSelector('board');
           if (!boardSelector) return;
@@ -210,7 +210,7 @@ export const LinkedIssues = {
         }
       });
     } else {
-      // console.warn("Jira Expand Extension: chrome.storage.sync not available. Linked tickets icons may not work as expected.");
+      // console.warn("Jira Expand Extension: chrome.storage.local not available. Linked tickets icons may not work as expected.");
       // Fallback: assume true if storage is not available
       const boardSelector = Utils.getSelector('board');
       if (!boardSelector) return;

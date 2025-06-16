@@ -26,8 +26,8 @@ const JiraExpandExtension = {
   },
 
   loadSettingsAndInitializeFeatures() {
-    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.sync) {
-      chrome.storage.sync.get([
+    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local) {
+      chrome.storage.local.get([
         'collapseRightPanel',
         'expandCreateModal',
         'viewLinkedTickets'
@@ -40,7 +40,7 @@ const JiraExpandExtension = {
         this.applyFeaturesBasedOnSettings();
       });
     } else {
-      // console.warn("Jira Expand Extension: chrome.storage.sync not available. Using default settings.");
+      // console.warn("Jira Expand Extension: chrome.storage.local not available. Using default settings.");
       // state.settings already has defaults from state.js
       this.applyFeaturesBasedOnSettings();
     }
@@ -72,8 +72,8 @@ const JiraExpandExtension = {
     const observer = new MutationObserver(Utils.debounce((mutations) => {
       // Check if significant DOM changes occurred
       //if (mutations.some(m => m.addedNodes.length > 0 || (m.type === 'attributes' && m.target.id === 'jira'))) {
-        // console.log("Jira Expand Extension: DOM changes detected, re-running feature initializers.");
-        this.runFeatureInitializers();
+      // console.log("Jira Expand Extension: DOM changes detected, re-running feature initializers.");
+      this.runFeatureInitializers();
       //}
     }, 500)); // Debounce to avoid excessive calls
 

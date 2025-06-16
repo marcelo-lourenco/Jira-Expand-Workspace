@@ -1,4 +1,5 @@
 # Contributing
+
 First of all, thank you for taking the time to contribute! Contributions are what make the open-source community such an incredible place to learn, inspire, and create. Any contributions you make will benefit everyone else and are **greatly appreciated**.
 
 Try to create bug reports that are:
