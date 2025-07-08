@@ -3,18 +3,18 @@ import { JiraType } from './constants.js';
 
 export const UI = {
   addIconCollapse(spanCollapseOpen) {
-    spanCollapseOpen.classList.remove('icon-open');
-    spanCollapseOpen.classList.add('icon-collapse');
+    spanCollapseOpen.classList.remove('ewj-icon-open');
+    spanCollapseOpen.classList.add('ewj-icon-collapse');
   },
 
   addIconOpen(spanCollapseOpen) {
-    spanCollapseOpen.classList.remove('icon-collapse');
-    spanCollapseOpen.classList.add('icon-open');
+    spanCollapseOpen.classList.remove('ewj-icon-collapse');
+    spanCollapseOpen.classList.add('ewj-icon-open');
   },
 
   addIconShrink(spanShrinkExpand) {
-    spanShrinkExpand.classList.remove('icon-expand');
-    spanShrinkExpand.classList.add('icon-shrink');
+    spanShrinkExpand.classList.remove('ewj-icon-expand');
+    spanShrinkExpand.classList.add('ewj-icon-shrink');
     if (state.jiraType !== JiraType.CLOUD) {
       Object.assign(spanShrinkExpand.style, {
         margin: '0px -10px -5px 10px',
@@ -23,8 +23,8 @@ export const UI = {
   },
 
   addIconExpand(spanShrinkExpand) {
-    spanShrinkExpand.classList.remove('icon-shrink');
-    spanShrinkExpand.classList.add('icon-expand');
+    spanShrinkExpand.classList.remove('ewj-icon-shrink');
+    spanShrinkExpand.classList.add('ewj-icon-expand');
     if (state.jiraType !== JiraType.CLOUD) {
       Object.assign(spanShrinkExpand.style, {
         margin: '0px -10px -5px 10px',

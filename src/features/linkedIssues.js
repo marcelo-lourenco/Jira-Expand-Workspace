@@ -40,19 +40,19 @@ export const LinkedIssues = {
       const issueKey = linkedIssue.key;
 
       return `
-        <div role="listitem" class="list-item bg-color-neutral-subtle-hovered text-decoration-color-initial text-decoration-line-none text-decoration-style-solid bg-color-neutral-subtle-pressed">
-          <div data-testid="issue-line-card.card-container" class="issue-line-card-container">
+        <div role="listitem" class="ewj-list-item ewj-bg-color-neutral-subtle-hovered ewj-text-decoration-color-initial ewj-text-decoration-line-none ewj-text-decoration-style-solid ewj-bg-color-neutral-subtle-pressed">
+          <div data-testid="issue-line-card.card-container" class="ewj-issue-line-card-container">
             <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
-              <div data-testid="issue-line-card-issue-type.issue-type" class="issue-line-issue-type">
-                <div class="issue-line-issue-type-grid">
-                  <img src="${iconUrl}" alt="${issueTypeName}" title="${issueTypeName} (${relationship})" class="issue-line-issue-type-img" draggable="false">
+              <div data-testid="issue-line-card-issue-type.issue-type" class="ewj-issue-line-issue-type">
+                <div class="ewj-issue-line-issue-type-grid">
+                  <img src="${iconUrl}" alt="${issueTypeName}" title="${issueTypeName} (${relationship})" class="ewj-issue-line-issue-type-img" draggable="false">
                 </div>
               </div>
             </div>
-            <span><span data-testid="hover-card-trigger-wrapper"><a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${issueKey}" target="_blank" class="issue-line-card-view-key" aria-label="${issueKey} ${statusName}" role="link" draggable="false">${issueKey}</a></span></span>
-            <div data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary" class="issue-line-card-view-summary"><span><span data-testid="hover-card-trigger-wrapper"><a data-testid="issue-field-summary.ui.inline-read.link-item" href="/browse/${issueKey}" target="_blank" class="issue-line-card-view-summary-a" data-is-router-link="false" data-vc="link-item" tabindex="0" draggable="false" aria-disabled="false"><span class="issue-line-card-view-summary-span" data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container"><div class="issue-line-card-view-summary-div"><span class="linkedIssue-fields-summary" data-item-title="true">${summary}</span></div></span></a></span></span></div>
-            <div role="presentation"><div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img" class="issue-line-card-read-only-assignee-inner" title="Assignee: ${assigneeDisplayName}"><span data-testid="issue-line-card.ui.assignee.read-only-assignee--inner" class="issue-line-card-assignee-inner">${assigneeAvatarUrl ? `<img src="${assigneeAvatarUrl}" alt="${assigneeDisplayName}" title="${assigneeDisplayName}" class="issue-line-card-assignee-image">` : '<span class="assignee-placeholder" title="Unassigned"></span>'}</span></div></div>
-            <div data-testid="issue-line-card.ui.status.status-field-container" class="issue-line-card-status-field-container"><div role="presentation"><div><div><button aria-label="${statusName}" aria-expanded="false" class="issue-line-card-view-button-status" tabindex="0" type="button"><span class="issue-line-card-view-button-span"><span class="issue-line-card-view-button-span2"><div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="issue-fields-status-lozenge"><span class="issue-line-card-view-button-span3 ${statusBgColor}"><span class="issue-line-card-view-button-span4"><div class="issue-line-card-view-button-status-color ${statusColor}">${statusName}</div></span></span></div></span></span></button></div></div></div></div>
+            <span><span data-testid="hover-card-trigger-wrapper"><a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${issueKey}" target="_blank" class="ewj-issue-line-card-view-key" aria-label="${issueKey} ${statusName}" role="link" draggable="false">${issueKey}</a></span></span>
+            <div data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary" class="ewj-issue-line-card-view-summary"><span><span data-testid="hover-card-trigger-wrapper"><a data-testid="issue-field-summary.ui.inline-read.link-item" href="/browse/${issueKey}" target="_blank" class="ewj-issue-line-card-view-summary-a" data-is-router-link="false" data-vc="link-item" tabindex="0" draggable="false" aria-disabled="false"><span class="ewj-issue-line-card-view-summary-span" data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container"><div class="ewj-issue-line-card-view-summary-div"><span class="ewj-linkedIssue-fields-summary" data-item-title="true">${summary}</span></div></span></a></span></span></div>
+            <div role="presentation"><div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img" class="ewj-issue-line-card-read-only-assignee-inner" title="Assignee: ${assigneeDisplayName}"><span data-testid="issue-line-card.ui.assignee.read-only-assignee--inner" class="ewj-issue-line-card-assignee-inner">${assigneeAvatarUrl ? `<img src="${assigneeAvatarUrl}" alt="${assigneeDisplayName}" title="${assigneeDisplayName}" class="ewj-issue-line-card-assignee-image">` : '<span class="assignee-placeholder" title="Unassigned"></span>'}</span></div></div>
+            <div data-testid="issue-line-card.ui.status.status-field-container" class="ewj-issue-line-card-status-field-container"><div role="presentation"><div><div><button aria-label="${statusName}" aria-expanded="false" class="ewj-issue-line-card-view-button-status" tabindex="0" type="button"><span class="ewj-issue-line-card-view-button-span"><span class="ewj-issue-line-card-view-button-span2"><div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="ewj-issue-fields-status-lozenge"><span class="ewj-issue-line-card-view-button-span3 ${statusBgColor}"><span class="ewj-issue-line-card-view-button-span4"><div class="ewj-issue-line-card-view-button-status-color ${statusColor}">${statusName}</div></span></span></div></span></span></button></div></div></div></div>
           </div>
         </div>`;
     } catch (error) {
@@ -98,9 +98,9 @@ export const LinkedIssues = {
       } else {
         for (const relationship in groupedLinks) {
           groupedLinksHtml += `
-            <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="issue-links-group-container">
-              <h3 class="issue-links-group-container-h3"><span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span></h3>
-              <div class="margin-top-8"><ul class="ul-card-container">${groupedLinks[relationship].join('')}</ul></div>
+            <div data-testid="issue.views.issue-base.content.issue-links.group-container" class="ewj-issue-links-group-container">
+              <h3 class="ewj-issue-links-group-container-h3"><span data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading">${relationship}</span></h3>
+              <div class="ewj-margin-top-8"><ul class="ewj-ul-card-container">${groupedLinks[relationship].join('')}</ul></div>
             </div>`;
         }
       }
@@ -122,7 +122,7 @@ export const LinkedIssues = {
     if (!tooltipManager.tooltip) {
       tooltipManager.create('<p class="tooltip-loading">Loading linked tickets...</p>');
     } else {
-      tooltipManager.tooltip.querySelector('.tooltip-content-container').innerHTML = '<p class="tooltip-loading">Loading linked tickets...</p>';
+      tooltipManager.tooltip.querySelector('.ewj-tooltip-content-container').innerHTML = '<p class="tooltip-loading">Loading linked tickets...</p>';
     }
     if (tooltipManager.tooltip) {
       tooltipManager.tooltip.style.display = 'block';
@@ -134,15 +134,15 @@ export const LinkedIssues = {
       if (!tooltipManager.tooltip) return; // Tooltip might have been destroyed
 
       const tooltipContent = error
-        ? `<div class="issue-tooltip-div1"><div class="issue-tooltip-linked-items-label"><label class="issue-link-search-label"><h2 class="title-linked-items">${title}</h2></label></div><div>${error}</div></div>`
-        : `<div class="issue-tooltip-div1"><div class="issue-tooltip-linked-items-label"><label class="issue-link-search-label"><h2 class="title-linked-items">${title}</h2></label><div role="presentation"><a href="${BY_URL}" target="_blank" class="img-link" rel="noopener noreferrer"><span role="img" class="span-logo logo16" title="${BY}"></span></a></div></div><div>${groupedLinksHtml}</div></div>`;
+        ? `<div class="ewj-issue-tooltip-div1"><div class="ewj-issue-tooltip-linked-items-label"><label class="ewj-issue-link-search-label"><h2 class="ewj-title-linked-items">${title}</h2></label></div><div>${error}</div></div>`
+        : `<div class="ewj-issue-tooltip-div1"><div class="ewj-issue-tooltip-linked-items-label"><label class="ewj-issue-link-search-label"><h2 class="ewj-title-linked-items">${title}</h2></label><div role="presentation"><a href="${BY_URL}" target="_blank" class="ewj-img-link" rel="noopener noreferrer"><span role="img" class="ewj-span-logo ewj-logo16" title="${BY}"></span></a></div></div><div>${groupedLinksHtml}</div></div>`;
 
-      tooltipManager.tooltip.querySelector('.tooltip-content-container').innerHTML = tooltipContent;
+      tooltipManager.tooltip.querySelector('.ewj-tooltip-content-container').innerHTML = tooltipContent;
       tooltipManager.adjustPosition(event);
     } catch (err) {
       // console.error('Jira Expand Extension: Error handling tooltip for', issueKey, err);
       if (tooltipManager.tooltip) {
-        tooltipManager.tooltip.querySelector('.tooltip-content-container').innerHTML = `<p>Error: ${err.message}</p>`;
+        tooltipManager.tooltip.querySelector('.ewj-tooltip-content-container').innerHTML = `<p>Error: ${err.message}</p>`;
         tooltipManager.adjustPosition(event);
       }
     }
@@ -156,9 +156,9 @@ export const LinkedIssues = {
     if (!cardFooterSelector) return;
     const footer = card.querySelector(cardFooterSelector);
 
-    if (footer && !footer.querySelector('.linked-issues-iconLink')) {
+    if (footer && !footer.querySelector('.ewj-linked-issues-iconLink')) {
       const iconLink = Utils.createElement('span', {
-        className: 'linked-issues-iconLink',
+        className: 'ewj-linked-issues-iconLink',
         //title: `View linked tickets for ${issueKey} (${BY})`,
         dataset: { issueLinkKey: issueKey }
       });
@@ -230,7 +230,7 @@ export const LinkedIssues = {
   handleDocumentClick(event) {
     if (tooltipManager.tooltip) {
       const target = event.target;
-      const isIconLink = target.closest('.linked-issues-iconLink');
+      const isIconLink = target.closest('.ewj-linked-issues-iconLink');
       if (!tooltipManager.tooltip.contains(target) && !isIconLink) {
         tooltipManager.destroy();
       }

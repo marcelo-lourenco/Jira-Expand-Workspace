@@ -9,10 +9,10 @@ class TooltipManager {
   create(content) {
     this.destroy();
     this.tooltip = Utils.createElement('div', {
-      className: 'tooltip-style'
+      className: 'ewj-tooltip-style'
     }, [
       Utils.createElement('div', {
-        className: 'tooltip-content-container',
+        className: 'ewj-tooltip-content-container',
         innerHTML: content
       })
     ]);

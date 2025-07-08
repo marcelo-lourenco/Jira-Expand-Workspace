@@ -8,10 +8,10 @@ export const JiraType = {
 };
 
 export const STATUS_COLORS = {
-  new: { color: 'status-color-new', bgColor: 'status-bg-color-new' },
-  indeterminate: { color: 'status-color-indeterminate', bgColor: 'status-bg-color-indeterminate' },
-  done: { color: 'status-color-done', bgColor: 'status-bg-color-done' },
-  other: { color: 'status-color-other', bgColor: 'status-bg-color-other' },
+  new: { color: 'ewj-status-color-new', bgColor: 'ewj-status-bg-color-new' },
+  indeterminate: { color: 'ewj-status-color-indeterminate', bgColor: 'ewj-status-bg-color-indeterminate' },
+  done: { color: 'ewj-status-color-done', bgColor: 'ewj-status-bg-color-done' },
+  other: { color: 'ewj-status-color-other', bgColor: 'ewj-status-bg-color-other' },
 };
 
 export const Selectors = {

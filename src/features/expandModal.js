@@ -51,13 +51,13 @@ export const ExpandModal = {
       const modalIssueCreate = document.querySelector(modalIssueCreateSelector);
       const modalIcons = document.querySelector(modalIconsSelector);
 
-      if (modalIssueCreate && modalIssueCreatePositioner && modalIcons && !document.getElementById('span-shrink-expand')) {
+      if (modalIssueCreate && modalIssueCreatePositioner && modalIcons && !document.getElementById('ewj-span-shrink-expand')) {
         if (state.jiraType !== JiraType.CLOUD) {
           modalIcons.style.display = 'flex';
         }
 
         const spanShrinkExpand = Utils.createElement('span', {
-          id: 'span-shrink-expand',
+          id: 'ewj-span-shrink-expand',
           // Initial state: modal will be expanded by default, so button offers to "Collapse"
           title: "Collapse modal ]"
         });
@@ -99,7 +99,7 @@ export const ExpandModal = {
       // Query elements dynamically inside the handler
       const modalIssueCreatePositionerSelector = Utils.getSelector('modalIssueCreatePositioner');
       const modalIssueCreateSelector = Utils.getSelector('modalIssueCreate');
-      const spanShrinkExpand = document.getElementById('span-shrink-expand');
+      const spanShrinkExpand = document.getElementById('ewj-span-shrink-expand');
 
       const modalIssueCreatePositioner = modalIssueCreatePositionerSelector ? document.querySelector(modalIssueCreatePositionerSelector) : null;
       const modalIssueCreate = modalIssueCreateSelector ? document.querySelector(modalIssueCreateSelector) : null;

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingConfiguration = {
     'enableAll': {
       label: 'Enable All Features',
-      dependentSettings: ['collapseRightPanel', 'expandCreateModal', 'viewLinkedTickets'],
+      dependentSettings: ['collapseRightPanel', 'expandCreateModal', 'viewLinkedTickets', 'expandImages'],
       default: true
     },
     'collapseRightPanel': {
@@ -19,58 +19,72 @@ document.addEventListener('DOMContentLoaded', () => {
       label: 'View Linked Tickets',
       functions: ['addIconToCard'],
       default: true
-    }
+    },
+    'expandImages': {
+      label: 'Expand Images',
+      functions: [''],
+      default: true
+    },
   };
 
-  const reloadMessageElement = document.getElementById('reload-message');
+  const reloadMessageElement = document.getElementById('ewj-reload-message');
   let reloadMessageTimeout;
 
-  // Carrega todas as configurações de uma vez
+  /**
+   * Loads all settings at once from chrome.storage.local.
+   */
   chrome.storage.local.get(Object.keys(settingConfiguration), (savedSettings) => {
     if (chrome.runtime.lastError) {
       console.error('Error loading settings:', chrome.runtime.lastError.message);
       return;
     }
 
-    // Verifica se já existem configurações salvas
+    /** @type {boolean} - Indicates if settings have been previously saved in storage. */
     const hasSavedSettings = Object.keys(savedSettings).length > 0;
     const enableAllCheckbox = document.getElementById('toggle-enableAll');
 
-    // Configura cada checkbox individualmente com base no storage ou valor padrão
+    /**
+     * Configures each checkbox individually based on stored settings or default values.
+     */
     Object.keys(settingConfiguration).forEach(settingKey => {
       const checkbox = document.getElementById(`toggle-${settingKey}`);
       if (!checkbox) return;
 
-      // Define o estado inicial do checkbox
+      /** @type {boolean} - The initial checked state for the current checkbox. */
       let initialCheckedState = settingConfiguration[settingKey].default;
       if (hasSavedSettings && savedSettings[settingKey] !== undefined) {
         initialCheckedState = savedSettings[settingKey];
       }
       checkbox.checked = initialCheckedState;
 
-      // Adiciona listener para salvar mudanças
+      /**
+       * Adds a change event listener to each checkbox to save its state
+       * and handle master/dependent logic.
+       */
       checkbox.addEventListener('change', () => {
         const isChecked = checkbox.checked;
         saveSetting(settingKey, isChecked);
 
-        // Se a configuração mestre ('enableAll') mudou, atualiza os dependentes
+        // If the master setting ('enableAll') changed, update dependent settings.
         if (settingKey === 'enableAll') {
           updateDependentSettings(isChecked);
         }
 
-        // Mostra a mensagem "Reload Required"
+        // Show the "Reload Required" message.
         if (reloadMessageElement) {
           clearTimeout(reloadMessageTimeout);
           reloadMessageElement.style.opacity = '1';
           reloadMessageTimeout = setTimeout(() => {
             reloadMessageElement.style.opacity = '0';
-          }, 2000); // Esconde após 2 segundos
+          }, 2000); // Hide after 2 seconds.
         }
       });
     });
 
-    // Após todos os checkboxes serem inicializados, ajusta o estado dos dependentes
-    // com base no estado carregado de 'enableAll'
+    /**
+     * After all checkboxes are initialized, adjust the state of dependent settings
+     * based on the loaded state of the 'enableAll' master checkbox.
+     */
     if (enableAllCheckbox) {
       const masterEnableState = enableAllCheckbox.checked;
       settingConfiguration.enableAll.dependentSettings.forEach(depSettingKey => {
@@ -78,50 +92,65 @@ document.addEventListener('DOMContentLoaded', () => {
         if (depCheckbox) {
           depCheckbox.disabled = !masterEnableState;
           // Se o mestre está desabilitado, os filhos também devem estar desabilitados E desmarcados.
-          // Salva este estado para consistência.
+          // If the master is disabled, children should also be disabled AND unchecked.
+          // Saves this state for consistency.
           if (!masterEnableState) {
-            if (depCheckbox.checked) { // Só altera e salva se estava marcado
+            if (depCheckbox.checked) { // Only change and save if it was checked.
               depCheckbox.checked = false;
               saveSetting(depSettingKey, false);
             }
           }
           // Se o mestre está habilitado, os filhos ficam habilitados (disabled=false).
-          // Seus estados 'checked' (que foram carregados do storage) são mantidos.
+          // If the master is enabled, children are enabled (disabled=false).
+          // Their 'checked' states (which were loaded from storage) are maintained.
         }
       });
     }
 
-    // Se não havia configurações salvas, salva os padrões
-    // Isso acontece depois que os checkboxes foram configurados e os dependentes ajustados.
+    /**
+     * If there were no saved settings, save the default settings.
+     * This happens after the checkboxes have been configured and dependent settings adjusted.
+     */
     if (!hasSavedSettings) {
       saveDefaultSettings();
     }
   });
 
-  // Atualiza as configurações dependentes QUANDO O TOGGLE MESTRE MUDA PELO USUÁRIO
+  /**
+   * Updates dependent settings when the master 'enableAll' toggle is changed by the user.
+   * @param {boolean} enable - Whether to enable or disable the dependent settings.
+   */
   function updateDependentSettings(enable) {
     settingConfiguration.enableAll.dependentSettings.forEach(depSettingKey => {
       const checkbox = document.getElementById(`toggle-${depSettingKey}`);
       if (checkbox) {
         checkbox.checked = enable;
-        checkbox.disabled = !enable; // Habilita/desabilita o filho
-        saveSetting(depSettingKey, enable); // Salva o estado forçado do filho
+        checkbox.disabled = !enable; // Enable/disable the child checkbox.
+        saveSetting(depSettingKey, enable); // Save the forced state of the child.
       }
     });
   }
 
-  // Salva uma configuração individual
+  /**
+   * Saves an individual setting to chrome.storage.local.
+   * @param {string} key - The key of the setting to save.
+   * @param {boolean} value - The value of the setting to save.
+   */
   function saveSetting(key, value) {
     chrome.storage.local.set({ [key]: value }, () => {
       if (chrome.runtime.lastError) {
         console.error(`Error saving setting "${key}":`, chrome.runtime.lastError.message);
       } else {
-        console.log(`Setting "${key}" saved as: ${value}`);
+        // console.log(`Setting "${key}" saved as: ${value}`); // Optional: for debugging
       }
     });
   }
 
-  // Salva todas as configurações padrão
+  /**
+   * Saves all default settings to chrome.storage.local.
+   * This is typically called when the extension is run for the first time
+   * or if no settings are found in storage.
+   */
   function saveDefaultSettings() {
     const defaultSettings = {};
     Object.keys(settingConfiguration).forEach(key => {

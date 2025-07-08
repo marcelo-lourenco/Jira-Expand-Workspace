@@ -36,10 +36,10 @@ export const CollapsePanel = {
       const containerRight = document.querySelector(containerRightSelector);
       const resizerElement = document.querySelector(resizerElementSelector);
 
-      if (containerRight && resizerElement && !document.getElementById('span-collapse-open')) {
+      if (containerRight && resizerElement && !document.getElementById('ewj-span-collapse-open')) {
         const spanCollapseOpen = Utils.createElement('span', {
-          id: 'span-collapse-open',
-          className: 'icon-collapse', // Initial state: panel is open, button shows "collapse"
+          id: 'ewj-span-collapse-open',
+          className: 'ewj-icon-collapse', // Initial state: panel is open, button shows "collapse"
           title: "Collapse right pane ]" // Initial title, as panel starts open
         });
 
@@ -101,7 +101,7 @@ export const CollapsePanel = {
       // Query elements dynamically inside the handler as their presence might change
       const containerRightSelector = Utils.getSelector('containerRight');
       const containerRight = containerRightSelector ? document.querySelector(containerRightSelector) : null;
-      const spanCollapseOpen = document.getElementById('span-collapse-open');
+      const spanCollapseOpen = document.getElementById('ewj-span-collapse-open');
 
       if (!containerRight || !spanCollapseOpen) return;
 
