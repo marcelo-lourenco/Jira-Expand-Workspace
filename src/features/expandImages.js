@@ -168,7 +168,7 @@ export const ExpandImages = {
         const spanExpandImages = Utils.createElement('span', {
           id: 'ewj-span-expand-images',
           className: 'ewj-icon-resize',
-          title: 'Toggle expansion of all images'
+          title: 'Expand/Collapse images (Ctrl+Shift+I)'
         });
 
         spanExpandImages.addEventListener('click', (event) => {
@@ -239,12 +239,6 @@ export const ExpandImages = {
       if (event.ctrlKey && event.shiftKey && event.key === 'I') {
         event.preventDefault();
         this.toggleImageExpansion(event);
-        // Update button if exists
-        const btn = document.getElementById('ewj-expand-images-btn');
-        if (btn) {
-          const isExpanded = btn.textContent.includes('Collapse');
-          btn.innerHTML = isExpanded ? '📷 Expand Images' : '📷 Collapse Images';
-        }
       }
     });
 
