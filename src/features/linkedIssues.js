@@ -194,21 +194,29 @@ export const LinkedIssues = {
   },
 
   checkAndAddIconsInternal() {
-    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local) {
-      chrome.storage.local.get(['viewLinkedTickets'], (result) => {
-        if (result.viewLinkedTickets !== false) {
-          const boardSelector = Utils.getSelector('board');
-          if (!boardSelector) return;
-          const board = document.querySelector(boardSelector);
-          if (board) {
-            const cardSelector = Utils.getSelector('card');
-            if (!cardSelector) return;
-            const cards = board.querySelectorAll(cardSelector);
-            cards.forEach(card => this.addIconToCard(card));
-            state.currentProjectKey = Utils.getProjectKeyFromURL();
+    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local && chrome.runtime && chrome.runtime.id) {
+      try {
+        chrome.storage.local.get(['viewLinkedTickets'], (result) => {
+          if (chrome.runtime.lastError) {
+            console.warn('Jira Expand Extension: Extension context invalidated. This may happen when the extension is reloaded or updated.');
+            return;
           }
-        }
-      });
+          if (result.viewLinkedTickets !== false) {
+            const boardSelector = Utils.getSelector('board');
+            if (!boardSelector) return;
+            const board = document.querySelector(boardSelector);
+            if (board) {
+              const cardSelector = Utils.getSelector('card');
+              if (!cardSelector) return;
+              const cards = board.querySelectorAll(cardSelector);
+              cards.forEach(card => this.addIconToCard(card));
+              state.currentProjectKey = Utils.getProjectKeyFromURL();
+            }
+          }
+        });
+      } catch (error) {
+        console.error('Jira Expand Extension: Error in checkAndAddIconsInternal:', error);
+      }
     } else {
       // console.warn("Jira Expand Extension: chrome.storage.local not available. Linked tickets icons may not work as expected.");
       // Fallback: assume true if storage is not available

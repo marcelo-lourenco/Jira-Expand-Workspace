@@ -6,6 +6,7 @@ export const state = {
   settings: {
     collapseRightPanel: true,
     expandCreateModal: true,
-    viewLinkedTickets: true
+    viewLinkedTickets: true,
+    expandImages: true
   }
 };

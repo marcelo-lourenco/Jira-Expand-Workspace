@@ -13,6 +13,7 @@ import { JiraType } from './constants.js';
 import { CollapsePanel } from './features/collapsePanel.js';
 import { ExpandModal } from './features/expandModal.js';
 import { LinkedIssues } from './features/linkedIssues.js';
+import { ExpandImages } from './features/expandImages.js';
 
 // Main Application
 const JiraExpandExtension = {
@@ -26,16 +27,23 @@ const JiraExpandExtension = {
   },
 
   loadSettingsAndInitializeFeatures() {
-    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local) {
+    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local && chrome.runtime && chrome.runtime.id) {
       chrome.storage.local.get([
         'collapseRightPanel',
         'expandCreateModal',
-        'viewLinkedTickets'
+        'viewLinkedTickets',
+        'expandImages'
       ], (settings) => {
+        if (chrome.runtime.lastError) {
+          console.error('Jira Expand Extension: Error loading settings:', chrome.runtime.lastError.message);
+          this.applyFeaturesBasedOnSettings(); // Use defaults
+          return;
+        }
         state.settings = {
           collapseRightPanel: settings.collapseRightPanel !== false,
           expandCreateModal: settings.expandCreateModal !== false,
-          viewLinkedTickets: settings.viewLinkedTickets !== false
+          viewLinkedTickets: settings.viewLinkedTickets !== false,
+          expandImages: settings.expandImages !== false
         };
         this.applyFeaturesBasedOnSettings();
       });
@@ -56,6 +64,9 @@ const JiraExpandExtension = {
       }
       if (state.settings.viewLinkedTickets) {
         LinkedIssues.init();
+      }
+      if (state.settings.expandImages) {
+        ExpandImages.init();
       }
     } else {
       // console.log("Jira Expand Extension: Not a recognized Jira page or Jira type unknown. Features not activated.");
