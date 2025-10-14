@@ -126,9 +126,12 @@ export const ExpandImages = {
           img.classList.remove('ewj-img-collapsed');
           img.style.maxHeight = 'none';
           img.style.width = '100%';
+          img.style.maxWidth = 'none'; // Remove maxWidth restriction
 
           // Update containers to follow image dimensions
           containers.forEach(container => {
+            container.style.maxWidth = '100%'; // Restore full width
+            container.style.width = '100%'; // Ensure full width
             container.style.maxHeight = 'none';
             container.style.height = 'auto';
             container.style.overflow = 'visible';
