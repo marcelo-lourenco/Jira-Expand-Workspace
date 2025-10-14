@@ -143,6 +143,8 @@ export const ExpandImages = {
 
           // Update containers to follow collapsed image dimensions
           containers.forEach(container => {
+            container.style.maxWidth = '400px'; // Match collapsed image maxWidth
+            container.style.width = 'auto'; // Allow natural width
             container.style.maxHeight = 'none';
             container.style.height = 'auto';
             container.style.overflow = 'visible';
