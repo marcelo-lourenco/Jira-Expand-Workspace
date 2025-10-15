@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. Voeg knoppen toe om de werkruimte uit te breiden, de rechterpaneel in te klappen en een modaal toe te voegen om gerelateerde problemen te bekijken."
-  },
-  "extName": {
-     "message": "Jira Werkruimte Uitbreiden"
-  }
+   "extDesc": {
+      "message": "Jira. Voeg knoppen toe om de werkruimte uit te breiden, de rechterpaneel in te klappen en een modaal toe te voegen om gerelateerde problemen te bekijken.",
+      "description": "Extensiebeschrijving"
+   },
+   "extName": {
+      "message": "Jira Werkruimte Uitbreiden",
+      "description": "Extensienaam"
+   },
+   "settingsTitle": {
+      "message": "Jira Uitbreiden Instellingen",
+      "description": "Hoofdtitel van instellingen popup"
+   },
+   "reloadRequired": {
+      "message": "Herladen vereist!",
+      "description": "Waarschuwingsbericht wanneer herladen vereist is"
+   },
+   "globalSettings": {
+      "message": "Globale Instellingen",
+      "description": "Globale instellingen sectie"
+   },
+   "enableFeatures": {
+      "message": "Functies Inschakelen",
+      "description": "Toggle label om alle functies in te schakelen"
+   },
+   "features": {
+      "message": "Functies",
+      "description": "Individuele functies sectie"
+   },
+   "collapseRightPanel": {
+      "message": "Rechterpaneel Inklappen",
+      "description": "Functie om rechterpaneel in te klappen"
+   },
+   "expandCreateModal": {
+      "message": "Aanmaak Modal Uitbreiden",
+      "description": "Functie om aanmaak modal uit te breiden"
+   },
+   "viewLinkedTickets": {
+      "message": "Gekoppelde Tickets Bekijken",
+      "description": "Functie om gekoppelde tickets te bekijken"
+   },
+   "expandImages": {
+      "message": "Afbeeldingen Uitbreiden",
+      "description": "Functie om afbeeldingen uit te breiden"
+   }
 }

@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. Munkaterület kibővítése gomb hozzáadásával, jobb panel összecsukásával és kapcsolódó problémák megtekintésére szolgáló modális ablak hozzáadásával."
-  },
-  "extName": {
-     "message": "Jira Munkaterület Kibővítése"
-  }
+   "extDesc": {
+      "message": "Jira. Munkaterület kibővítése gomb hozzáadásával, jobb panel összecsukásával és kapcsolódó problémák megtekintésére szolgáló modális ablak hozzáadásával.",
+      "description": "Kiterjesztés leírása"
+   },
+   "extName": {
+      "message": "Jira Munkaterület Kibővítése",
+      "description": "Kiterjesztés neve"
+   },
+   "settingsTitle": {
+      "message": "Jira Kiterjesztés Beállítások",
+      "description": "Beállítások felugró ablak fő címe"
+   },
+   "reloadRequired": {
+      "message": "Újratöltés szükséges!",
+      "description": "Figyelmeztető üzenet újratöltés szükségeskor"
+   },
+   "globalSettings": {
+      "message": "Globális Beállítások",
+      "description": "Globális beállítások szakasz"
+   },
+   "enableFeatures": {
+      "message": "Funkciók Engedélyezése",
+      "description": "Minden funkció engedélyezéséhez tartozó kapcsoló címke"
+   },
+   "features": {
+      "message": "Funkciók",
+      "description": "Egyéni funkciók szakasz"
+   },
+   "collapseRightPanel": {
+      "message": "Jobb Panel Összecsukása",
+      "description": "Jobb panel összecsukásának funkciója"
+   },
+   "expandCreateModal": {
+      "message": "Létrehozás Modális Kibővítése",
+      "description": "Létrehozás modális kibővítésének funkciója"
+   },
+   "viewLinkedTickets": {
+      "message": "Kapcsolt Jegyek Megtekintése",
+      "description": "Kapcsolt jegyek megtekintésének funkciója"
+   },
+   "expandImages": {
+      "message": "Képek Kibővítése",
+      "description": "Képek kibővítésének funkciója"
+   }
 }

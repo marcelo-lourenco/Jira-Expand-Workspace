@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. Adăugați butoane pentru extinderea spațiului de lucru, pliați panoul din dreapta și adăugați un modal pentru a vizualiza problemele relevante."
-  },
-  "extName": {
-     "message": "Extinde spațiul de lucru Jira"
-  }
+   "extDesc": {
+      "message": "Jira. Adăugați butoane pentru extinderea spațiului de lucru, pliați panoul din dreapta și adăugați un modal pentru a vizualiza problemele relevante.",
+      "description": "Descrierea extensiei"
+   },
+   "extName": {
+      "message": "Extinde spațiul de lucru Jira",
+      "description": "Numele extensiei"
+   },
+   "settingsTitle": {
+      "message": "Setări Extindere Jira",
+      "description": "Titlul principal al popup-ului de setări"
+   },
+   "reloadRequired": {
+      "message": "Repornire necesară!",
+      "description": "Mesaj de avertizare când repornirea este necesară"
+   },
+   "globalSettings": {
+      "message": "Setări Globale",
+      "description": "Secțiunea de setări globale"
+   },
+   "enableFeatures": {
+      "message": "Activați Funcționalitățile",
+      "description": "Eticheta pentru activarea tuturor funcționalităților"
+   },
+   "features": {
+      "message": "Funcționalități",
+      "description": "Secțiunea funcționalităților individuale"
+   },
+   "collapseRightPanel": {
+      "message": "Pliați Panoul Drept",
+      "description": "Funcționalitate pentru plierea panoului drept"
+   },
+   "expandCreateModal": {
+      "message": "Extindeți Modalul de Creare",
+      "description": "Funcționalitate pentru extinderea modalului de creare"
+   },
+   "viewLinkedTickets": {
+      "message": "Vizualizați Bilete Conectate",
+      "description": "Funcționalitate pentru vizualizarea biletelor conectate"
+   },
+   "expandImages": {
+      "message": "Extindeți Imaginile",
+      "description": "Funcționalitate pentru extinderea imaginilor"
+   }
 }

@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. Thêm nút để mở rộng Không gian Làm việc, ẩn bảng điều khiển bên phải và thêm mô hình để xem các vấn đề liên quan."
-  },
-  "extName": {
-     "message": "Mở rộng Không gian Làm việc của Jira"
-  }
+   "extDesc": {
+      "message": "Jira. Thêm nút để mở rộng Không gian Làm việc, ẩn bảng điều khiển bên phải và thêm mô hình để xem các vấn đề liên quan.",
+      "description": "Mô tả tiện ích"
+   },
+   "extName": {
+      "message": "Mở rộng Không gian Làm việc của Jira",
+      "description": "Tên tiện ích"
+   },
+   "settingsTitle": {
+      "message": "Cài đặt Mở rộng Jira",
+      "description": "Tiêu đề chính của cửa sổ bật lên cài đặt"
+   },
+   "reloadRequired": {
+      "message": "Cần tải lại!",
+      "description": "Thông báo cảnh báo khi cần tải lại"
+   },
+   "globalSettings": {
+      "message": "Cài đặt Toàn cầu",
+      "description": "Phần cài đặt toàn cầu"
+   },
+   "enableFeatures": {
+      "message": "Bật Tính năng",
+      "description": "Nhãn chuyển đổi để bật tất cả các tính năng"
+   },
+   "features": {
+      "message": "Tính năng",
+      "description": "Phần tính năng cá nhân"
+   },
+   "collapseRightPanel": {
+      "message": "Thu gọn Bảng điều khiển Bên phải",
+      "description": "Tính năng để thu gọn bảng điều khiển bên phải"
+   },
+   "expandCreateModal": {
+      "message": "Mở rộng Modal Tạo",
+      "description": "Tính năng để mở rộng modal tạo"
+   },
+   "viewLinkedTickets": {
+      "message": "Xem Vé Liên kết",
+      "description": "Tính năng để xem vé liên kết"
+   },
+   "expandImages": {
+      "message": "Mở rộng Hình ảnh",
+      "description": "Tính năng để mở rộng hình ảnh"
+   }
 }

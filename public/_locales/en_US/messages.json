@@ -1,8 +1,46 @@
 {
    "extDesc": {
-      "message": "Jira. Adds buttons to expand the workspace, collapse the right pane and modal to view related issues."
+      "message": "Jira. Adds buttons to expand the workspace, collapse the right pane and modal to view related issues.",
+      "description": "Extension description"
    },
    "extName": {
-      "message": "Jira Expand Workspace"
+      "message": "Jira Expand Workspace",
+      "description": "Extension name"
+   },
+   "settingsTitle": {
+      "message": "Jira Expand Settings",
+      "description": "Main settings popup title"
+   },
+   "reloadRequired": {
+      "message": "Reload required!",
+      "description": "Warning message when reload is required"
+   },
+   "globalSettings": {
+      "message": "Global Settings",
+      "description": "Global settings section"
+   },
+   "enableFeatures": {
+      "message": "Enable Features",
+      "description": "Label for toggle to enable all features"
+   },
+   "features": {
+      "message": "Features",
+      "description": "Individual features section"
+   },
+   "collapseRightPanel": {
+      "message": "Collapse Right Panel",
+      "description": "Feature to collapse right panel"
+   },
+   "expandCreateModal": {
+      "message": "Expand Create Modal",
+      "description": "Feature to expand create modal"
+   },
+   "viewLinkedTickets": {
+      "message": "View Linked Tickets",
+      "description": "Feature to view linked tickets"
+   },
+   "expandImages": {
+      "message": "Expand Images",
+      "description": "Feature to expand images"
    }
 }

@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. เพิ่มปุ่มเพื่อขยายพื้นที่ทำงาน, ปิดแผงด้านขวาและเพิ่มโมเดลเพื่อดูปัญหาที่เกี่ยวข้อง"
-  },
-  "extName": {
-     "message": "ขยายพื้นที่ทำงานของ Jira"
-  }
+   "extDesc": {
+      "message": "Jira. เพิ่มปุ่มเพื่อขยายพื้นที่ทำงาน, ปิดแผงด้านขวาและเพิ่มโมเดลเพื่อดูปัญหาที่เกี่ยวข้อง",
+      "description": "คำอธิบายส่วนขยาย"
+   },
+   "extName": {
+      "message": "ขยายพื้นที่ทำงานของ Jira",
+      "description": "ชื่อส่วนขยาย"
+   },
+   "settingsTitle": {
+      "message": "การตั้งค่า Jira ขยาย",
+      "description": "หัวเรื่องหลักของป๊อปอัพการตั้งค่า"
+   },
+   "reloadRequired": {
+      "message": "จำเป็นต้องโหลดใหม่!",
+      "description": "ข้อความเตือนเมื่อจำเป็นต้องโหลดใหม่"
+   },
+   "globalSettings": {
+      "message": "การตั้งค่าสากล",
+      "description": "ส่วนการตั้งค่าสากล"
+   },
+   "enableFeatures": {
+      "message": "เปิดใช้งานฟีเจอร์",
+      "description": "ป้ายกำกับสวิตช์เพื่อเปิดใช้งานฟีเจอร์ทั้งหมด"
+   },
+   "features": {
+      "message": "ฟีเจอร์",
+      "description": "ส่วนฟีเจอร์แต่ละรายการ"
+   },
+   "collapseRightPanel": {
+      "message": "ยุบแผงด้านขวา",
+      "description": "ฟีเจอร์สำหรับยุบแผงด้านขวา"
+   },
+   "expandCreateModal": {
+      "message": "ขยายโมเดลการสร้าง",
+      "description": "ฟีเจอร์สำหรับขยายโมเดลการสร้าง"
+   },
+   "viewLinkedTickets": {
+      "message": "ดูตั๋วที่เชื่อมโยง",
+      "description": "ฟีเจอร์สำหรับดูตั๋วที่เชื่อมโยง"
+   },
+   "expandImages": {
+      "message": "ขยายรูปภาพ",
+      "description": "ฟีเจอร์สำหรับขยายรูปภาพ"
+   }
 }

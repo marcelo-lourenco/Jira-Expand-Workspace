@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. Çalışma alanını genişletmek için düğme ekleyin, sağ paneli toplayın ve ilgili sorunları görmek için modal ekleyin."
-  },
-  "extName": {
-     "message": "Jira Çalışma Alanını Genişlet"
-  }
+   "extDesc": {
+      "message": "Jira. Çalışma alanını genişletmek için düğme ekleyin, sağ paneli toplayın ve ilgili sorunları görmek için modal ekleyin.",
+      "description": "Uzantı açıklaması"
+   },
+   "extName": {
+      "message": "Jira Çalışma Alanını Genişlet",
+      "description": "Uzantı adı"
+   },
+   "settingsTitle": {
+      "message": "Jira Genişletme Ayarları",
+      "description": "Ayarlar açılır penceresinin ana başlığı"
+   },
+   "reloadRequired": {
+      "message": "Yeniden yükleme gerekli!",
+      "description": "Yeniden yükleme gerekli olduğunda uyarı mesajı"
+   },
+   "globalSettings": {
+      "message": "Genel Ayarlar",
+      "description": "Genel ayarlar bölümü"
+   },
+   "enableFeatures": {
+      "message": "Özellikleri Etkinleştir",
+      "description": "Tüm özellikleri etkinleştirmek için geçiş etiketi"
+   },
+   "features": {
+      "message": "Özellikler",
+      "description": "Bireysel özellikler bölümü"
+   },
+   "collapseRightPanel": {
+      "message": "Sağ Paneli Daralt",
+      "description": "Sağ paneli daraltma özelliği"
+   },
+   "expandCreateModal": {
+      "message": "Oluştur Modalını Genişlet",
+      "description": "Oluştur modalını genişletme özelliği"
+   },
+   "viewLinkedTickets": {
+      "message": "Bağlı Biletlere Bak",
+      "description": "Bağlı biletlere bakma özelliği"
+   },
+   "expandImages": {
+      "message": "Resimleri Genişlet",
+      "description": "Resimleri genişletme özelliği"
+   }
 }

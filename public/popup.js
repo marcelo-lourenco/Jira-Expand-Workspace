@@ -1,27 +1,109 @@
+/**
+ * Substitui manualmente os placeholders i18n no HTML do popup
+ * O Chrome Extensions não faz isso automaticamente para popups
+ */
+function replaceI18nPlaceholders() {
+  // Mapeamento de placeholders para suas respectivas mensagens
+  const i18nMap = {
+    '__MSG_settingsTitle__': 'settingsTitle',
+    '__MSG_reloadRequired__': 'reloadRequired',
+    '__MSG_globalSettings__': 'globalSettings',
+    '__MSG_enableFeatures__': 'enableFeatures',
+    '__MSG_features__': 'features',
+    '__MSG_collapseRightPanel__': 'collapseRightPanel',
+    '__MSG_expandCreateModal__': 'expandCreateModal',
+    '__MSG_viewLinkedTickets__': 'viewLinkedTickets',
+    '__MSG_expandImages__': 'expandImages'
+  };
+
+  // Função para substituir texto em um elemento e seus filhos
+  function replaceInElement(element) {
+    if (element.nodeType === Node.TEXT_NODE) {
+      let text = element.textContent;
+      let replaced = false;
+
+      Object.keys(i18nMap).forEach(placeholder => {
+        if (text.includes(placeholder)) {
+          const messageKey = i18nMap[placeholder];
+          const translatedText = chrome.i18n.getMessage(messageKey);
+          if (translatedText) {
+            text = text.replace(new RegExp(placeholder, 'g'), translatedText);
+            replaced = true;
+          }
+        }
+      });
+
+      if (replaced) {
+        element.textContent = text;
+      }
+    } else if (element.nodeType === Node.ELEMENT_NODE) {
+      // Processar atributos que podem conter placeholders
+      ['title', 'alt', 'placeholder'].forEach(attr => {
+        if (element.hasAttribute(attr)) {
+          let value = element.getAttribute(attr);
+          Object.keys(i18nMap).forEach(placeholder => {
+            if (value.includes(placeholder)) {
+              const messageKey = i18nMap[placeholder];
+              const translatedText = chrome.i18n.getMessage(messageKey);
+              if (translatedText) {
+                value = value.replace(new RegExp(placeholder, 'g'), translatedText);
+              }
+            }
+          });
+          element.setAttribute(attr, value);
+        }
+      });
+
+      // Processar filhos recursivamente
+      Array.from(element.childNodes).forEach(replaceInElement);
+    }
+  }
+
+  // Aplicar substituição em todo o documento
+  replaceInElement(document.body);
+
+  // Atualizar o título da página se necessário
+  const titleElement = document.querySelector('title');
+  if (titleElement && titleElement.textContent.includes('__MSG_')) {
+    Object.keys(i18nMap).forEach(placeholder => {
+      if (titleElement.textContent.includes(placeholder)) {
+        const messageKey = i18nMap[placeholder];
+        const translatedText = chrome.i18n.getMessage(messageKey);
+        if (translatedText) {
+          titleElement.textContent = titleElement.textContent.replace(new RegExp(placeholder, 'g'), translatedText);
+        }
+      }
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Aplicar internacionalização primeiro
+  replaceI18nPlaceholders();
+
   const settingConfiguration = {
     'enableAll': {
-      label: 'Enable All Features',
+      label: chrome.i18n.getMessage('enableFeatures'),
       dependentSettings: ['collapseRightPanel', 'expandCreateModal', 'viewLinkedTickets', 'expandImages'],
       default: true
     },
     'collapseRightPanel': {
-      label: 'Collapse Right Panel',
+      label: chrome.i18n.getMessage('collapseRightPanel'),
       functions: ['fnCollapseLoad', 'fnCollapseOpen'],
       default: true
     },
     'expandCreateModal': {
-      label: 'Expand Create Modal',
+      label: chrome.i18n.getMessage('expandCreateModal'),
       functions: ['fnShrinkExpand'],
       default: true
     },
     'viewLinkedTickets': {
-      label: 'View Linked Tickets',
+      label: chrome.i18n.getMessage('viewLinkedTickets'),
       functions: ['addIconToCard'],
       default: true
     },
     'expandImages': {
-      label: 'Expand Images',
+      label: chrome.i18n.getMessage('expandImages'),
       functions: [''],
       default: true
     },

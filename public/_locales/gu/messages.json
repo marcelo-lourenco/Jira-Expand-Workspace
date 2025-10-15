@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. વર્કસ્પેસ વિસ્તૃત કરવા માટે બટન ઉમેરો, ડાબી પેન અને સંબંધિત મુદ્દાઓ જોવા માટે મોડલ જોડો."
-  },
-  "extName": {
-     "message": "Jira વર્કસ્પેસ વિસ્તૃત કરો"
-  }
+   "extDesc": {
+      "message": "Jira. વર્કસ્પેસ વિસ્તૃત કરવા માટે બટન ઉમેરો, ડાબી પેન અને સંબંધિત મુદ્દાઓ જોવા માટે મોડલ જોડો.",
+      "description": "એક્સટેંશનનું વર્ણન"
+   },
+   "extName": {
+      "message": "Jira વર્કસ્પેસ વિસ્તૃત કરો",
+      "description": "એક્સટેંશનનું નામ"
+   },
+   "settingsTitle": {
+      "message": "Jira વિસ્તૃત સેટિંગ્સ",
+      "description": "સેટિંગ્સ પોપઅપનું મુખ્ય શીર્ષક"
+   },
+   "reloadRequired": {
+      "message": "રીલોડ જરૂરી છે!",
+      "description": "રીલોડ જરૂરી હોય ત્યારે ચેતવણી સંદેશ"
+   },
+   "globalSettings": {
+      "message": "ગ્લોબલ સેટિંગ્સ",
+      "description": "ગ્લોબલ સેટિંગ્સ વિભાગ"
+   },
+   "enableFeatures": {
+      "message": "ફીચર્સ સક્ષમ કરો",
+      "description": "તમામ ફીચર્સ સક્ષમ કરવા માટે ટોગલ લેબલ"
+   },
+   "features": {
+      "message": "ફીચર્સ",
+      "description": "વ્યક્તિગત ફીચર્સ વિભાગ"
+   },
+   "collapseRightPanel": {
+      "message": "જમણી પેનલને ભંગ કરો",
+      "description": "જમણી પેનલ ભંગ કરવાની ફીચર"
+   },
+   "expandCreateModal": {
+      "message": "ક્રિએટ મોડલ વિસ્તૃત કરો",
+      "description": "ક્રિએટ મોડલ વિસ્તૃત કરવાની ફીચર"
+   },
+   "viewLinkedTickets": {
+      "message": "લિંક કરેલ ટિકિટ્સ જુઓ",
+      "description": "લિંક કરેલ ટિકિટ્સ જોવાની ફીચર"
+   },
+   "expandImages": {
+      "message": "ઇમેજીસ વિસ્તૃત કરો",
+      "description": "ઇમેજીસ વિસ્તૃત કરવાની ફીચર"
+   }
 }

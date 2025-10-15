@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. काम क्षेत्र विस्तार करण्यासाठी बटणे जोडा, उजवी पॅनल आणि संबंधित समस्या पाहण्यासाठी मॉडल जोडा."
-  },
-  "extName": {
-     "message": "Jira काम करण्याची जागा वाढवा"
-  }
+   "extDesc": {
+      "message": "Jira. काम क्षेत्र विस्तार करण्यासाठी बटणे जोडा, उजवी पॅनल आणि संबंधित समस्या पाहण्यासाठी मॉडल जोडा.",
+      "description": "एक्स्टेंशनचे वर्णन"
+   },
+   "extName": {
+      "message": "Jira काम करण्याची जागा वाढवा",
+      "description": "एक्स्टेंशनचे नाव"
+   },
+   "settingsTitle": {
+      "message": "Jira विस्तार सेटिंग्ज",
+      "description": "सेटिंग्ज पॉपअपचे मुख्य शीर्षक"
+   },
+   "reloadRequired": {
+      "message": "रीलोड आवश्यक!",
+      "description": "रीलोड आवश्यक असल्यास चेतावणी संदेश"
+   },
+   "globalSettings": {
+      "message": "ग्लोबल सेटिंग्ज",
+      "description": "ग्लोबल सेटिंग्ज विभाग"
+   },
+   "enableFeatures": {
+      "message": "फीचर्स सक्षम करा",
+      "description": "सर्व फीचर्स सक्षम करण्यासाठी टॉगल लेबल"
+   },
+   "features": {
+      "message": "फीचर्स",
+      "description": "वैयक्तिक फीचर्स विभाग"
+   },
+   "collapseRightPanel": {
+      "message": "उजवी पॅनल कोलॅप्स करा",
+      "description": "उजवी पॅनल कोलॅप्स करण्याची फीचर"
+   },
+   "expandCreateModal": {
+      "message": "क्रिएट मोडल विस्तारित करा",
+      "description": "क्रिएट मोडल विस्तारित करण्याची फीचर"
+   },
+   "viewLinkedTickets": {
+      "message": "लिंक्ड टिकट्स पाहा",
+      "description": "लिंक्ड टिकट्स पाहण्याची फीचर"
+   },
+   "expandImages": {
+      "message": "इमेजेस विस्तारित करा",
+      "description": "इमेजेस विस्तारित करण्याची फीचर"
+   }
 }

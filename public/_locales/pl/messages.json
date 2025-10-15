@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. Dodaj przyciski do rozszerzania przestrzeni roboczej, zwiń panel prawy i dodaj okno modalne do wyświetlania powiązanych problemów."
-  },
-  "extName": {
-     "message": "Jira Rozwiń Przestrzeń Roboczą"
-  }
+   "extDesc": {
+      "message": "Jira. Dodaj przyciski do rozszerzania przestrzeni roboczej, zwiń panel prawy i dodaj okno modalne do wyświetlania powiązanych problemów.",
+      "description": "Opis rozszerzenia"
+   },
+   "extName": {
+      "message": "Jira Rozwiń Przestrzeń Roboczą",
+      "description": "Nazwa rozszerzenia"
+   },
+   "settingsTitle": {
+      "message": "Ustawienia Rozszerzenia Jira",
+      "description": "Główny tytuł okna ustawień"
+   },
+   "reloadRequired": {
+      "message": "Wymagane przeładowanie!",
+      "description": "Komunikat ostrzegawczy gdy wymagane jest przeładowanie"
+   },
+   "globalSettings": {
+      "message": "Ustawienia Globalne",
+      "description": "Sekcja ustawień globalnych"
+   },
+   "enableFeatures": {
+      "message": "Włącz Funkcje",
+      "description": "Etykieta przełącznika do włączania wszystkich funkcji"
+   },
+   "features": {
+      "message": "Funkcje",
+      "description": "Sekcja indywidualnych funkcji"
+   },
+   "collapseRightPanel": {
+      "message": "Zwiń Panel Prawy",
+      "description": "Funkcja zwijania prawego panelu"
+   },
+   "expandCreateModal": {
+      "message": "Rozszerz Modal Tworzenia",
+      "description": "Funkcja rozszerzania modalu tworzenia"
+   },
+   "viewLinkedTickets": {
+      "message": "Zobacz Połączone Zgłoszenia",
+      "description": "Funkcja przeglądania połączonych zgłoszeń"
+   },
+   "expandImages": {
+      "message": "Rozszerz Obrazy",
+      "description": "Funkcja rozszerzania obrazów"
+   }
 }

@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. اضافه کردن دکمه ها برای گسترش فضای کاری، جمع کردن پنل راست و مدال برای مشاهده مشکلات مرتبط."
-  },
-  "extName": {
-     "message": "گسترش فضای کاری Jira"
-  }
+   "extDesc": {
+      "message": "Jira. اضافه کردن دکمه ها برای گسترش فضای کاری، جمع کردن پنل راست و مدال برای مشاهده مشکلات مرتبط.",
+      "description": "توضیح افزونه"
+   },
+   "extName": {
+      "message": "گسترش فضای کاری Jira",
+      "description": "نام افزونه"
+   },
+   "settingsTitle": {
+      "message": "تنظیمات گسترش Jira",
+      "description": "عنوان اصلی پنجره تنظیمات"
+   },
+   "reloadRequired": {
+      "message": "بارگذاری مجدد لازم است!",
+      "description": "پیام هشدار هنگام نیاز به بارگذاری مجدد"
+   },
+   "globalSettings": {
+      "message": "تنظیمات عمومی",
+      "description": "بخش تنظیمات عمومی"
+   },
+   "enableFeatures": {
+      "message": "فعال کردن ویژگی ها",
+      "description": "برچسب تغییر برای فعال کردن تمام ویژگی ها"
+   },
+   "features": {
+      "message": "ویژگی ها",
+      "description": "بخش ویژگی های جداگانه"
+   },
+   "collapseRightPanel": {
+      "message": "جمع کردن پنل راست",
+      "description": "ویژگی برای جمع کردن پنل راست"
+   },
+   "expandCreateModal": {
+      "message": "گسترش مدال ایجاد",
+      "description": "ویژگی برای گسترش مدال ایجاد"
+   },
+   "viewLinkedTickets": {
+      "message": "مشاهده تیکت های مرتبط",
+      "description": "ویژگی برای مشاهده تیکت های مرتبط"
+   },
+   "expandImages": {
+      "message": "گسترش تصاویر",
+      "description": "ویژگی برای گسترش تصاویر"
+   }
 }

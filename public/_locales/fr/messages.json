@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. Ajoute des boutons pour étendre l'espace de travail, réduire le volet droit et la fenêtre modale pour afficher les problèmes associés."
-  },
-  "extName": {
-     "message": "Étendre l'espace de travail de Jira"
-  }
+   "extDesc": {
+      "message": "Jira. Ajoute des boutons pour étendre l'espace de travail, réduire le volet droit et la fenêtre modale pour afficher les problèmes associés.",
+      "description": "Description de l'extension"
+   },
+   "extName": {
+      "message": "Étendre l'espace de travail de Jira",
+      "description": "Nom de l'extension"
+   },
+   "settingsTitle": {
+      "message": "Paramètres Jira Expand",
+      "description": "Titre principal du popup de paramètres"
+   },
+   "reloadRequired": {
+      "message": "Rechargement requis !",
+      "description": "Message d'avertissement quand le rechargement est requis"
+   },
+   "globalSettings": {
+      "message": "Paramètres Globaux",
+      "description": "Section des paramètres globaux"
+   },
+   "enableFeatures": {
+      "message": "Activer les Fonctionnalités",
+      "description": "Étiquette du toggle pour activer toutes les fonctionnalités"
+   },
+   "features": {
+      "message": "Fonctionnalités",
+      "description": "Section des fonctionnalités individuelles"
+   },
+   "collapseRightPanel": {
+      "message": "Réduire le Panneau Droit",
+      "description": "Fonctionnalité pour réduire le panneau droit"
+   },
+   "expandCreateModal": {
+      "message": "Étendre la Modale de Création",
+      "description": "Fonctionnalité pour étendre la modale de création"
+   },
+   "viewLinkedTickets": {
+      "message": "Voir les Tickets Liés",
+      "description": "Fonctionnalité pour voir les tickets liés"
+   },
+   "expandImages": {
+      "message": "Étendre les Images",
+      "description": "Fonctionnalité pour étendre les images"
+   }
 }

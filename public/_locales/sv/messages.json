@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. Lägg till knappar för att expandera arbetsyta, dölja högerpanel och lägga till modal för att visa relaterade problem."
-  },
-  "extName": {
-     "message": "Jira Expandera Arbetsyta"
-  }
+   "extDesc": {
+      "message": "Jira. Lägg till knappar för att expandera arbetsyta, dölja högerpanel och lägga till modal för att visa relaterade problem.",
+      "description": "Tilläggsbeskrivning"
+   },
+   "extName": {
+      "message": "Jira Expandera Arbetsyta",
+      "description": "Tilläggsnamn"
+   },
+   "settingsTitle": {
+      "message": "Jira Expandera Inställningar",
+      "description": "Huvudrubrik för inställnings-popup"
+   },
+   "reloadRequired": {
+      "message": "Omladdning krävs!",
+      "description": "Varningsmeddelande när omladdning krävs"
+   },
+   "globalSettings": {
+      "message": "Globala Inställningar",
+      "description": "Sektion för globala inställningar"
+   },
+   "enableFeatures": {
+      "message": "Aktivera Funktioner",
+      "description": "Etikett för att aktivera alla funktioner"
+   },
+   "features": {
+      "message": "Funktioner",
+      "description": "Sektion för individuella funktioner"
+   },
+   "collapseRightPanel": {
+      "message": "Dölj Högerpanel",
+      "description": "Funktion för att dölja högerpanel"
+   },
+   "expandCreateModal": {
+      "message": "Expandera Skapa Modal",
+      "description": "Funktion för att expandera skapa modal"
+   },
+   "viewLinkedTickets": {
+      "message": "Visa Länkade Ärendekort",
+      "description": "Funktion för att visa länkade ärendekort"
+   },
+   "expandImages": {
+      "message": "Expandera Bilder",
+      "description": "Funktion för att expandera bilder"
+   }
 }

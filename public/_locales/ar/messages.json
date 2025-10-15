@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. إضافة أزرار لتوسيع مساحة العمل، طي اللوحة اليمنى ونافذة لعرض المشاكل ذات الصلة."
-  },
-  "extName": {
-     "message": "توسيع مساحة عمل Jira"
-  }
+   "extDesc": {
+      "message": "Jira. إضافة أزرار لتوسيع مساحة العمل، طي اللوحة اليمنى ونافذة لعرض المشاكل ذات الصلة.",
+      "description": "وصف الإضافة"
+   },
+   "extName": {
+      "message": "توسيع مساحة عمل Jira",
+      "description": "اسم الإضافة"
+   },
+   "settingsTitle": {
+      "message": "إعدادات Jira توسيع",
+      "description": "العنوان الرئيسي لنافذة الإعدادات"
+   },
+   "reloadRequired": {
+      "message": "إعادة التحميل مطلوبة!",
+      "description": "رسالة تحذير عند الحاجة إلى إعادة التحميل"
+   },
+   "globalSettings": {
+      "message": "الإعدادات العامة",
+      "description": "قسم الإعدادات العامة"
+   },
+   "enableFeatures": {
+      "message": "تمكين الميزات",
+      "description": "تسمية التبديل لتمكين جميع الميزات"
+   },
+   "features": {
+      "message": "الميزات",
+      "description": "قسم الميزات الفردية"
+   },
+   "collapseRightPanel": {
+      "message": "طي اللوحة اليمنى",
+      "description": "الميزة لطي اللوحة اليمنى"
+   },
+   "expandCreateModal": {
+      "message": "توسيع نافذة الإنشاء",
+      "description": "الميزة لتوسيع نافذة الإنشاء"
+   },
+   "viewLinkedTickets": {
+      "message": "عرض التذاكر المرتبطة",
+      "description": "الميزة لعرض التذاكر المرتبطة"
+   },
+   "expandImages": {
+      "message": "توسيع الصور",
+      "description": "الميزة لتوسيع الصور"
+   }
 }

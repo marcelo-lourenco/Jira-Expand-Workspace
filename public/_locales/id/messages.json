@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. Tambahkan tombol untuk memperluas ruang kerja, lipat panel kanan, dan modal untuk melihat isu terkait."
-  },
-  "extName": {
-     "message": "Perluas Ruang Kerja Jira"
-  }
+   "extDesc": {
+      "message": "Jira. Tambahkan tombol untuk memperluas ruang kerja, lipat panel kanan, dan modal untuk melihat isu terkait.",
+      "description": "Deskripsi ekstensi"
+   },
+   "extName": {
+      "message": "Perluas Ruang Kerja Jira",
+      "description": "Nama ekstensi"
+   },
+   "settingsTitle": {
+      "message": "Pengaturan Perluas Jira",
+      "description": "Judul utama popup pengaturan"
+   },
+   "reloadRequired": {
+      "message": "Muat ulang diperlukan!",
+      "description": "Pesan peringatan saat muat ulang diperlukan"
+   },
+   "globalSettings": {
+      "message": "Pengaturan Global",
+      "description": "Bagian pengaturan global"
+   },
+   "enableFeatures": {
+      "message": "Aktifkan Fitur",
+      "description": "Label toggle untuk mengaktifkan semua fitur"
+   },
+   "features": {
+      "message": "Fitur",
+      "description": "Bagian fitur individual"
+   },
+   "collapseRightPanel": {
+      "message": "Lipat Panel Kanan",
+      "description": "Fitur untuk melipat panel kanan"
+   },
+   "expandCreateModal": {
+      "message": "Perluas Modal Buat",
+      "description": "Fitur untuk memperluas modal buat"
+   },
+   "viewLinkedTickets": {
+      "message": "Lihat Tiket Terkait",
+      "description": "Fitur untuk melihat tiket terkait"
+   },
+   "expandImages": {
+      "message": "Perluas Gambar",
+      "description": "Fitur untuk memperluas gambar"
+   }
 }

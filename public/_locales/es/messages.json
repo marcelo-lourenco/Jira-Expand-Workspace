@@ -1,8 +1,46 @@
 {
    "extDesc": {
-      "message": "Jira. Agrega botones para expandir el espacio de trabajo, colapsar el panel derecho y modal para ver los problemas relacionados."
+      "message": "Jira. Agrega botones para expandir el espacio de trabajo, colapsar el panel derecho y modal para ver los problemas relacionados.",
+      "description": "Descripción de la extensión"
    },
    "extName": {
-      "message": "Jira Expandir Espacio de Trabajo"
+      "message": "Jira Expandir Espacio de Trabajo",
+      "description": "Nombre de la extensión"
+   },
+   "settingsTitle": {
+      "message": "Configuración de Jira Expand",
+      "description": "Título principal del popup de configuración"
+   },
+   "reloadRequired": {
+      "message": "¡Recarga requerida!",
+      "description": "Mensaje de advertencia cuando se requiere recarga"
+   },
+   "globalSettings": {
+      "message": "Configuración Global",
+      "description": "Sección de configuración global"
+   },
+   "enableFeatures": {
+      "message": "Habilitar Funcionalidades",
+      "description": "Etiqueta del toggle para habilitar todas las funcionalidades"
+   },
+   "features": {
+      "message": "Funcionalidades",
+      "description": "Sección de funcionalidades individuales"
+   },
+   "collapseRightPanel": {
+      "message": "Colapsar Panel Derecho",
+      "description": "Funcionalidad para colapsar el panel derecho"
+   },
+   "expandCreateModal": {
+      "message": "Expandir Modal de Creación",
+      "description": "Funcionalidad para expandir el modal de creación"
+   },
+   "viewLinkedTickets": {
+      "message": "Ver Tickets Vinculados",
+      "description": "Funcionalidad para ver tickets vinculados"
+   },
+   "expandImages": {
+      "message": "Expandir Imágenes",
+      "description": "Funcionalidad para expandir imágenes"
    }
 }

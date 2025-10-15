@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. 添加按钮以扩展工作区，折叠右侧面板并添加模式以查看相关问题。"
-  },
-  "extName": {
-     "message": "Jira 扩展工作区"
-  }
+   "extDesc": {
+      "message": "Jira. 添加按钮以扩展工作区，折叠右侧面板并添加模式以查看相关问题。",
+      "description": "扩展描述"
+   },
+   "extName": {
+      "message": "Jira 扩展工作区",
+      "description": "扩展名称"
+   },
+   "settingsTitle": {
+      "message": "Jira 扩展设置",
+      "description": "设置弹出窗口的主要标题"
+   },
+   "reloadRequired": {
+      "message": "需要重新加载！",
+      "description": "需要重新加载时的警告消息"
+   },
+   "globalSettings": {
+      "message": "全局设置",
+      "description": "全局设置部分"
+   },
+   "enableFeatures": {
+      "message": "启用功能",
+      "description": "切换标签以启用所有功能"
+   },
+   "features": {
+      "message": "功能",
+      "description": "单个功能部分"
+   },
+   "collapseRightPanel": {
+      "message": "折叠右侧面板",
+      "description": "折叠右侧面板的功能"
+   },
+   "expandCreateModal": {
+      "message": "扩展创建模式",
+      "description": "扩展创建模式的功能"
+   },
+   "viewLinkedTickets": {
+      "message": "查看链接工单",
+      "description": "查看链接工单的功能"
+   },
+   "expandImages": {
+      "message": "扩展图片",
+      "description": "扩展图片的功能"
+   }
 }

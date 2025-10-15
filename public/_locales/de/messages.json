@@ -1,8 +1,46 @@
 {
-  "extDesc": {
-     "message": "Jira. Fügt Schaltflächen hinzu, um den Arbeitsbereich zu erweitern, das rechte Fenster zu reduzieren und ein Modalfenster anzuzeigen, um verwandte Probleme anzuzeigen."
-  },
-  "extName": {
-     "message": "Jira Arbeitsbereich erweitern"
-  }
+   "extDesc": {
+      "message": "Jira. Fügt Schaltflächen hinzu, um den Arbeitsbereich zu erweitern, das rechte Fenster zu reduzieren und ein Modalfenster anzuzeigen, um verwandte Probleme anzuzeigen.",
+      "description": "Erweiterungsbeschreibung"
+   },
+   "extName": {
+      "message": "Jira Arbeitsbereich erweitern",
+      "description": "Name der Erweiterung"
+   },
+   "settingsTitle": {
+      "message": "Jira Expand Einstellungen",
+      "description": "Haupttitel des Einstellungs-Popups"
+   },
+   "reloadRequired": {
+      "message": "Neuladen erforderlich!",
+      "description": "Warnmeldung wenn Neuladen erforderlich ist"
+   },
+   "globalSettings": {
+      "message": "Globale Einstellungen",
+      "description": "Abschnitt für globale Einstellungen"
+   },
+   "enableFeatures": {
+      "message": "Funktionen aktivieren",
+      "description": "Beschriftung für Toggle um alle Funktionen zu aktivieren"
+   },
+   "features": {
+      "message": "Funktionen",
+      "description": "Abschnitt für einzelne Funktionen"
+   },
+   "collapseRightPanel": {
+      "message": "Rechtes Panel zuklappen",
+      "description": "Funktion um rechtes Panel zu zuklappen"
+   },
+   "expandCreateModal": {
+      "message": "Erstellmodal erweitern",
+      "description": "Funktion um Erstellmodal zu erweitern"
+   },
+   "viewLinkedTickets": {
+      "message": "Verknüpfte Tickets ansehen",
+      "description": "Funktion um verknüpfte Tickets anzusehen"
+   },
+   "expandImages": {
+      "message": "Bilder erweitern",
+      "description": "Funktion um Bilder zu erweitern"
+   }
 }
