@@ -1,4 +1,4 @@
-export const BY = 'By Jira Expand Extension';
+// BY constant is now handled through i18n in linkedIssues.js
 export const BY_URL = 'https://chromewebstore.google.com/detail/occanfpdiglllenbekgbnhijeoincilf';
 
 export const JiraType = {

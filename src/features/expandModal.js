@@ -3,6 +3,8 @@ import { Utils } from '../utils.js';
 import { UI } from '../ui.js';
 import { JiraType } from '../constants.js';
 
+const { getI18nMessage } = Utils;
+
 export const ExpandModal = {
   init() {
     this.addExpandButton();
@@ -22,7 +24,7 @@ export const ExpandModal = {
         width: "100%", insetBlockStart: "40px", height: "calc(-40px + 100vh)",
       };
       Object.assign(modalIssueCreatePositioner.style, positionerStyles);
-      spanShrinkExpand.title = "Collapse modal ]";
+      spanShrinkExpand.title = getI18nMessage('collapseModalTitle');
     } else {
       // Modal is currently expanded, will be shrunk. Button should now offer to expand.
       UI.addIconExpand(spanShrinkExpand);
@@ -35,7 +37,7 @@ export const ExpandModal = {
       if (state.jiraType !== JiraType.CLOUD) {
         modalIssueCreatePositioner.style.insetBlockStart = '';
       }
-      spanShrinkExpand.title = "Expand modal ]";
+      spanShrinkExpand.title = getI18nMessage('expandModalTitle');
     }
   },
 
@@ -59,7 +61,7 @@ export const ExpandModal = {
         const spanShrinkExpand = Utils.createElement('span', {
           id: 'ewj-span-shrink-expand',
           // Initial state: modal will be expanded by default, so button offers to "Collapse"
-          title: "Collapse modal ]"
+          title: getI18nMessage('collapseModalTitle')
         });
 
         // Initialize to expanded state

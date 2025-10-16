@@ -3,6 +3,8 @@ import { Utils } from '../utils.js';
 import { UI } from '../ui.js';
 import { JiraType } from '../constants.js';
 
+const { getI18nMessage } = Utils;
+
 export const ExpandImages = {
   init() {
     this.addExpandImagesButton();
@@ -168,7 +170,7 @@ export const ExpandImages = {
         const spanExpandImages = Utils.createElement('span', {
           id: 'ewj-span-expand-images',
           className: 'ewj-icon-resize',
-          title: 'Expand/Collapse images (Ctrl+Shift+I)'
+          title: getI18nMessage('expandImagesTitle')
         });
 
         spanExpandImages.addEventListener('click', (event) => {

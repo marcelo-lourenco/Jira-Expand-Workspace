@@ -3,6 +3,8 @@ import { Utils } from '../utils.js';
 import { UI } from '../ui.js';
 import { JiraType } from '../constants.js';
 
+const { getI18nMessage } = Utils;
+
 export const CollapsePanel = {
   init() {
     this.addCollapseButton();
@@ -14,12 +16,12 @@ export const CollapsePanel = {
       // Panel is currently closed, will be opened. Button should now offer to collapse.
       UI.addIconCollapse(spanCollapseOpen);
       containerRight.style.display = state.jiraType === JiraType.CLOUD ? 'block' : '';
-      spanCollapseOpen.title = "Collapse right pane ]";
+      spanCollapseOpen.title = getI18nMessage('collapseRightPaneTitle');
     } else {
       // Panel is currently open, will be closed. Button should now offer to open.
       UI.addIconOpen(spanCollapseOpen);
       containerRight.style.display = 'none';
-      spanCollapseOpen.title = "Open right pane ]";
+      spanCollapseOpen.title = getI18nMessage('openRightPaneTitle');
     }
     if (modalIssueDetailsDialog && modalIssueDetailsDialogPositioner) {
       UI.expandIssueDetailsDialog(modalIssueDetailsDialog, modalIssueDetailsDialogPositioner);
@@ -40,7 +42,7 @@ export const CollapsePanel = {
         const spanCollapseOpen = Utils.createElement('span', {
           id: 'ewj-span-collapse-open',
           className: 'ewj-icon-collapse', // Initial state: panel is open, button shows "collapse"
-          title: "Collapse right pane ]" // Initial title, as panel starts open
+          title: getI18nMessage('collapseRightPaneTitle') // Initial title, as panel starts open
         });
 
         const modalIssueDetailsDialogPositionerSelector = Utils.getSelector('modalIssueDetailsDialogPositioner');

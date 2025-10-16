@@ -10,6 +10,13 @@ export const Utils = {
     };
   },
 
+  getI18nMessage(key, substitutions = []) {
+    if (typeof chrome !== "undefined" && chrome.i18n && chrome.i18n.getMessage) {
+      return chrome.i18n.getMessage(key, substitutions);
+    }
+    return key; // Fallback to key if i18n is not available
+  },
+
   getJiraType() {
     if (document.getElementById('jira-frontend')) {
       return JiraType.CLOUD;

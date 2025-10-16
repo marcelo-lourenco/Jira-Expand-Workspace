@@ -1,7 +1,9 @@
 import { state } from '../state.js';
 import { Utils } from '../utils.js';
 import { tooltipManager } from '../tooltipManager.js';
-import { STATUS_COLORS, BY, BY_URL, JiraType } from '../constants.js'; // Added JiraType
+import { STATUS_COLORS, BY_URL, JiraType } from '../constants.js'; // Added JiraType
+
+const { getI18nMessage } = Utils;
 
 export const LinkedIssues = {
   mouseOverTimeout: null,
@@ -45,13 +47,13 @@ export const LinkedIssues = {
             <div data-testid="issue-line-card.issue-type.tooltip--container" role="presentation">
               <div data-testid="issue-line-card-issue-type.issue-type" class="ewj-issue-line-issue-type">
                 <div class="ewj-issue-line-issue-type-grid">
-                  <img src="${iconUrl}" alt="${issueTypeName}" title="${issueTypeName} (${relationship})" class="ewj-issue-line-issue-type-img" draggable="false">
+                  <img src="${iconUrl}" alt="${issueTypeName}" title="${getI18nMessage('issueTypeTitle', [issueTypeName, relationship])}" class="ewj-issue-line-issue-type-img" draggable="false">
                 </div>
               </div>
             </div>
-            <span><span data-testid="hover-card-trigger-wrapper"><a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${issueKey}" target="_blank" class="ewj-issue-line-card-view-key" aria-label="${issueKey} ${statusName}" role="link" draggable="false">${issueKey}</a></span></span>
+            <span><span data-testid="hover-card-trigger-wrapper"><a data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.key" href="/browse/${issueKey}" target="_blank" class="ewj-issue-line-card-view-key" aria-label="${getI18nMessage('issueAriaLabel', [issueKey, statusName])}" role="link" draggable="false">${issueKey}</a></span></span>
             <div data-testid="issue.issue-view.views.common.issue-line-card.issue-line-card-view.summary" class="ewj-issue-line-card-view-summary"><span><span data-testid="hover-card-trigger-wrapper"><a data-testid="issue-field-summary.ui.inline-read.link-item" href="/browse/${issueKey}" target="_blank" class="ewj-issue-line-card-view-summary-a" data-is-router-link="false" data-vc="link-item" tabindex="0" draggable="false" aria-disabled="false"><span class="ewj-issue-line-card-view-summary-span" data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container"><div class="ewj-issue-line-card-view-summary-div"><span class="ewj-linkedIssue-fields-summary" data-item-title="true">${summary}</span></div></span></a></span></span></div>
-            <div role="presentation"><div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img" class="ewj-issue-line-card-read-only-assignee-inner" title="Assignee: ${assigneeDisplayName}"><span data-testid="issue-line-card.ui.assignee.read-only-assignee--inner" class="ewj-issue-line-card-assignee-inner">${assigneeAvatarUrl ? `<img src="${assigneeAvatarUrl}" alt="${assigneeDisplayName}" title="${assigneeDisplayName}" class="ewj-issue-line-card-assignee-image">` : '<span class="assignee-placeholder" title="Unassigned"></span>'}</span></div></div>
+            <div role="presentation"><div data-testid="issue-line-card.ui.assignee.read-only-assignee" role="img" class="ewj-issue-line-card-read-only-assignee-inner" title="${getI18nMessage('assigneeTitle', [assigneeDisplayName])}"><span data-testid="issue-line-card.ui.assignee.read-only-assignee--inner" class="ewj-issue-line-card-assignee-inner">${assigneeAvatarUrl ? `<img src="${assigneeAvatarUrl}" alt="${assigneeDisplayName}" title="${assigneeDisplayName}" class="ewj-issue-line-card-assignee-image">` : '<span class="assignee-placeholder" title="Unassigned"></span>'}</span></div></div>
             <div data-testid="issue-line-card.ui.status.status-field-container" class="ewj-issue-line-card-status-field-container"><div role="presentation"><div><div><button aria-label="${statusName}" aria-expanded="false" class="ewj-issue-line-card-view-button-status" tabindex="0" type="button"><span class="ewj-issue-line-card-view-button-span"><span class="ewj-issue-line-card-view-button-span2"><div data-testid="issue.fields.status.common.ui.status-lozenge.3" class="ewj-issue-fields-status-lozenge"><span class="ewj-issue-line-card-view-button-span3 ${statusBgColor}"><span class="ewj-issue-line-card-view-button-span4"><div class="ewj-issue-line-card-view-button-status-color ${statusColor}">${statusName}</div></span></span></div></span></span></button></div></div></div></div>
           </div>
         </div>`;
@@ -70,7 +72,7 @@ export const LinkedIssues = {
       const linkedIssuesData = data.fields.issuelinks || [];
 
       if (linkedIssuesData.length === 0) {
-        return { groupedLinksHtml: '<p>No linked tickets.</p>', title: 'Linked Tickets' };
+        return { groupedLinksHtml: `<p>${getI18nMessage('noLinkedTickets')}</p>`, title: getI18nMessage('linkedTicketsTitle') };
       }
 
       const groupedLinks = {};
@@ -104,10 +106,10 @@ export const LinkedIssues = {
             </div>`;
         }
       }
-      return { groupedLinksHtml, title: 'Linked Tickets' };
+      return { groupedLinksHtml, title: getI18nMessage('linkedTicketsTitle') };
     } catch (error) {
       // console.error('Jira Expand Extension: Error fetching linked tickets for', issueKey, error);
-      return { error: `<p>Error fetching linked tickets: ${error.message}</p>`, title: 'Error' };
+      return { error: `<p>Error fetching linked tickets: ${error.message}</p>`, title: getI18nMessage('errorTitle') };
     }
   },
 
@@ -119,10 +121,11 @@ export const LinkedIssues = {
   },
 
   async handleIconMouseOver(event, iconLink, issueKey) {
+    const loadingMessage = getI18nMessage('loadingLinkedTickets');
     if (!tooltipManager.tooltip) {
-      tooltipManager.create('<p class="tooltip-loading">Loading linked tickets...</p>');
+      tooltipManager.create(`<p class="tooltip-loading">${loadingMessage}</p>`);
     } else {
-      tooltipManager.tooltip.querySelector('.ewj-tooltip-content-container').innerHTML = '<p class="tooltip-loading">Loading linked tickets...</p>';
+      tooltipManager.tooltip.querySelector('.ewj-tooltip-content-container').innerHTML = `<p class="tooltip-loading">${loadingMessage}</p>`;
     }
     if (tooltipManager.tooltip) {
       tooltipManager.tooltip.style.display = 'block';
@@ -135,7 +138,7 @@ export const LinkedIssues = {
 
       const tooltipContent = error
         ? `<div class="ewj-issue-tooltip-div1"><div class="ewj-issue-tooltip-linked-items-label"><label class="ewj-issue-link-search-label"><h2 class="ewj-title-linked-items">${title}</h2></label></div><div>${error}</div></div>`
-        : `<div class="ewj-issue-tooltip-div1"><div class="ewj-issue-tooltip-linked-items-label"><label class="ewj-issue-link-search-label"><h2 class="ewj-title-linked-items">${title}</h2></label><div role="presentation"><a href="${BY_URL}" target="_blank" class="ewj-img-link" rel="noopener noreferrer"><span role="img" class="ewj-span-logo ewj-logo16" title="${BY}"></span></a></div></div><div>${groupedLinksHtml}</div></div>`;
+        : `<div class="ewj-issue-tooltip-div1"><div class="ewj-issue-tooltip-linked-items-label"><label class="ewj-issue-link-search-label"><h2 class="ewj-title-linked-items">${title}</h2></label><div role="presentation"><a href="${BY_URL}" target="_blank" class="ewj-img-link" rel="noopener noreferrer"><span role="img" class="ewj-span-logo ewj-logo16" title="${getI18nMessage('byExtension')}"></span></a></div></div><div>${groupedLinksHtml}</div></div>`;
 
       tooltipManager.tooltip.querySelector('.ewj-tooltip-content-container').innerHTML = tooltipContent;
       tooltipManager.adjustPosition(event);
