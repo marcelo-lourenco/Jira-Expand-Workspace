@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "تصاویر کو بڑھائیں",
       "description": "تصاویر کو بڑھانے کا فیچر"
+   },
+   "collapseRightPaneTitle": {
+      "message": "دائیں پینل کو چھپائیں ]",
+      "description": "دائیں پینل کو چھپانے کے بٹن کا عنوان"
+   },
+   "openRightPaneTitle": {
+      "message": "دائیں پینل کو کھولیں ]",
+      "description": "جب دائیں پینل چھپا ہوا ہو تو عنوان"
+   },
+   "collapseModalTitle": {
+      "message": "ماڈل کو چھپائیں ]",
+      "description": "ماڈل چھپانے کے بٹن کا عنوان"
+   },
+   "expandModalTitle": {
+      "message": "ماڈل کو بڑھائیں ]",
+      "description": "جب ماڈل چھپا ہوا ہو تو عنوان"
+   },
+   "expandImagesTitle": {
+      "message": "تصاویر کو بڑھائیں/چھپائیں (Ctrl+Shift+I)",
+      "description": "تصاویر کو بڑھانے/چھپانے کے بٹن کا عنوان"
+   },
+   "byExtension": {
+      "message": "جیرا ایکسپینڈ ایکسٹینشن کے ذریعے",
+      "description": "ایکسٹینشن کی نسبت کا متن"
+   },
+   "linkedTicketsTitle": {
+      "message": "لنکڈ ٹکٹس",
+      "description": "لنکڈ ٹکٹس ٹول ٹپ کا عنوان"
+   },
+   "noLinkedTickets": {
+      "message": "کوئی لنکڈ ٹکٹس نہیں ملے۔",
+      "description": "جب لنکڈ ٹکٹس نہیں ملے تو پیغام"
+   },
+   "errorTitle": {
+      "message": "غلطی",
+      "description": "غلطی کا عنوان"
+   },
+   "assigneeTitle": {
+      "message": "تفویض کردہ: $assignee$",
+      "description": "تفویض کردہ ٹول ٹپ",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "جان ڈو"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "مسئلہ کی قسم کا ٹول ٹپ",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "بگ"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "روک رہا ہے"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "مسئلہ aria لیبل",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "جاری ہے"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "لنکڈ ٹکٹس لوڈ ہو رہے ہیں...",
+      "description": "لنکڈ ٹکٹس ٹول ٹپ کے لیے لوڈنگ پیغام"
    }
 }

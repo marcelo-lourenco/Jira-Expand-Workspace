@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "छवियों का विस्तार करें",
       "description": "छवियों का विस्तार करने की सुविधा"
+   },
+   "collapseRightPaneTitle": {
+      "message": "दाएँ पैनल को संकुचित करें ]",
+      "description": "दाएँ पैनल को संकुचित करने के बटन का शीर्षक"
+   },
+   "openRightPaneTitle": {
+      "message": "दाएँ पैनल खोलें ]",
+      "description": "दाएँ पैनल संकुचित होने पर शीर्षक"
+   },
+   "collapseModalTitle": {
+      "message": "मोडल को संकुचित करें ]",
+      "description": "मोडल को संकुचित करने के बटन का शीर्षक"
+   },
+   "expandModalTitle": {
+      "message": "मोडल का विस्तार करें ]",
+      "description": "मोडल संकुचित होने पर शीर्षक"
+   },
+   "expandImagesTitle": {
+      "message": "छवियों का विस्तार/संकुचन करें (Ctrl+Shift+I)",
+      "description": "छवियों का विस्तार/संकुचन करने के बटन का शीर्षक"
+   },
+   "byExtension": {
+      "message": "Jira विस्तार एक्सटेंशन द्वारा",
+      "description": "एक्सटेंशन एट्रिब्यूशन टेक्स्ट"
+   },
+   "linkedTicketsTitle": {
+      "message": "लिंक्ड टिकट",
+      "description": "लिंक्ड टिकट टूलटिप का शीर्षक"
+   },
+   "noLinkedTickets": {
+      "message": "कोई लिंक्ड टिकट नहीं।",
+      "description": "कोई लिंक्ड टिकट नहीं मिलने पर संदेश"
+   },
+   "errorTitle": {
+      "message": "त्रुटि",
+      "description": "त्रुटि का शीर्षक"
+   },
+   "assigneeTitle": {
+      "message": "असाइन: $assignee$",
+      "description": "असाइन टूलटिप",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "जॉन डो"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "अंक प्रकार टूलटिप",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "बग"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "ब्लॉक करता है"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "अंक aria लेबल",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "प्रगति में"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "लिंक्ड टिकट लोड हो रहे हैं...",
+      "description": "लिंक्ड टिकट टूलटिप के लिए लोडिंग संदेश"
    }
 }

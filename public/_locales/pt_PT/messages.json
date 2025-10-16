@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "Expandir Imagens",
       "description": "Funcionalidade para expandir imagens"
+   },
+   "collapseRightPaneTitle": {
+      "message": "Recolher painel direito ]",
+      "description": "Título do botão para recolher o painel direito"
+   },
+   "openRightPaneTitle": {
+      "message": "Abrir painel direito ]",
+      "description": "Título quando o painel direito está recolhido"
+   },
+   "collapseModalTitle": {
+      "message": "Recolher modal ]",
+      "description": "Título do botão para recolher o modal"
+   },
+   "expandModalTitle": {
+      "message": "Expandir modal ]",
+      "description": "Título quando o modal está recolhido"
+   },
+   "expandImagesTitle": {
+      "message": "Expandir/Recolher imagens (Ctrl+Shift+I)",
+      "description": "Título do botão para expandir/recolher imagens"
+   },
+   "byExtension": {
+      "message": "Por Jira Expand Extension",
+      "description": "Texto de atribuição da extensão"
+   },
+   "linkedTicketsTitle": {
+      "message": "Tickets Vinculados",
+      "description": "Título do tooltip de tickets vinculados"
+   },
+   "noLinkedTickets": {
+      "message": "Nenhum ticket vinculado.",
+      "description": "Mensagem quando não há tickets vinculados encontrados"
+   },
+   "errorTitle": {
+      "message": "Erro",
+      "description": "Título de erro"
+   },
+   "assigneeTitle": {
+      "message": "Responsável: $assignee$",
+      "description": "Tooltip do responsável",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "João Silva"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "Tooltip do tipo de issue",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "Bug"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "bloqueia"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "Rótulo aria da issue",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "Em Andamento"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "Carregando tickets vinculados...",
+      "description": "Mensagem de carregamento para o tooltip de tickets vinculados"
    }
 }

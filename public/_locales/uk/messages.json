@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "Розширити зображення",
       "description": "Функція для розширення зображень"
+   },
+   "collapseRightPaneTitle": {
+      "message": "Згорнути праву панель ]",
+      "description": "Заголовок кнопки згортання правої панелі"
+   },
+   "openRightPaneTitle": {
+      "message": "Відкрити праву панель ]",
+      "description": "Заголовок коли права панель згорнута"
+   },
+   "collapseModalTitle": {
+      "message": "Згорнути модальне вікно ]",
+      "description": "Заголовок кнопки згортання модального вікна"
+   },
+   "expandModalTitle": {
+      "message": "Розширити модальне вікно ]",
+      "description": "Заголовок коли модальне вікно згорнуте"
+   },
+   "expandImagesTitle": {
+      "message": "Розширити/Згорнути зображення (Ctrl+Shift+I)",
+      "description": "Заголовок кнопки розширення/згортання зображень"
+   },
+   "byExtension": {
+      "message": "Від розширення Jira Expand",
+      "description": "Текст атрибуції розширення"
+   },
+   "linkedTicketsTitle": {
+      "message": "Пов'язані заявки",
+      "description": "Заголовок підказки пов'язаних заявок"
+   },
+   "noLinkedTickets": {
+      "message": "Пов'язаних заявок не знайдено.",
+      "description": "Повідомлення коли пов'язані заявки не знайдені"
+   },
+   "errorTitle": {
+      "message": "Помилка",
+      "description": "Заголовок помилки"
+   },
+   "assigneeTitle": {
+      "message": "Виконавець: $assignee$",
+      "description": "Підказка виконавця",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "Джон Доу"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "Підказка типу проблеми",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "Помилка"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "блокує"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "Aria мітка проблеми",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "В роботі"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "Завантаження пов'язаних заявок...",
+      "description": "Повідомлення завантаження для підказки пов'язаних заявок"
    }
 }

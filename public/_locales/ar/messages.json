@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "توسيع الصور",
       "description": "الميزة لتوسيع الصور"
+   },
+   "collapseRightPaneTitle": {
+      "message": "طي اللوحة اليمنى ]",
+      "description": "عنوان زر طي اللوحة اليمنى"
+   },
+   "openRightPaneTitle": {
+      "message": "فتح اللوحة اليمنى ]",
+      "description": "العنوان عند طي اللوحة اليمنى"
+   },
+   "collapseModalTitle": {
+      "message": "طي النافذة المنبثقة ]",
+      "description": "عنوان زر طي النافذة المنبثقة"
+   },
+   "expandModalTitle": {
+      "message": "توسيع النافذة المنبثقة ]",
+      "description": "العنوان عند طي النافذة المنبثقة"
+   },
+   "expandImagesTitle": {
+      "message": "توسيع/طي الصور (Ctrl+Shift+I)",
+      "description": "عنوان زر توسيع/طي الصور"
+   },
+   "byExtension": {
+      "message": "بواسطة إضافة توسيع Jira",
+      "description": "نص نسبة الإضافة"
+   },
+   "linkedTicketsTitle": {
+      "message": "التذاكر المرتبطة",
+      "description": "عنوان تلميح التذاكر المرتبطة"
+   },
+   "noLinkedTickets": {
+      "message": "لا توجد تذاكر مرتبطة.",
+      "description": "الرسالة عند عدم العثور على تذاكر مرتبطة"
+   },
+   "errorTitle": {
+      "message": "خطأ",
+      "description": "عنوان الخطأ"
+   },
+   "assigneeTitle": {
+      "message": "المسؤول: $assignee$",
+      "description": "تلميح المسؤول",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "جون دو"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "تلميح نوع المشكلة",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "خطأ"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "يحجب"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "تسمية aria للمشكلة",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "قيد التقدم"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "تحميل التذاكر المرتبطة...",
+      "description": "رسالة التحميل لتلميح التذاكر المرتبطة"
    }
 }

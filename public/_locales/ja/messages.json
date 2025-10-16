@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "画像を拡張",
       "description": "画像を拡張する機能"
+   },
+   "collapseRightPaneTitle": {
+      "message": "右パネルを折りたたむ ]",
+      "description": "右パネルを折りたたむボタンのタイトル"
+   },
+   "openRightPaneTitle": {
+      "message": "右パネルを開く ]",
+      "description": "右パネルが折りたたまれている場合のタイトル"
+   },
+   "collapseModalTitle": {
+      "message": "モーダルを折りたたむ ]",
+      "description": "モーダルを折りたたむボタンのタイトル"
+   },
+   "expandModalTitle": {
+      "message": "モーダルを拡張 ]",
+      "description": "モーダルが折りたたまれている場合のタイトル"
+   },
+   "expandImagesTitle": {
+      "message": "画像を拡張/折りたたむ (Ctrl+Shift+I)",
+      "description": "画像を拡張/折りたたむボタンのタイトル"
+   },
+   "byExtension": {
+      "message": "Jira 拡張拡張機能による",
+      "description": "拡張機能の帰属テキスト"
+   },
+   "linkedTicketsTitle": {
+      "message": "リンクされたチケット",
+      "description": "リンクされたチケットのツールチップのタイトル"
+   },
+   "noLinkedTickets": {
+      "message": "リンクされたチケットがありません。",
+      "description": "リンクされたチケットが見つからない場合のメッセージ"
+   },
+   "errorTitle": {
+      "message": "エラー",
+      "description": "エラーのタイトル"
+   },
+   "assigneeTitle": {
+      "message": "担当者: $assignee$",
+      "description": "担当者のツールチップ",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "山田太郎"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "課題タイプのツールチップ",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "バグ"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "ブロック"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "課題のariaラベル",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "進行中"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "リンクされたチケットを読み込み中...",
+      "description": "リンクされたチケットのツールチップの読み込みメッセージ"
    }
 }

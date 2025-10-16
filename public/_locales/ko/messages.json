@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "이미지 확장",
       "description": "이미지를 확장하는 기능"
+   },
+   "collapseRightPaneTitle": {
+      "message": "오른쪽 패널 접기 ]",
+      "description": "오른쪽 패널을 접는 버튼의 제목"
+   },
+   "openRightPaneTitle": {
+      "message": "오른쪽 패널 열기 ]",
+      "description": "오른쪽 패널이 접혀 있는 경우 제목"
+   },
+   "collapseModalTitle": {
+      "message": "모달 접기 ]",
+      "description": "모달을 접는 버튼의 제목"
+   },
+   "expandModalTitle": {
+      "message": "모달 확장 ]",
+      "description": "모달이 접혀 있는 경우 제목"
+   },
+   "expandImagesTitle": {
+      "message": "이미지 확장/접기 (Ctrl+Shift+I)",
+      "description": "이미지를 확장/접는 버튼의 제목"
+   },
+   "byExtension": {
+      "message": "Jira 확장 프로그램에 의해",
+      "description": "확장 프로그램 속성 텍스트"
+   },
+   "linkedTicketsTitle": {
+      "message": "연결된 티켓",
+      "description": "연결된 티켓 툴팁 제목"
+   },
+   "noLinkedTickets": {
+      "message": "연결된 티켓이 없습니다.",
+      "description": "연결된 티켓을 찾을 수 없는 경우 메시지"
+   },
+   "errorTitle": {
+      "message": "오류",
+      "description": "오류 제목"
+   },
+   "assigneeTitle": {
+      "message": "담당자: $assignee$",
+      "description": "담당자 툴팁",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "김철수"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "이슈 유형 툴팁",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "버그"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "차단"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "이슈 aria 라벨",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "진행 중"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "연결된 티켓 로딩 중...",
+      "description": "연결된 티켓 툴팁용 로딩 메시지"
    }
 }

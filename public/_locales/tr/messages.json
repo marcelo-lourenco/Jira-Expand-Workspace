@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "Resimleri Genişlet",
       "description": "Resimleri genişletme özelliği"
+   },
+   "collapseRightPaneTitle": {
+      "message": "Sağ paneli daralt ]",
+      "description": "Sağ paneli daraltma düğmesi başlığı"
+   },
+   "openRightPaneTitle": {
+      "message": "Sağ paneli aç ]",
+      "description": "Sağ panel daraltıldığında başlık"
+   },
+   "collapseModalTitle": {
+      "message": "Modalı daralt ]",
+      "description": "Modal daraltma düğmesi başlığı"
+   },
+   "expandModalTitle": {
+      "message": "Modalı genişlet ]",
+      "description": "Modal daraltıldığında başlık"
+   },
+   "expandImagesTitle": {
+      "message": "Resimleri Genişlet/Daralt (Ctrl+Shift+I)",
+      "description": "Resimleri genişlet/daralt düğmesi başlığı"
+   },
+   "byExtension": {
+      "message": "Jira Genişlet Uzantısı tarafından",
+      "description": "Uzantı atıf metni"
+   },
+   "linkedTicketsTitle": {
+      "message": "Bağlı Biletler",
+      "description": "Bağlı biletler araç ipucu başlığı"
+   },
+   "noLinkedTickets": {
+      "message": "Bağlı bilet bulunamadı.",
+      "description": "Bağlı bilet bulunamadığında mesaj"
+   },
+   "errorTitle": {
+      "message": "Hata",
+      "description": "Hata başlığı"
+   },
+   "assigneeTitle": {
+      "message": "Atanan: $assignee$",
+      "description": "Atanan araç ipucu",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "John Doe"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "Sorun türü araç ipucu",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "Hata"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "engelliyor"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "Sorun aria etiketi",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "Devam ediyor"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "Bağlı biletler yükleniyor...",
+      "description": "Bağlı biletler araç ipucu için yükleme mesajı"
    }
 }

@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "Expand Images",
       "description": "Feature to expand images"
+   },
+   "collapseRightPaneTitle": {
+      "message": "Collapse right pane ]",
+      "description": "Title for collapse right pane button"
+   },
+   "openRightPaneTitle": {
+      "message": "Open right pane ]",
+      "description": "Title when right pane is collapsed"
+   },
+   "collapseModalTitle": {
+      "message": "Collapse modal ]",
+      "description": "Title for collapse modal button"
+   },
+   "expandModalTitle": {
+      "message": "Expand modal ]",
+      "description": "Title when modal is collapsed"
+   },
+   "expandImagesTitle": {
+      "message": "Expand/Collapse images (Ctrl+Shift+I)",
+      "description": "Title for expand/collapse images button"
+   },
+   "byExtension": {
+      "message": "By Jira Expand Extension",
+      "description": "Extension attribution text"
+   },
+   "linkedTicketsTitle": {
+      "message": "Linked Tickets",
+      "description": "Title for linked tickets tooltip"
+   },
+   "noLinkedTickets": {
+      "message": "No linked tickets.",
+      "description": "Message when no linked tickets found"
+   },
+   "errorTitle": {
+      "message": "Error",
+      "description": "Error title"
+   },
+   "assigneeTitle": {
+      "message": "Assignee: $assignee$",
+      "description": "Assignee tooltip",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "John Doe"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "Issue type tooltip",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "Bug"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "blocks"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "Issue aria label",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "In Progress"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "Loading linked tickets...",
+      "description": "Loading message for linked tickets tooltip"
    }
 }

@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "Afbeeldingen Uitbreiden",
       "description": "Functie om afbeeldingen uit te breiden"
+   },
+   "collapseRightPaneTitle": {
+      "message": "Rechterpaneel inklappen ]",
+      "description": "Titel van rechterpaneel inklappen knop"
+   },
+   "openRightPaneTitle": {
+      "message": "Rechterpaneel openen ]",
+      "description": "Titel wanneer rechterpaneel is ingeklapt"
+   },
+   "collapseModalTitle": {
+      "message": "Modal inklappen ]",
+      "description": "Titel van modal inklappen knop"
+   },
+   "expandModalTitle": {
+      "message": "Modal uitbreiden ]",
+      "description": "Titel wanneer modal is ingeklapt"
+   },
+   "expandImagesTitle": {
+      "message": "Afbeeldingen uitbreiden/inklappen (Ctrl+Shift+I)",
+      "description": "Titel van afbeeldingen uitbreiden/inklappen knop"
+   },
+   "byExtension": {
+      "message": "Door Jira Uitbreiden Extensie",
+      "description": "Extensie toeschrijving tekst"
+   },
+   "linkedTicketsTitle": {
+      "message": "Gekoppelde Tickets",
+      "description": "Titel van gekoppelde tickets tooltip"
+   },
+   "noLinkedTickets": {
+      "message": "Geen gekoppelde tickets.",
+      "description": "Bericht wanneer geen gekoppelde tickets gevonden zijn"
+   },
+   "errorTitle": {
+      "message": "Fout",
+      "description": "Fout titel"
+   },
+   "assigneeTitle": {
+      "message": "Toegewezen: $assignee$",
+      "description": "Toegewezen tooltip",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "Jan Jansen"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "Probleemtype tooltip",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "Bug"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "blokkeert"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "Probleem aria label",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "In uitvoering"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "Gekoppelde tickets laden...",
+      "description": "Laadbericht voor gekoppelde tickets tooltip"
    }
 }

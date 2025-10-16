@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "Képek Kibővítése",
       "description": "Képek kibővítésének funkciója"
+   },
+   "collapseRightPaneTitle": {
+      "message": "Jobb panel összecsukása ]",
+      "description": "Jobb panel összecsukása gomb címe"
+   },
+   "openRightPaneTitle": {
+      "message": "Jobb panel megnyitása ]",
+      "description": "Jobb panel összecsukott állapotban lévő cím"
+   },
+   "collapseModalTitle": {
+      "message": "Modális összecsukása ]",
+      "description": "Modális összecsukása gomb címe"
+   },
+   "expandModalTitle": {
+      "message": "Modális kibővítése ]",
+      "description": "Modális összecsukott állapotban lévő cím"
+   },
+   "expandImagesTitle": {
+      "message": "Képek kibővítése/összecsukása (Ctrl+Shift+I)",
+      "description": "Képek kibővítése/összecsukása gomb címe"
+   },
+   "byExtension": {
+      "message": "Jira Kiterjesztés által",
+      "description": "Kiterjesztés attribúciós szövege"
+   },
+   "linkedTicketsTitle": {
+      "message": "Kapcsolt Jegyek",
+      "description": "Kapcsolt jegyek tooltip címe"
+   },
+   "noLinkedTickets": {
+      "message": "Nincsenek kapcsolt jegyek.",
+      "description": "Üzenet, ha nem találhatók kapcsolt jegyek"
+   },
+   "errorTitle": {
+      "message": "Hiba",
+      "description": "Hiba címe"
+   },
+   "assigneeTitle": {
+      "message": "Hozzárendelve: $assignee$",
+      "description": "Hozzárendelt tooltip",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "John Doe"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "Probléma típus tooltip",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "Bug"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "blokkolja"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "Probléma aria címke",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "Folyamatban"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "Kapcsolt jegyek betöltése...",
+      "description": "Betöltési üzenet a kapcsolt jegyek tooltiphez"
    }
 }

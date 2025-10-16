@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "ছবি প্রসারিত করুন",
       "description": "ছবি প্রসারিত করার ফিচার"
+   },
+   "collapseRightPaneTitle": {
+      "message": "ডান প্যানেল কোলাপস করুন ]",
+      "description": "ডান প্যানেল কোলাপস বোতামের শিরোনাম"
+   },
+   "openRightPaneTitle": {
+      "message": "ডান প্যানেল খুলুন ]",
+      "description": "ডান প্যানেল কোলাপস হলে শিরোনাম"
+   },
+   "collapseModalTitle": {
+      "message": "মোডাল কোলাপস করুন ]",
+      "description": "মোডাল কোলাপস বোতামের শিরোনাম"
+   },
+   "expandModalTitle": {
+      "message": "মোডাল প্রসারিত করুন ]",
+      "description": "মোডাল কোলাপস হলে শিরোনাম"
+   },
+   "expandImagesTitle": {
+      "message": "ছবি প্রসারিত/কোলাপস করুন (Ctrl+Shift+I)",
+      "description": "ছবি প্রসারিত/কোলাপস বোতামের শিরোনাম"
+   },
+   "byExtension": {
+      "message": "Jira এক্সপ্যান্ড এক্সটেনশন দ্বারা",
+      "description": "এক্সটেনশন অ্যাট্রিবিউশন টেক্সট"
+   },
+   "linkedTicketsTitle": {
+      "message": "লিঙ্ক করা টিকেট",
+      "description": "লিঙ্ক করা টিকেট টুলটিপের শিরোনাম"
+   },
+   "noLinkedTickets": {
+      "message": "কোন লিঙ্ক করা টিকেট নেই।",
+      "description": "কোন লিঙ্ক করা টিকেট না পাওয়া গেলে বার্তা"
+   },
+   "errorTitle": {
+      "message": "ত্রুটি",
+      "description": "ত্রুটির শিরোনাম"
+   },
+   "assigneeTitle": {
+      "message": "অ্যাসাইনি: $assignee$",
+      "description": "অ্যাসাইনি টুলটিপ",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "জন ডো"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "ইস্যু টাইপ টুলটিপ",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "বাগ"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "ব্লক করে"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "ইস্যু aria লেবেল",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "চলমান"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "লিঙ্ক করা টিকেট লোড হচ্ছে...",
+      "description": "লিঙ্ক করা টিকেট টুলটিপের জন্য লোডিং বার্তা"
    }
 }

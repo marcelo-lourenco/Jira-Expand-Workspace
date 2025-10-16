@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "படங்களை விரிவாக்கு",
       "description": "படங்களை விரிவாக்குவதற்கான செயல்பாடு"
+   },
+   "collapseRightPaneTitle": {
+      "message": "வலது பேனலை மூடு ]",
+      "description": "வலது பேனலை மூடுவதற்கான பொத்தானின் தலைப்பு"
+   },
+   "openRightPaneTitle": {
+      "message": "வலது பேனலைத் திற ]",
+      "description": "வலது பேனல் மூடப்பட்டிருக்கும்போது தலைப்பு"
+   },
+   "collapseModalTitle": {
+      "message": "மோடலை மூடு ]",
+      "description": "மோடலை மூடுவதற்கான பொத்தானின் தலைப்பு"
+   },
+   "expandModalTitle": {
+      "message": "மோடலை விரிவாக்கு ]",
+      "description": "மோடல் மூடப்பட்டிருக்கும்போது தலைப்பு"
+   },
+   "expandImagesTitle": {
+      "message": "படங்களை விரிவாக்கு/மூடு (Ctrl+Shift+I)",
+      "description": "படங்களை விரிவாக்கு/மூடுவதற்கான பொத்தானின் தலைப்பு"
+   },
+   "byExtension": {
+      "message": "Jira விரிவாக்க நீட்டிப்பு மூலம்",
+      "description": "நீட்டிப்பு உரிமையியல் உரை"
+   },
+   "linkedTicketsTitle": {
+      "message": "இணைக்கப்பட்ட டிக்கெட்டுகள்",
+      "description": "இணைக்கப்பட்ட டிக்கெட்டுகள் டூல்டிப்பின் தலைப்பு"
+   },
+   "noLinkedTickets": {
+      "message": "இணைக்கப்பட்ட டிக்கெட்டுகள் இல்லை.",
+      "description": "இணைக்கப்பட்ட டிக்கெட்டுகள் கிடைக்கவில்லை என்பதைத் தெரிவிக்கும் செய்தி"
+   },
+   "errorTitle": {
+      "message": "பிழை",
+      "description": "பிழை தலைப்பு"
+   },
+   "assigneeTitle": {
+      "message": "ஒதுக்கப்பட்டவர்: $assignee$",
+      "description": "ஒதுக்கப்பட்டவர் டூல்டிப்",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "ஜான் டோ"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "சிக்கல் வகை டூல்டிப்",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "பிழை"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "தடுக்கிறது"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "சிக்கல் aria லேபிள்",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "நடைபெற்றுக்கொண்டிருக்கிறது"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "இணைக்கப்பட்ட டிக்கெட்டுகளை ஏற்றுகிறது...",
+      "description": "இணைக்கப்பட்ட டிக்கெட்டுகள் டூல்டிப்பிற்கான ஏற்றுதல் செய்தி"
    }
 }

@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "ขยายรูปภาพ",
       "description": "ฟีเจอร์สำหรับขยายรูปภาพ"
+   },
+   "collapseRightPaneTitle": {
+      "message": "ยุบแผงด้านขวา ]",
+      "description": "หัวเรื่องปุ่มยุบแผงด้านขวา"
+   },
+   "openRightPaneTitle": {
+      "message": "เปิดแผงด้านขวา ]",
+      "description": "หัวเรื่องเมื่อแผงด้านขวาถูกยุบ"
+   },
+   "collapseModalTitle": {
+      "message": "ยุบโมเดล ]",
+      "description": "หัวเรื่องปุ่มยุบโมเดล"
+   },
+   "expandModalTitle": {
+      "message": "ขยายโมเดล ]",
+      "description": "หัวเรื่องเมื่อโมเดลถูกยุบ"
+   },
+   "expandImagesTitle": {
+      "message": "ขยาย/ยุบรูปภาพ (Ctrl+Shift+I)",
+      "description": "หัวเรื่องปุ่มขยาย/ยุบรูปภาพ"
+   },
+   "byExtension": {
+      "message": "โดยส่วนขยาย Jira ขยาย",
+      "description": "ข้อความการอ้างอิงส่วนขยาย"
+   },
+   "linkedTicketsTitle": {
+      "message": "ตั๋วที่เชื่อมโยง",
+      "description": "หัวเรื่องเคล็ดลับเครื่องมือตั๋วที่เชื่อมโยง"
+   },
+   "noLinkedTickets": {
+      "message": "ไม่พบตั๋วที่เชื่อมโยง.",
+      "description": "ข้อความเมื่อไม่พบตั๋วที่เชื่อมโยง"
+   },
+   "errorTitle": {
+      "message": "ข้อผิดพลาด",
+      "description": "หัวเรื่องข้อผิดพลาด"
+   },
+   "assigneeTitle": {
+      "message": "ผู้ได้รับมอบหมาย: $assignee$",
+      "description": "เคล็ดลับเครื่องมือผู้ได้รับมอบหมาย",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "จอห์น โด้"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "เคล็ดลับเครื่องมือประเภทปัญหา",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "บัก"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "บล็อก"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "ป้ายกำกับ aria ปัญหา",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "กำลังดำเนินการ"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "กำลังโหลดตั๋วที่เชื่อมโยง...",
+      "description": "ข้อความโหลดสำหรับเคล็ดลับเครื่องมือตั๋วที่เชื่อมโยง"
    }
 }

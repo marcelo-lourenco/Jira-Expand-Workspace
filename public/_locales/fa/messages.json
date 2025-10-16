@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "گسترش تصاویر",
       "description": "ویژگی برای گسترش تصاویر"
+   },
+   "collapseRightPaneTitle": {
+      "message": "جمع کردن پنل راست ]",
+      "description": "عنوان دکمه جمع کردن پنل راست"
+   },
+   "openRightPaneTitle": {
+      "message": "باز کردن پنل راست ]",
+      "description": "عنوان وقتی پنل راست جمع شده است"
+   },
+   "collapseModalTitle": {
+      "message": "جمع کردن مدال ]",
+      "description": "عنوان دکمه جمع کردن مدال"
+   },
+   "expandModalTitle": {
+      "message": "گسترش مدال ]",
+      "description": "عنوان وقتی مدال جمع شده است"
+   },
+   "expandImagesTitle": {
+      "message": "گسترش/جمع کردن تصاویر (Ctrl+Shift+I)",
+      "description": "عنوان دکمه گسترش/جمع کردن تصاویر"
+   },
+   "byExtension": {
+      "message": "توسط افزونه گسترش Jira",
+      "description": "متن نسبت افزونه"
+   },
+   "linkedTicketsTitle": {
+      "message": "تیکت های مرتبط",
+      "description": "عنوان راهنمای ابزار تیکت های مرتبط"
+   },
+   "noLinkedTickets": {
+      "message": "تیکت مرتبطی یافت نشد.",
+      "description": "پیام وقتی تیکت مرتبطی یافت نشد"
+   },
+   "errorTitle": {
+      "message": "خطا",
+      "description": "عنوان خطا"
+   },
+   "assigneeTitle": {
+      "message": "محول شده به: $assignee$",
+      "description": "راهنمای ابزار محول شده",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "جان دو"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "راهنمای ابزار نوع مسئله",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "باگ"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "مسدود می کند"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "برچسب aria مسئله",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "در حال انجام"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "بارگذاری تیکت های مرتبط...",
+      "description": "پیام بارگذاری برای راهنمای ابزار تیکت های مرتبط"
    }
 }

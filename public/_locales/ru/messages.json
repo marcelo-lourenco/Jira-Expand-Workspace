@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "Расширить Изображения",
       "description": "Функция для расширения изображений"
+   },
+   "collapseRightPaneTitle": {
+      "message": "Свернуть правую панель ]",
+      "description": "Заголовок кнопки для сворачивания правой панели"
+   },
+   "openRightPaneTitle": {
+      "message": "Открыть правую панель ]",
+      "description": "Заголовок когда правая панель свернута"
+   },
+   "collapseModalTitle": {
+      "message": "Свернуть модальное окно ]",
+      "description": "Заголовок кнопки для сворачивания модального окна"
+   },
+   "expandModalTitle": {
+      "message": "Расширить модальное окно ]",
+      "description": "Заголовок когда модальное окно свернуто"
+   },
+   "expandImagesTitle": {
+      "message": "Расширить/Свернуть изображения (Ctrl+Shift+I)",
+      "description": "Заголовок кнопки для расширения/сворачивания изображений"
+   },
+   "byExtension": {
+      "message": "От Расширения Jira Expand",
+      "description": "Текст атрибуции расширения"
+   },
+   "linkedTicketsTitle": {
+      "message": "Связанные Заявки",
+      "description": "Заголовок всплывающей подсказки связанных заявок"
+   },
+   "noLinkedTickets": {
+      "message": "Нет связанных заявок.",
+      "description": "Сообщение когда связанные заявки не найдены"
+   },
+   "errorTitle": {
+      "message": "Ошибка",
+      "description": "Заголовок ошибки"
+   },
+   "assigneeTitle": {
+      "message": "Ответственный: $assignee$",
+      "description": "Всплывающая подсказка ответственного",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "Иван Петров"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "Всплывающая подсказка типа проблемы",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "Баг"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "блокирует"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "Aria метка проблемы",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "В работе"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "Загрузка связанных заявок...",
+      "description": "Сообщение загрузки для всплывающей подсказки связанных заявок"
    }
 }

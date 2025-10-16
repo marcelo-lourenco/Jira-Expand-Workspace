@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "చిత్రాలను విస్తరించు",
       "description": "చిత్రాలను విస్తరించే సౌలభ్యం"
+   },
+   "collapseRightPaneTitle": {
+      "message": "కుడి ప్యానెల్‌ను మూసివేయి ]",
+      "description": "కుడి ప్యానెల్‌ను మూసివేయే బటన్ శీర్షిక"
+   },
+   "openRightPaneTitle": {
+      "message": "కుడి ప్యానెల్‌ను తెరవండి ]",
+      "description": "కుడి ప్యానెల్ మూసివేయబడినప్పుడు శీర్షిక"
+   },
+   "collapseModalTitle": {
+      "message": "మోడల్‌ను మూసివేయి ]",
+      "description": "మోడల్‌ను మూసివేయే బటన్ శీర్షిక"
+   },
+   "expandModalTitle": {
+      "message": "మోడల్‌ను విస్తరించు ]",
+      "description": "మోడల్ మూసివేయబడినప్పుడు శీర్షిక"
+   },
+   "expandImagesTitle": {
+      "message": "చిత్రాలను విస్తరించు/మూసివేయి (Ctrl+Shift+I)",
+      "description": "చిత్రాలను విస్తరించు/మూసివేయే బటన్ శీర్షిక"
+   },
+   "byExtension": {
+      "message": "Jira విస్తరించు పొడిగింత ద్వారా",
+      "description": "పొడిగింత ఆపాదన పాఠ్యం"
+   },
+   "linkedTicketsTitle": {
+      "message": "లింక్ చేయబడిన టికెట్లు",
+      "description": "లింక్ చేయబడిన టికెట్ల సూచన శీర్షిక"
+   },
+   "noLinkedTickets": {
+      "message": "లింక్ చేయబడిన టికెట్లు కనుగొనబడలేదు.",
+      "description": "లింక్ చేయబడిన టికెట్లు కనుగొనబడనప్పుడు సందేశం"
+   },
+   "errorTitle": {
+      "message": "దోషం",
+      "description": "దోష శీర్షిక"
+   },
+   "assigneeTitle": {
+      "message": "అసైనీ: $assignee$",
+      "description": "అసైనీ సూచన",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "జాన్ డో"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "సమస్య రకం సూచన",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "బగ్"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "బ్లాక్స్"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "సమస్య aria లేబుల్",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "ప్రోగ్రెస్‌లో ఉంది"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "లింక్ చేయబడిన టికెట్లను లోడ్ చేస్తోంది...",
+      "description": "లింక్ చేయబడిన టికెట్ల సూచన కోసం లోడింగ్ సందేశం"
    }
 }

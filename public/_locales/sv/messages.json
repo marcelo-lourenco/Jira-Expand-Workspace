@@ -42,5 +42,83 @@
    "expandImages": {
       "message": "Expandera Bilder",
       "description": "Funktion för att expandera bilder"
+   },
+   "collapseRightPaneTitle": {
+      "message": "Kollapsa höger panel ]",
+      "description": "Titel för kollapsa höger panel-knapp"
+   },
+   "openRightPaneTitle": {
+      "message": "Öppna höger panel ]",
+      "description": "Titel när höger panel är kollapsad"
+   },
+   "collapseModalTitle": {
+      "message": "Kollapsa modal ]",
+      "description": "Titel för kollapsa modal-knapp"
+   },
+   "expandModalTitle": {
+      "message": "Utöka modal ]",
+      "description": "Titel när modal är kollapsad"
+   },
+   "expandImagesTitle": {
+      "message": "Utöka/Kollapsa bilder (Ctrl+Shift+I)",
+      "description": "Titel för utöka/kollapsa bilder-knapp"
+   },
+   "byExtension": {
+      "message": "Av Jira Expand Tillägg",
+      "description": "Tilläggs-attributions-text"
+   },
+   "linkedTicketsTitle": {
+      "message": "Länkade Ärenden",
+      "description": "Titel för länkade ärenden tooltip"
+   },
+   "noLinkedTickets": {
+      "message": "Inga länkade ärenden.",
+      "description": "Meddelande när länkade ärenden inte hittades"
+   },
+   "errorTitle": {
+      "message": "Fel",
+      "description": "Fel-titel"
+   },
+   "assigneeTitle": {
+      "message": "Tilldelad: $assignee$",
+      "description": "Tooltip för tilldelad person",
+      "placeholders": {
+         "assignee": {
+            "content": "$1",
+            "example": "Anna Andersson"
+         }
+      }
+   },
+   "issueTypeTitle": {
+      "message": "$type$ ($relationship$)",
+      "description": "Tooltip för problemtyp",
+      "placeholders": {
+         "type": {
+            "content": "$1",
+            "example": "Bug"
+         },
+         "relationship": {
+            "content": "$2",
+            "example": "blockerar"
+         }
+      }
+   },
+   "issueAriaLabel": {
+      "message": "$key$ $status$",
+      "description": "Aria-etikett för problem",
+      "placeholders": {
+         "key": {
+            "content": "$1",
+            "example": "PROJ-123"
+         },
+         "status": {
+            "content": "$2",
+            "example": "I arbete"
+         }
+      }
+   },
+   "loadingLinkedTickets": {
+      "message": "Laddar länkade ärenden...",
+      "description": "Laddningsmeddelande för länkade ärenden tooltip"
    }
 }
